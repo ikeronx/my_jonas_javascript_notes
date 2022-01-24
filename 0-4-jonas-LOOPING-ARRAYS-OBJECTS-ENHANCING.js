@@ -108,7 +108,7 @@ for (const [key, { open, close }] of openingHoursEntries) {
 
 console.log('----ENHANCING OBJECT LITERALS ----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648565#announcements
-// 1 first es6 enhanced object literal
+// * 1. first es6 enhanced object literal
 // how to add a object literal inside another object literal by using ES6 enhanced object literals
 const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const openingHours = {
@@ -133,7 +133,7 @@ const restaurant2 = {
         categories: ['Italian 🇮🇹', 'Pizzeria 🇺🇸', 'Vegetarian 🥗', 'Organic 🍳'],
         starterMenu: ['Focaccia 🥐', 'Bruschetta 🥪', 'Garlic Bread 🥖', 'Caprese Salad 🥙'],
         mainMenu: ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 '],
-        // ES6 enhanced object literal
+        // * 1. ES6 enhanced object literal
         openingHours,
         // 1. how to make a function return an array and destruct the result into different variables.... receive values from the object's arrays (mainMenu, etc) using indexes
         order(categoryIndex, starterIndex, MainIndex) {
