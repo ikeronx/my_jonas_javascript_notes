@@ -252,3 +252,7 @@ button.addEventListener('click', () => {
 // someVariable        ✅✅✅
 // calculateAge        ✅✅✅✅
 // delayedDeparture    ✅✅✅✅✅
+
+console.log('-----CODING CHALLENGE #5 135-----');
+console.log('-----functions-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648673#overview

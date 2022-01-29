@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable strict */
 // eslint-disable-next-line lines-around-directive
@@ -118,6 +119,7 @@ console.log('-----HIGHER ODER #2: FUNCTIONS RETURNING FUNCTIONS-----');
 // * 2. Function that returns new function
 
 // *** EXAMPLE 1 ***
+// - how to make a function return another function
 const greet = function (greeting) {
         return function (name) {
                 console.log(`${greeting} ${name}`);
@@ -129,7 +131,7 @@ greeterHey('Leanna'); // Hey Leanna
 greeterWadUp('Willis'); // Wad Up! Willis
 greet('Hello sexy')('Terry'); // Hello sexy Terry
 
-// write is an arrow function...
+// - how to write is an arrow function...
 const greetArr = (greeting) => (name) => console.log(`${greeting} ${name}`);
 
 const greeterBye = greetArr('Byeeeee!!');
@@ -140,23 +142,158 @@ console.log('-----FUNCTION METHODS: CALL() APPLY()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648663#overview
 // https://www.javascripttutorial.net/javascript-function-type/
 // A function object has three important methods: apply(), call() and bind().
-// ... the apply() and call() methods call a fn with a given 'this' value and arguments
-// ... differences between the apply() and call() method:
-// ... 1. you pass the arguments to the apply() method as an array-like object - say.apply(cat, ['What does a cat say?']);
-// ... 2. you pass the arguments to the call() function individually - say.call(cat, 'What does a cat say?')
+// ... the call() and apply() methods call a fn with a given 'this' value and ARGUMENTS
+// ... differences between the call() and apply() method:
+// ... 1. you pass the arguments to the call() function individually - say.call(cat, 'What does a cat say?')
+// ... 2. you pass the arguments to the apply() method as an array-like object - say.apply(cat, ['What does a cat say?']);
+// ... these methods allows us to explicity define the this keyword in any function we choose
 
+// *** EXAMPLES ***
+// - how to use the call() and bind() method
 const lufthansa = {
         airline: 'Lufthansa',
         iataCode: 'LH',
         bookings: [],
         book(flightNum, name) {
-                console.log(`${name} booked a seat on ${this.airline} flight${this.iataCode}${flightNum}`);
+                console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
+                this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
         },
 };
-lufthansa.book('LHFN', 'Keron');
+lufthansa.book(239, 'Leanna McGuire');
+lufthansa.book(635, 'John Smith');
+console.log(lufthansa);
 
-// console.log('-----call() method-----');
-// // *
+const eurowings = {
+        airline: 'Eurowings',
+        iataCode: 'EW',
+        bookings: [],
+};
 
-// console.log('-----apply() method-----');
-// // *
+const swiss = {
+        airline: 'Swiss Air Lines',
+        iataCode: 'LX',
+        bookings: [],
+};
+
+// ... step 1. we can take lufthansa.book fn and store it in a new variole since javascript has first call functions:
+// eslint-disable-next-line prefer-destructuring
+const book = lufthansa.book;
+
+// ... step 2. we can apply the book variable fn which is the lufthansa book fn
+// ... to objects (eurowings, lufthansa etc) by using function methods to point to the object 'this' keyword:
+console.log('-----call() method-----');
+// the call() method calls the book function which will then point to the objects (swiss, lufthansa, eurowings etc) 'this' keyword then we set the arguments
+book.call(eurowings, 23, 'Sarah Williams'); // Sarah Williams booked a seat on Eurowings flight EW23
+book.call(lufthansa, 239, 'Mary Kate'); // Mary Kate booked a seat on Lufthansa flight LH239
+book.call(swiss, 583, 'Alexis Rode'); // Alexis Rode booked a seat on Swiss Air Lines flight LX583
+
+// this does not work:
+// book(23, 'Sarah Williams') // <-- !! this wont work cause the 'this' keyword points points to a regular function call which the arguments equals to undefined... since the book variable is in the global name space and not a function
+
+console.log('-----apply() method-----');
+// * the apply() method takes an array of arguments
+const flightData = [583, 'George Cooper'];
+book.apply(swiss, flightData); // George Cooper booked a seat on Swiss Air Lines flight LX583
+
+// better way:
+// is using the call() method with the spread operator instead of using the apply method:
+book.call(swiss, ...flightData); // George Cooper booked a seat on Swiss Air Lines flight LX583
+
+console.log('-----FUNCTION METHODS: BIND()-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648667#overview
+// * the bind() method creates a new function instance whose this value is bound to the object that you provide
+// !! using the bind() method will not call the function but will return a new function instance
+
+// *** example ***
+const bookSwiss = book.bind(swiss);
+const bookLufthansa = book.bind(lufthansa);
+const bookEurowings = book.bind(eurowings);
+bookSwiss(45, 'Robyn Fenty'); // Robyn Fenty booked a seat on Swiss Air Lines flight LX45
+bookLufthansa(456, 'Kaydel Gordon'); // Kaydel Gordon booked a seat on Lufthansa flight LH456
+bookEurowings(245, 'Kayum Stapleton'); // Kayum Stapleton booked a seat on Eurowings flight EW245
+
+// - how to preset the arguments when you use the bind() method:
+// ... preset the book 'flightNum' value/argument
+const bookSwiss249 = book.bind(swiss, 249);
+bookSwiss249('Robyn Fenty'); // Robyn Fenty booked a seat on Swiss Air Lines flight LX249
+bookSwiss249('Jerry'); // Jerry booked a seat on Swiss Air Lines flight LX249
+
+console.log('-----other situations when we can use the function methods-----');
+// *** with event listeners example **
+// - how to use the bind() method with event listeners:
+// ... step 1. add a new properties to the lufthansa object
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+        // ... step 2. <-- make sure the function is not an arrow function when you use the bind() method to call the function in the addeventlistener below
+        console.log(this);
+        this.planes++;
+
+        console.log(`${this.airline} now has ${this.planes} planes`);
+};
+const buyPlaneBtn = document.querySelector('.buy');
+// ... step 3. bind() the lufthansa.buyPlane fn to the lufthansa object to point to the lufthansa object 'this' keyword and add the lufthansa object to the event listener as a callback function
+buyPlaneBtn.addEventListener('click', lufthansa.buyPlane.bind(lufthansa)); // Lufthansa now has 301 planes
+
+// *** with partial applications ***
+// * partial application means with can preset parameters
+// * partial application is a function that takes a function as an argument and returns a function
+
+// *** example ***
+// - how to use the partial application method:
+// ... step 1. create a fn general fn that we'll bind to
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200)); // 123.23
+
+// ... step 2. use the bind() method to bind() the addVat to the addTax fn and preset the rate (argument) and use null in place of the object 'this' keyword we want to point to:
+const addVAT = addTax.bind(null, 0.23);
+console.log(addVAT(100)); // 123
+console.log(addVAT(50)); // 61.5
+
+// *** challenge ***
+// ... write it as a function that returns another function
+const addTax2 = (rate) => (value) => value + value * rate;
+addTax2(0.1)(200); // 123.23
+
+const addVAT2 = addTax2(0.23);
+console.log(addVAT2(60)); // 79.6
+
+console.log('-----CODING CHALLENGE #5 135-----');
+
+const poll = {
+        question: 'What is your favorite programming language?',
+        answers: ['JavaScript', 'Python', 'Rust', 'C++'],
+        votes: [0, 0, 0, 0],
+        registerNewAnswer() {
+                const optionsArr = [];
+                for (const [index, value] of this.answers.entries()) {
+                        optionsArr.push(`${index}: ${value}`);
+                }
+                const answer = prompt(`${this.question}\n${optionsArr.join('\n')}\n(Write option number)`);
+                // make sure the answer is a number
+                const answerNum = parseInt(answer);
+                const inputArr = [];
+                for (const [index, value] of this.votes.entries()) {
+                        if (answerNum === index) {
+                                this.votes[index]++;
+                                inputArr.push(`${this.answers[index]} - ${this.votes[index]} votes`);
+                        }
+                }
+                // console.log(inputArr.join('\n'));
+                console.log(`Poll results are ${this.votes}`);
+        },
+        displayResults() {
+                const inputArr = [];
+                for (const [index, value] of this.votes.entries()) {
+                        inputArr.push(`${this.answers[index]} - ${this.votes[index]} votes`);
+                }
+                console.log(`Poll results are ${inputArr.join('\n')}`);
+        }
+
+
+};
+
+const answerPollBtn = document.querySelector('.poll');
+answerPollBtn.addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// create function that accepts an array as an argument
+// function accepts an array of numbers
