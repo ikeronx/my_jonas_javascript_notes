@@ -258,42 +258,38 @@ const addVAT2 = addTax2(0.23);
 console.log(addVAT2(60)); // 79.6
 
 console.log('-----CODING CHALLENGE #5 135-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648673#overview
 
+// .... jonas way
 const poll = {
         question: 'What is your favorite programming language?',
-        answers: ['JavaScript', 'Python', 'Rust', 'C++'],
-        votes: [0, 0, 0, 0],
+        options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+        answers: new Array(4).fill(0),
+        // get answer fn
         registerNewAnswer() {
-                const optionsArr = [];
-                for (const [index, value] of this.answers.entries()) {
-                        optionsArr.push(`${index}: ${value}`);
-                }
-                const answer = prompt(`${this.question}\n${optionsArr.join('\n')}\n(Write option number)`);
-                // make sure the answer is a number
-                const answerNum = parseInt(answer);
-                const inputArr = [];
-                for (const [index, value] of this.votes.entries()) {
-                        if (answerNum === index) {
-                                this.votes[index]++;
-                                inputArr.push(`${this.answers[index]} - ${this.votes[index]} votes`);
-                        }
-                }
-                // console.log(inputArr.join('\n'));
-                console.log(`Poll results are ${this.votes}`);
+                // Display a prompt window for the user to input the number of the option they want to vote for
+                const answer = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
+                // register answer
+                // if  if the input is a number and if the number is between 0 and 3 (inclusive) then we register the answer in the answers array at the index of the number we got as an input (answer) - 1 (because the array starts at 0) and we increment the answer by 1 (because we want to count the number of times the user answered the question) - this is the same as this.answers[answer - 1]++ but we use the array method .fill() instead of .push() because we want to overwrite the value at the index of the answer we got as an input (answer) - 1 (because the array starts at 0)
+                typeof answer === 'number' && answer < this.answers.length && this.answers[answer]++;
+                console.log(this.answers);
+                // show results of poll
+                this.displayResults();
+                this.displayResults('string');
         },
-        displayResults() {
-                const inputArr = [];
-                for (const [index, value] of this.votes.entries()) {
-                        inputArr.push(`${this.answers[index]} - ${this.votes[index]} votes`);
+        // display results fn
+        displayResults(type = 'array') {
+                if (type === 'array') {
+                        return this.answers;
                 }
-                console.log(`Poll results are ${inputArr.join('\n')}`);
-        }
-
-
+                if (type === 'string') {
+                        return `Poll results are ${this.answers.join(', ')}`;
+                }
+        },
 };
+document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
 
-const answerPollBtn = document.querySelector('.poll');
-answerPollBtn.addEventListener('click', poll.registerNewAnswer.bind(poll));
-
-// create function that accepts an array as an argument
-// function accepts an array of numbers
+// Bonus
+console.log(poll.displayResults.call({ answers: [5, 2, 3] })); // [5, 2, 3]
+console.log(poll.displayResults.call({ answers: [5, 2, 3] }, 'string')); // Poll results are 5, 2, 3
+console.log(poll.displayResults.call({ answers: [5, 2, 3, 9, 6] })); // [5, 2, 3, 9, 6]

@@ -254,5 +254,38 @@ button.addEventListener('click', () => {
 // delayedDeparture    ✅✅✅✅✅
 
 console.log('-----CODING CHALLENGE #5 135-----');
-console.log('-----functions-----');
+console.log('-----a closer look a functions #1-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648673#overview
+
+// .... jonas way
+const poll = {
+        question: 'What is your favorite programming language?',
+        options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+        answers: new Array(4).fill(0),
+        // get answer fn
+        registerNewAnswer() {
+                // Display a prompt window for the user to input the number of the option they want to vote for
+                const answer = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
+                // register answer
+                // if  if the input is a number and if the number is between 0 and 3 (inclusive) then we register the answer in the answers array at the index of the number we got as an input (answer) - 1 (because the array starts at 0) and we increment the answer by 1 (because we want to count the number of times the user answered the question) - this is the same as this.answers[answer - 1]++ but we use the array method .fill() instead of .push() because we want to overwrite the value at the index of the answer we got as an input (answer) - 1 (because the array starts at 0)
+                typeof answer === 'number' && answer < this.answers.length && this.answers[answer]++;
+                console.log(this.answers);
+                // show results of poll
+                this.displayResults();
+                this.displayResults('string');
+        },
+        // display results fn
+        displayResults(type = 'array') {
+                if (type === 'array') {
+                        return this.answers;
+                }
+                if (type === 'string') {
+                        console.log(`Poll results are ${this.answers.join(', ')}`);
+                }
+        },
+};
+document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+// Bonus
+console.log(poll.displayResults.call({ answers: [5, 2, 3] })); // [5, 2, 3]
+console.log(poll.displayResults.call({ answers: [5, 2, 3] }, 'string')); // Poll results are 5, 2, 3
