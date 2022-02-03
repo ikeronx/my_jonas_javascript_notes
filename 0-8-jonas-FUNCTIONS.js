@@ -58,7 +58,7 @@ console.log(flight); // LH234
 // ... when we pass a reference type (object) to a function
 // ... what is copied is just a reference to the object in the memory heap
 // ... so whatever changes are made to the the leanna variable inside the function
-// ... will also apply to the leanna object outside the function when it is pass to the function as an argument (passenger)
+// ... will also apply to the leanna object outside the function when it is pass to the 'checkIn' function as an argument (passenger)
 // ... hence the leanna object values will be updated/change also
 console.log(leanna); // {name: 'Mrs Le-Anna McGuire', passport: 2345578}
 // is the same as writing
@@ -75,26 +75,27 @@ newPassport(leanna);
 checkIn(flight, leanna);
 // console.log(leanna);
 
-// # javascript does not pass be by reference only by values
+// # javascript does not pass by reference only by values
 // # in javascript we pass a reference of the values TO the function and not BY reference
 
 console.log('-----HIGHER ODER #1: FUNCTIONS ACCEPTING CALLBACK FUNCTIONS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648655#questions
 // There are two types of higher order functions:
-// * 1. Function that receives another function... like addEventListener for e.g.
+// * 1. Function that receives another function... like addEventListener using callbacks for example
 
 // *** EXAMPLE 1 ***
 const oneWord = (str) => str.replace(/ /g, '').toLowerCase();
+
 const upperFirstWord = (str) => {
         const [firstWord, ...others] = str.split(' ');
         return [firstWord.toUpperCase(), ...others].join(' ');
 };
 
 // - how to pass a function to another function
-// ... step 1: set the a str and the upperFirstWord fn to the higher oder transformer function as parameters
+// ... step 1: set the str and the upperFirstWord fn to the higher oder transformer function as parameters
 const transformer = (str, fn) => {
         console.log(`The original string: ${str}`); // The original string: JAVASCRIPT is the best!
-        // ... step 3: invoke the upperFirstWord/oneWord fn like this:
+        // ... step 3: invoke the upperFirstWord/oneWord fn inside the transformer (higher order fn) like this:
         console.log(`Transformed string: ${fn(str)}`); // Transformed string: javascriptisthebestest!!!!
 
         // functions also have properties cause they are objects
@@ -179,7 +180,7 @@ const swiss = {
 // eslint-disable-next-line prefer-destructuring
 const book = lufthansa.book;
 
-// ... step 2. we can apply the book variable fn which is the lufthansa book fn
+// ... step 2. we can apply the book variable fn which is the lufthansa book method to the eurowings object
 // ... to objects (eurowings, lufthansa etc) by using function methods to point to the object 'this' keyword:
 console.log('-----call() method-----');
 // the call() method calls the book function which will then point to the objects (swiss, lufthansa, eurowings etc) 'this' keyword then we set the arguments
@@ -270,7 +271,7 @@ const poll = {
                 // Display a prompt window for the user to input the number of the option they want to vote for
                 const answer = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
                 // register answer
-                // if  if the input is a number and if the number is between 0 and 3 (inclusive) then we register the answer in the answers array at the index of the number we got as an input (answer) - 1 (because the array starts at 0) and we increment the answer by 1 (because we want to count the number of times the user answered the question) - this is the same as this.answers[answer - 1]++ but we use the array method .fill() instead of .push() because we want to overwrite the value at the index of the answer we got as an input (answer) - 1 (because the array starts at 0)
+                // if the input is a number and if the number is between 0 and 3 (inclusive) then we register the answer in the answers array at the index of the number we got as an input (answer) - 1 (because the array starts at 0) and we increment the answer by 1 (because we want to count the number of times the user answered the question) - this is the same as this.answers[answer - 1]++ but we use the array method .fill() instead of .push() because we want to overwrite the value at the index of the answer we got as an input (answer) - 1 (because the array starts at 0)
                 typeof answer === 'number' && answer < this.answers.length && this.answers[answer]++;
                 console.log(this.answers);
                 // show results of poll
@@ -293,3 +294,89 @@ document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer
 console.log(poll.displayResults.call({ answers: [5, 2, 3] })); // [5, 2, 3]
 console.log(poll.displayResults.call({ answers: [5, 2, 3] }, 'string')); // Poll results are 5, 2, 3
 console.log(poll.displayResults.call({ answers: [5, 2, 3, 9, 6] })); // [5, 2, 3, 9, 6]
+
+console.log('-----IIFE-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648679#overview
+// * Immediately Invoked Function Expression (IIFE)
+// ... IIFE is only executed once when the page loads
+// ... best use-case is with async await functions and it's a way to avoid the 'this' keyword confusion when using the 'this' keyword inside the IIFE
+
+// - how  to use the IIFE:
+// *** examples ***
+(function () {
+        console.log('This will never run again');
+})(); // This will never run again
+
+(function (a, b) {
+        console.log(a + b);
+})(1, 2); // 3
+
+// ... arrow function version
+((a, b) => console.log(a + b))(1, 2); // 3
+
+// ... block version (with curly braces)
+{
+        console.log('hello');
+}
+
+console.log('-----CLOSURES-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648683#overview
+// * closures make the function remember and access the variables from the scope in which it was created even if that execution context is gone
+// ... closures are useful when you want to access a variable from a function that has already returned
+
+// - how to use closures:
+// *** example ***
+const secureBooking = function () {
+        let passenger = 0;
+
+        // ... booker fn below has access to this function scope (variables/context) and return function due to the closure
+        return function () {
+                passenger++;
+                console.log(`${passenger} passenger booked a seat`);
+        };
+};
+
+// ... the booker fn is returned from the secureBooking fn and it has access to the passenger variable in the secureBooking fn because it's a closure
+const booker = secureBooking();
+booker(); // 1 passenger booked a seat
+booker(); // 2 passenger booked a seat
+booker(); // 3 passenger booked a seat
+
+// you can inspect the variable environment of a fn like this:
+console.dir(booker);
+
+console.log('-----more closure examples-----');
+// *** example 1 ***
+let f;
+const g = function () {
+        const a = 23;
+        f = function () {
+                console.log(a * 2);
+        };
+};
+
+const h = function () {
+        const b = 600;
+        f = function () {
+                console.log(b * 2);
+        };
+};
+g();
+f(); // 46
+h();
+f(); // 120
+
+// *** example 2 ***
+const boardPassengers = function (num, wait) {
+        const perGroup = num / 3;
+        // ... fn will execute after
+        setTimeout(function () {
+                console.log(`We are boarding all ${num} passengers`);
+                console.log(`There are 3 groups, each with ${perGroup} passengers`);
+        }, wait);
+        
+
+        console.log(`We'll start boarding in ${wait} seconds`);
+};
+
+const bording = boardPassengers(100, 3000);

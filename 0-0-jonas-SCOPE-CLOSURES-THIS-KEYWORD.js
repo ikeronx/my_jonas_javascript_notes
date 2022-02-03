@@ -171,7 +171,7 @@ const jonas = {
         },
 };
 jonas.calcAge2(); // 46
-jonas.greet(); // Hey undefined
+jonas.greet(); // Hey undefined ... the greet method is pointing to the window object this keyword since it's an arrow function so it return undefined
 
 // /////////////////////////////////////
 // ARGUMENTS KEYWORD -
@@ -190,7 +190,7 @@ const addArrow = (a, b) => a + b;
 let lastName = 'Williams';
 const oldLastName = lastName;
 lastName = 'Davis';
-console.log(lastName, oldLastName);
+console.log(lastName, oldLastName); // Davis Williams
 
 // Reference types
 const jessica = {
