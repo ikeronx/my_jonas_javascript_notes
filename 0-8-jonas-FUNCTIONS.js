@@ -373,10 +373,11 @@ const boardPassengers = function (num, wait) {
         setTimeout(function () {
                 console.log(`We are boarding all ${num} passengers`);
                 console.log(`There are 3 groups, each with ${perGroup} passengers`);
-        }, wait);
-        
+        }, wait * 1000);
 
         console.log(`We'll start boarding in ${wait} seconds`);
 };
 
-const bording = boardPassengers(100, 3000);
+const bording = boardPassengers(180, 3);
+
+

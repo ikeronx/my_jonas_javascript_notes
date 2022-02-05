@@ -290,4 +290,16 @@ document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer
 console.log(poll.displayResults.call({ answers: [5, 2, 3] })); // [5, 2, 3]
 console.log(poll.displayResults.call({ answers: [5, 2, 3] }, 'string')); // Poll results are 5, 2, 3
 
+console.log('-----CODING CHALLENGE #5 139-----');
+console.log('-----a closer look a functions #2-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648697#overview
+console.log('-----CODING CHALLENGE #5 139-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648697#overview
 
+(function () {
+        const header = document.querySelector('h1');
+        header.style.color = 'red';
+        document.body.addEventListener('click', () => {
+                header.style.color = 'blue';
+        });
+})();
