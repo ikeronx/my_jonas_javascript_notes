@@ -291,11 +291,8 @@ console.log(poll.displayResults.call({ answers: [5, 2, 3] })); // [5, 2, 3]
 console.log(poll.displayResults.call({ answers: [5, 2, 3] }, 'string')); // Poll results are 5, 2, 3
 
 console.log('-----CODING CHALLENGE #5 139-----');
-console.log('-----a closer look a functions #2-----');
+console.log('-----a closer look a functions: closure #2-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648697#overview
-console.log('-----CODING CHALLENGE #5 139-----');
-// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648697#overview
-
 (function () {
         const header = document.querySelector('h1');
         header.style.color = 'red';
@@ -303,3 +300,22 @@ console.log('-----CODING CHALLENGE #5 139-----');
                 header.style.color = 'blue';
         });
 })();
+
+console.log('-----CODING CHALLENGE #6 148-----');
+console.log('-----working with arrays #1-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648723#overview
+const checkDogs = (dogsJulia, dogsKate) => {
+        const dogsJuliaCopy = [...dogsJulia];
+        dogsJuliaCopy.splice(0, 1);
+        dogsJuliaCopy.splice(-2);
+
+        const dogOwnersArr = [...dogsJuliaCopy, ...dogsKate];
+        dogOwnersArr.forEach((dogAge, index) => {
+                const outPut =
+                        dogAge >= 3
+                                ? `Dog number ${index + 1} is an adult 🐩, and is ${dogAge} years old`
+                                : `Dog number ${index + 1} is a puppy 🐶`;
+                console.log(outPut);
+        });
+};
+checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
