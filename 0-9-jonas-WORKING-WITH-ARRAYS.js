@@ -171,24 +171,108 @@ colors.forEach((color) => {
 
 console.log('-----DATA TRANSFORMATIONS: MAP() FILTER() REDUCE()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648727#overview
+// the map returns ALL the elements of an array as a new array
+// the filter returns SOME of the elements of an array that pass a test as a new array
+// the reduce returns a SINGLE value after iterating through the elements of an array
 
-console.log('-----map()-----'); // !! NO MUTATION - returns a new array
-// * the map method allows us to loop through an array and perform a function on each element
+console.log('-----MAP()-----'); // !! NO MUTATION - returns a new array
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648731#overview
+// * the map method allows us to loop through an array and perform a function on each element in the array
 // * the map method does not modify/mutate the original array
 // * the map method returns a new array with the transformed elements
 
 // ** examples **
 // - how to use the map() method
-
-const myArray = [2, 4, 5, 7, 9, 12, 14];
-myArray.map((num, index) => {
-        const output = `${index}: ${num * 2}`;
-        console.log(output); // 0: 4, 1: 8, 2: 10, 3: 14, 4: 20, 5: 28, 6: 36
-});
-
 const eurToUsd = 1.1;
-const movementsUSD = movements.map((value) => {
-        const output = value * eurToUsd;
-        return output.toFixed(0); // 200, 450, -400, 3000, -650, -130, 70, 1300
-});
+const movementsUSD = movements.map((value) => Math.round(value * eurToUsd) / 1);
 console.log(movementsUSD); // [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+// - how to use the map() method to the value and index
+const myArray = [2, 4, 5, 7, 9, 12, 14];
+const doubleEl = myArray.map((num, index) => `${index + 1}: ${num * 2}`);
+console.log(doubleEl.join(', ')); // 1: 4, 2: 8, 3: 10, 4: 14, 5: 18, 6: 24, 7: 28
+
+// ...
+const movementsDescriptions = movements.map(
+        (value, index) => `Movement ${index + 1}: You ${value > 0 ? 'deposited' : 'withdrew'} ${Math.abs(value)}`
+);
+console.log(movementsDescriptions); // [ 'Movement 1: You deposited $200', 'Movement 2: You withdrew $450', 'Movement 3: You withdrew $400', 'Movement 4: You deposited $3000', 'Movement 5: You withdrew $650', 'Movement 6: You withdrew $130', 'Movement 7: You deposited $70', 'Movement 8: You withdrew $1300' ]
+
+console.log('-----FILTER()-----'); // !! NO MUTATION - returns a new array
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648737#overview
+// * the filter method allows us to loop through an array and perform a function on each element in the array
+// * the filter returns SOME of the elements of an array that pass a test in a new array
+// * the filter method does not modify/mutate the original array
+// * the filter method returns a new array with the filtered elements
+
+// ** examples **
+// - how to use the filter() method
+// ... filter out the negative movements and return the positive ones (deposit)
+const deposits = movements.filter((value) => value > 0);
+console.log(deposits); // [200, 450, 3000, 70]
+
+// ... filter out the positive movements and return the negative ones (withdrawal)
+const withdrawals = movements.filter((value) => value < 0);
+console.log(withdrawals); // [-400, -650, -130]
+
+console.log('-----REDUCE()-----'); // !! NO MUTATION - returns a single value
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648743#overview
+// * the reduce method allows us to loop through an array and perform a function on each element in the array
+// * the reduce method returns a SINGLE value after iterating through the elements of an array
+
+// ** examples **
+// - how to use the reduce() method
+// ... sum of wall the movements
+const balance = movements.reduce((acc, value) => acc + value, 0);
+console.log(balance); // 3840
+
+// ... get movements maximum using the reduce method
+const max = movements.reduce((acc, value) => (value > acc ? value : acc), movements[0]);
+console.log(max); // 3000
+
+console.log('-----CHAINING METHODS-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648747#overview
+// * the chaining methods allow us to chain together multiple methods
+// * the chaining methods return the original array
+
+// ** examples **
+// ... sum of the depositsSum to usd dollars
+const eurToUSD = 1.1;
+const totalDepositsUSD = movements
+        .filter((value) => value > 0)
+        .map(
+                (value, i, arr) =>
+                        // !! we can inspect the arr to see which array the the array method is being use on in any stage of the pipeline by oonsole logging the arr variable
+                        value * eurToUSD
+        )
+        .reduce((acc, value) => acc + value, 0);
+console.log(totalDepositsUSD); // 5522
+
+// *** practice ***
+// ... sum of the withdrawals
+const withdrawalsSum = movements.filter((value) => value < 0).reduce((acc, value) => acc + value, 0);
+console.log(withdrawalsSum); // -1180
+
+// ... get sum of the number in the array
+const messyArr = ['bitch', 20, 3, 'ok', true, 5];
+const messyNum = messyArr.filter((value) => typeof value !== 'string').reduce((acc, cumulative) => acc + cumulative, 0);
+console.log(messyNum); // 29
+
+const products = [
+        // Here we create an object and each
+        // object has a name and a price
+        { name: 'dress', price: 600 },
+        { name: 'cream', price: 60 },
+        { name: 'book', price: 200 },
+        { name: 'bottle', price: 50 },
+        { name: 'bedsheet', price: 350 },
+];
+
+// 15% off each products price greater than 100
+const discount = products
+        .filter((product) => product.price > 100)
+        .map((product) => {
+                product.price *= 0.85;
+                return product;
+        });
+console.log(discount); // [ { name: 'dress', price: 540 }, { name: 'book', price: 180 } ]

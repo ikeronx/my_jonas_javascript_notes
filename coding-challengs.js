@@ -319,3 +319,16 @@ const checkDogs = (dogsJulia, dogsKate) => {
         });
 };
 checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
+
+console.log('-----CODING CHALLENGE #7 154-----');
+console.log('-----working with arrays #2-----');
+const calcAverageHumanAge = (dogAges) => {
+        const humanAge = dogAges
+                .map((dogAge) => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
+                .filter((dogAge) => dogAge > 18);
+        const avgHumanAge = Math.round(humanAge.reduce((acc, dogAge) => acc + dogAge, 0) / humanAge.length);
+        return avgHumanAge;
+};
+console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])); // 44
+console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4])); // 47
+
