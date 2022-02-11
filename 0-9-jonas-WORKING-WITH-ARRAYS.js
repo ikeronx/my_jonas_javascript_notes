@@ -243,6 +243,7 @@ const totalDepositsUSD = movements
         .map(
                 (value, i, arr) =>
                         // !! we can inspect the arr to see which array the the array method is being use on in any stage of the pipeline by oonsole logging the arr variable
+                        // console.log(arr);
                         value * eurToUSD
         )
         .reduce((acc, value) => acc + value, 0);
@@ -258,6 +259,19 @@ const messyArr = ['bitch', 20, 3, 'ok', true, 5];
 const messyNum = messyArr.filter((value) => typeof value !== 'string').reduce((acc, cumulative) => acc + cumulative, 0);
 console.log(messyNum); // 29
 
+// ... calculate the average of the dogs in the array
+const calcAverageHumanAge = (dogAges) => {
+        const humanAge = dogAges
+                .map((dogAge) => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
+                .filter((dogAge) => dogAge >= 18)
+                // !! use the arr variable in reduce method to get the length of the new array to calculate the average
+                .reduce((acc, dogAge, i, arr) => acc + dogAge / arr.length, 0);
+        return Math.round(humanAge);
+};
+console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])); // 44
+console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4])); // 47
+
+// ... and calculate the price
 const products = [
         // Here we create an object and each
         // object has a name and a price
@@ -276,3 +290,53 @@ const discount = products
                 return product;
         });
 console.log(discount); // [ { name: 'dress', price: 540 }, { name: 'book', price: 180 } ]
+
+console.log('-----FIND METHOD-----'); // !! NO MUTATION - returns a single value
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648757#overview
+// * the find method allows us to loop through an array and perform a function on each element in the array
+// * the find method returns the FIRST element of an array that pass a test in a new array
+// * the find method does not modify/mutate the original array
+// * the find method returns a single value
+
+// ** examples **
+// - how to use the find() method
+// ... find the first number thats greater than 10
+const nums = [-11, 8, 9, 10, 5, 32, 14, 6];
+const firstElement = nums.find((value) => value > 10);
+console.log(firstElement); // 32
+
+// ... find the first withdrawal
+const movements2 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const firstWithdrawal = movements2.find((value) => value < 0);
+console.log(firstWithdrawal); // -400
+
+// ... find the first withdrawal in the array that is greater than 400
+const withdrawalGreater400 = movements2
+        .filter((value) => value < 0)
+        .map((value) => Math.abs(value))
+        .find((value) => value > 400);
+console.log(withdrawalGreater400); // 650
+
+// eslint-disable-next-line prettier/prettier
+console.log( '-----how to use the find() method to find an object in an array based on some property of that object-----');
+// - how to use the find() method find an object an the array based on some property of that object
+const user1 = {
+        name: 'John',
+        age: 30,
+        favFood: ['pizza', 'pasta', 'salad'],
+};
+const user2 = {
+        name: 'Mary',
+        age: 25,
+        favFood: ['Sushi', 'cake', 'salad'],
+};
+
+const userss = [user1, user2];
+
+// ... find the user with the name 'Mary' and return the object
+const getUser = userss.find((user) => user.name === 'Mary');
+console.log(getUser); // { name: 'Mary', age: 25, favFood: [ 'Sushi', 'cake', 'salad' ] }
+
+// // ... find the user with the name 'John' and return favorite foods
+const userJohn = userss.find((user) => user.name === 'John');
+console.log(userJohn.favFood); // [ 'pizza', 'pasta', 'salad' ]
