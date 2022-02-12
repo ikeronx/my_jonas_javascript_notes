@@ -90,6 +90,7 @@ const checkEmail1 =
 
 // ... as a function
 const checkEmail = (userEmail, loginEmail) => { 
+        // makes string lower case and removes all white spaces from the string
         const normalizedEmail = loginEmail.toLowerCase().replace(/ +/g, '');
         return normalizedEmail === userEmail ? console.log('Email is correct 👍🏾 ') : console.log('Email is incorrect 👎🏾 ');
 }
@@ -364,9 +365,5 @@ covertVarBtn.style.cssText = `
         const text = document.querySelector('textarea').value;
         convertVar(text);
         });
-
-
-
-
 
 

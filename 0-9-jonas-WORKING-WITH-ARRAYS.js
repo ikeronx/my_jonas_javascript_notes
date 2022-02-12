@@ -291,7 +291,7 @@ const discount = products
         });
 console.log(discount); // [ { name: 'dress', price: 540 }, { name: 'book', price: 180 } ]
 
-console.log('-----FIND METHOD-----'); // !! NO MUTATION - returns a single value
+console.log('-----FIND()-----'); // !! NO MUTATION - returns a single value
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648757#overview
 // * the find method allows us to loop through an array and perform a function on each element in the array
 // * the find method returns the FIRST element of an array that pass a test in a new array
@@ -340,3 +340,12 @@ console.log(getUser); // { name: 'Mary', age: 25, favFood: [ 'Sushi', 'cake', 's
 // // ... find the user with the name 'John' and return favorite foods
 const userJohn = userss.find((user) => user.name === 'John');
 console.log(userJohn.favFood); // [ 'pizza', 'pasta', 'salad' ]
+
+console.log('-----FINDINDEX()-----'); // !! MUTATION - returns the index of the element that passes the test
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648769#questions/13698340
+// * the findIndex method allows us to loop through an array and perform a function on each element in the array
+// * the findIndex method returns the index of the FIRST element of an array that pass a test in a new array
+// * the findIndex method does not modify/mutate the original array
+
+// ** examples **
+// - how to use the findIndex() method

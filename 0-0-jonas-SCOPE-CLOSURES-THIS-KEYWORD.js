@@ -137,6 +137,9 @@ let myArrowFunction2 = () => {
 
 }
 myArrowFunction2() // window
+
+
+// NEVER USE THE 'this' keyword INSIDE ARROW FUCNTION USE IT IN REGULAR FUNCTION;
 */
 
 // /////////////////////////////////////
