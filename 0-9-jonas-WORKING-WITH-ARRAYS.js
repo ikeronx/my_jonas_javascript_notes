@@ -294,7 +294,7 @@ console.log(discount); // [ { name: 'dress', price: 540 }, { name: 'book', price
 console.log('-----FIND()-----'); // !! NO MUTATION - returns a single value
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648757#overview
 // * the find method allows us to loop through an array and perform a function on each element in the array
-// * the find method returns the FIRST element of an array that pass a test in a new array
+// * the find method returns the FIRST element of an array that passes a certain condition
 // * the find method does not modify/mutate the original array
 // * the find method returns a single value
 
@@ -318,8 +318,8 @@ const withdrawalGreater400 = movements2
 console.log(withdrawalGreater400); // 650
 
 // eslint-disable-next-line prettier/prettier
-console.log( '-----how to use the find() method to find an object in an array based on some property of that object-----');
-// - how to use the find() method find an object an the array based on some property of that object
+console.log('-----how to use the find() method to find an object in an array based on some property of that object-----');
+// - how to use the find() method to find an object in an the array based on some property value of that object
 const user1 = {
         name: 'John',
         age: 30,
@@ -341,11 +341,197 @@ console.log(getUser); // { name: 'Mary', age: 25, favFood: [ 'Sushi', 'cake', 's
 const userJohn = userss.find((user) => user.name === 'John');
 console.log(userJohn.favFood); // [ 'pizza', 'pasta', 'salad' ]
 
-console.log('-----FINDINDEX()-----'); // !! MUTATION - returns the index of the element that passes the test
+console.log('-----FINDINDEX()-----'); // !! NO MUTATION - returns the index of the element that passes the test
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648769#questions/13698340
 // * the findIndex method allows us to loop through an array and perform a function on each element in the array
-// * the findIndex method returns the index of the FIRST element of an array that pass a test in a new array
+// * the findIndex method returns the a single value which is the index of an element in an array that passes a certain condition
 // * the findIndex method does not modify/mutate the original array
 
 // ** examples **
 // - how to use the findIndex() method
+// ... find the index of the first number thats greater than 10
+const nums2 = [-11, 8, 9, 10, 5, 32, 14, 6];
+const firstElementIndex = nums2.findIndex((value) => value > 10);
+console.log(firstElementIndex); // 5
+
+console.log('-----SOME() EVERY()-----'); // !! NO MUTATION - returns a boolean
+console.log('-----some()-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648771#questions/13698340
+// * the some method allows us to loop through an array and perform a function on each element in the array
+// * the some method checks if at least one element in an array passes a certain condition or not and returns a boolean value
+// * the some method does not modify/mutate the original array
+
+// ** examples **
+// - how to use the some() method
+// ... check if there is a number greater than 10
+const nums3 = [-11, 8, 9, 12, 5, 2, 1, 6];
+const comeNum = nums3.some((value) => value > 10);
+console.log(comeNum); // true
+
+// the incudes() method is similar to the some method tp the some method only checks for equalioty whereas the some() method checks for a condition
+console.log(movements);
+console.log(movements.includes(-40)); // false
+
+console.log('-----every()-----');
+// * the every method allows us to loop through an array and perform a function on each element in the array
+// * the every method checks if every element in an array passes a certain condition or not and returns a boolean value
+// * the every method does not modify/mutate the original array
+
+// ** examples **
+// - how to use the every() method
+// ... check if every number is greater than 10
+const nums4 = [11, 9, 600];
+const allNum = nums4.every((value) => value > 10);
+console.log(allNum); // false
+
+console.log('-----FLAT() FLATMAP()-----'); // !! NO MUTATION - returns a boolean
+console.log('-----flat()-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648775#questions
+// * the flat() method allows us to flatten an array of arrays into a single array
+// * the flat() method does not modify/mutate the original array
+// * the flat() method returns a new array
+
+// ** examples **
+// - how to use the flat() method
+const arr11 = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
+const flatArr = arr11.flat();
+console.log(flatArr); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+
+// .. how to can pass a number to the flat() method to flatten an array of arrays into a single array if there are nested arrays inside nested arrays
+// ... flatten an array of arrays at a deeper nested level
+const arr12 = [[1, 2, [4, 5, [900, 800], 9], 6], [7, 8, 9], 10];
+const flatArr2 = arr12.flat(3); // <-- pass a number to the flat() method to go a to deeper level of the array to flatten it out
+console.log(flatArr2); // [ 1, 2, 3, 4, 5, 900, 800, 9, 6, 7, 8, 9, 10 ]
+
+// *** PRACTICE ***
+// get all the movements of every single account inside the accounts array and flatten them into a single array and get the overall balance of all the accounts
+const account1 = { owner: 'Keron Williams', movements: [200, 450, -400, 3000, -650, -130, 70, 1300] };
+const account2 = { owner: 'Jessica Davis', movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30] };
+const account3 = { owner: 'Steven Thomas Williams', movements: [200, -200, 340, -300, -20, 50, 400, -460] };
+const account4 = { owner: 'Sarah Smith', movements: [430, 1000, 700, 50, 90] };
+
+const accounts = [account1, account2, account3, account4];
+
+// step 1: loop through the accounts array and get the movements from each account
+// step 2: flatten the movements of each account into a single array
+// step 3: calculate the overall bal ance of all the accounts
+const allAccMovements = accounts
+        .map((acc) => acc.movements)
+        .flat()
+        .reduce((acc, mov) => acc + mov);
+console.log(allAccMovements); // 17840
+
+console.log('-----flatMap()-----'); // !! NO MUTATION - returns a boolean
+// * the flatMap() method map and flat an array at the same time and returns a new array
+// * the flatMap() method does not modify/mutate the original array
+// * keep in mind that flatMap() method only go one level deep unlike the flat() method method that can go as deep as you want inside nested arrays
+
+// ** examples **
+// - how to use the flatMap() method
+// ... rewrite the allAccMovements fm above using the flatMap() method
+// eslint-disable-next-line prettier/prettier
+const allAccMovements2 = accounts
+        .flatMap((acc) => acc.movements)
+        .reduce((acc, mov) => acc + mov);
+console.log(allAccMovements2); // 17840
+
+console.log('-----SORT()-----'); // !! MUTATES THE ORIGINAL ARRAY !!
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648779#questions/14542862
+// * the sort() method allows us to sort an array in ascending or descending order
+// * the sort() method does not return a new array but it modifies the original array
+// * the sort() method is case sensitive
+
+// ** examples: strings**
+// - how to use the sort() method to sort strings
+// ... sort the names alphabetically in ascending order (from a to z)
+const names = ['Keron', 'Jessica', 'Apple', 'Zebra', 'Steven', 'Sarah'];
+console.log(names.sort()); // ['Apple', 'Jessica', 'Keron', 'Sarah', 'Steven', 'Zebra']
+
+// ... sort the names alphabetically in descending order (from z to a)
+const names2 = ['Keron', 'Jessica', 'Apple', 'Zebra', 'Steven', 'Sarah'];
+console.log(names2.sort().reverse()); // ['Zebra', 'Steven', 'Sarah', 'Keron', 'Jessica', 'Apple']
+
+// ** examples: numbers**
+// - how to use the sort() method to sort numbers
+// ~~  pass a compare callback fn '.sort((a, b) => a - b)' to the sort() method to sort numbers in ascending or descending order ~~
+// ~~ ascending order: a - b (smallest to biggest)
+// ~~ descending order: b - a (biggest to smallest)
+
+// ... sort the numbers in an array in ascending order (from smallest to biggest)
+const nums5 = [11, 9, 600, 7, -900, -12, 500];
+const sortedNumsAscOrder = [...nums5];
+sortedNumsAscOrder.sort((a, b) => a - b);
+console.log(sortedNumsAscOrder); // [-900, -12, 7, 9, 11, 500, 600]
+
+// ... sort the numbers in an array in descending order (from biggest to smallest)
+const sortedNumsDescOrder = [...nums5];
+sortedNumsDescOrder.sort((a, b) => b - a);
+console.log(sortedNumsDescOrder); // [600, 500, 11, 9, 7, -12, -900]
+
+console.log('---CREATING AND FILLING ARRAYS: ARRAY() FILL() ARRAY.FOM()---');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648783#questions/13468474
+
+console.log('-----Array()-----'); // !! CREATES AN ARRAY
+// * the Array() constructor allows us to create an array
+// * the Array() constructor does not return a new array but it modifies the original array
+// * the Array() constructor takes in a number as a parameter and creates an array of that length
+// * the Array() constructor takes in a string as a parameter and creates an array of that string
+// * the Array() constructor takes in an array as a parameter and creates an array of that array
+// * the Array() constructor takes in an object as a parameter and creates an array of that object
+// * the Array() constructor takes in a set of parameters and creates an array of those parameters
+
+// *** examples ***
+// - how to use the Array() constructor to create an array of numbers
+console.log(new Array(10, 20, 30, 40, 50)); // [ 10, 20, 30, 40, 50 ]
+
+console.log('-----fill()-----'); // !! MUTATES THE ORIGINAL ARRAY !!
+// * the fill() method allows us to fill an array with a certain value
+// * the fill() method does not return a new array but it modifies the original array
+// * the fill() method takes in a: value and a start index and an end index like the splice method() method
+
+// - how to use the fill() and Array() method together to create arrays programmatically without having hard code all the items manually
+// .. step 1: we use thd Array constructor and pass a single number in the array constructor, this will create an array of that length
+const x = new Array(7); // [ <7 empty items> ]
+// ... step 2: we fill the array using the fill() method and pass in a value which fills the entire array with that value
+// x.fill(0); // [ 0, 0, 0, 0, 0, 0, 0 ]
+// ~~ we can also also specify which index we want it to start filling from and which index we want it to end at by passing in a start index and an end index ~~
+x.fill('egg', 2, 7); // [empty × 2, 'egg', 'egg', 'egg', 'egg', 'egg']
+console.log(x);
+
+// - how to use the fill() method on other arrays
+// ... fill the array with the value 'rice' starting at index 1 and ending at index 3
+const x2 = ['butter', 'egg', 'egg', 'egg', 'egg'];
+x2.fill('rice', 1, 3); // ['butter', 'rice', 'rice', 'rice', 'egg']
+console.log(x2);
+
+console.log('-----Array.from()-----'); // !! CREATES AN ARRAY !!
+// * the Array.from() method allows us to create an array from scratch
+// * the Array.from() method also allows us to create an array from any iterable object like a nodes list, a string, a set, a map, a generator, a function, an array-like object, or an another array
+// * the Array.from() method takes in a set of parameters and creates an array of those parameters
+// * these parameters can be:
+//   - a string
+//   - a set
+//   - a map
+//   - a generator
+//   - a function
+
+// *** examples ***
+// - how tp use the Array.from() method to create an array from scratch
+// ... step 1: we pass in an object with the length property as the first parameter/argument 
+// ... step 2: we pass in a second parameter which is a callback function 
+const createNewArr = Array.from({ length: 5 }, (_, index) => index + 1); // the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
+console.log(createNewArr);
+
+// ** practice example **
+// create an array of 100 dice rolls using the Array.from() method
+console.log(Array.from({ length: 100 }, (_, index) => Math.floor(Math.random(index) * 6) + 1));
+// the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
+
+// ~~ separate callbacks.. dry principle .. use when the call function condition is the same in each fn~
+// const deposit = (mov) => mov > 0;
+// console.log(movements.every(deposit)); // true
+// console.log(movements.some(deposit)); // true
+// console.log(movements.filter(deposit)); // [ 200, 450, 1300 ]
+// console.log(movements.find(deposit)); // 200
+// console.log(movements.map(deposit)); // [ 200, 450, 1300 ]
+

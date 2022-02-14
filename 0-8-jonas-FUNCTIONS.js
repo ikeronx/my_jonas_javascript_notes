@@ -381,3 +381,4 @@ const boardPassengers = function (num, wait) {
 const bording = boardPassengers(180, 3);
 
 
+

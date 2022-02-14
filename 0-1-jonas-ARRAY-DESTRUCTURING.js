@@ -39,24 +39,24 @@ const restaurant = {
 
 console.log('----REAL WORLD EXAMPLES----');
 // ******* real world example ********
-// 1. how to make a function return an array and destruct the result into different variables....  - receive values from the object's from arrays (mainMenu, etc) using indexes and object method
+// 1. - how to make a function return an array and destruct the result into different variables....  - receive values from the object's from arrays (mainMenu, etc) using indexes and object method
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648521#announcements 10:55 timestamp
 const [foodCategory, starter, mainCourse] = restaurant.order(0, 2, 0);
 console.log(`Food Category: ${foodCategory} Starter Menu: ${starter} Main Menu: ${mainCourse}`); // Food Category: Italian 🇮🇹 Starter Menu: Garlic Bread 🥖 Main Menu: Pizza 🍕
 
 // ******* real world example ********
-// 2. how to make a function accept multiple arguments then use the spread operator to pass those arguments.  receive values using spread operator
+// 2. - how to make a function accept multiple arguments then use the spread operator to pass those arguments.  receive values using spread operator
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648535#announcements 12:30 timestamp
 const pastaIngredients = ['Tomato 🍅', 'Cheese 🧀', 'Chilli 🌶'];
 restaurant.orderPizza(...pastaIngredients); // Here's your delicious Pasta with 🍅, 🍝,🍗
 
 // ******* real world example ********
-// 3. how to use rest operator as an argument which returns an array
+// 3. - how to use rest operator as an argument which returns an array
 restaurant.orderFood(0, ' 🍇', '🍆', '🍄'); // Here's your delicious Pizza with 🍇 and 🍆 and 🍄
 const keronOrder = { ...restaurant.orderFood(1, 'Tomato 🍅', 'Broccoli 🥦', 'Shrimp 🍤') }; // Here's your delicious Pasta with Tomato 🍅 and Broccoli 🥦
 
 console.log('----DESTRUCTING ARRAYS----');
-// ******* Destruct Arrays ********
+
 // - how to destructure arrays inside an object
 const [restaurantCategories] = [restaurant.categories];
 console.log(restaurantCategories); // ['Italian 🍝', 'Pizzeria 🍕', 'Vegetarian 🥗', 'Organic 🍳']
@@ -82,8 +82,8 @@ const [p, q, r = 1] = [8, 9];
 console.log(p, q, r); // 8 9 1
 
 console.log('----THE SPREAD OPERATOR (...) ARRAYS----');
-// ******* SPREAD OPERATOR (ARRAYS) ********
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648535#notes
+
 // - how to copy an array using the spread operator
 const mainMenuCopy = [...restaurant.mainMenu];
 
