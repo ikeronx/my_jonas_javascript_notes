@@ -32,6 +32,8 @@ console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Air
 console.log(airline.slice(-1)); // l
 // ... how to extract letters either from the beginning or the end of the string
 console.log(airline.slice(1, -3)); // AP Air Portu
+// ... how to extract all the letters except the last letter from a string
+console.log(airline.slice(0, -1)); // AP Air Portuga
 
 // **** REAL WORLD EXAMPLES ****
 // ... write a function that receives an airplane seat and logs to to the console whether it is middle seat or not
@@ -212,12 +214,12 @@ console.log('hello'.padStart(10, '%').padEnd(20, '+')); // -----hello**********
 // **** REAL WORLD EXAMPLES ****
 // 1. ... write a function that mass credit card numbers except the last 4 digits
 const massCreditCard = (number) => {
-    // step 1. convert the number into a string
-     const str = String(number)
-    // step 2. extract the last 4 digits of the credit card number
-    const last4digits = str.slice(-4)
-    // step 3. return the last 4 digits of the string with a padding at the beginning of the string that is equal to the length of the original string
-    return last4digits.padStart(str.length, '*')
+        // step 1. convert the number into a string
+        const str = String(number)
+        // step 2. extract the last 4 digits of the credit card number
+        const last4digits = str.slice(-4)
+        // step 3. return the last 4 digits of the string with a padding at the beginning of the string that is equal to the length of the original string
+        return last4digits.padStart(str.length, '*')
 }
 console.log(massCreditCard(123456)); // **3456
 console.log(massCreditCard(1234567890123456)); // ************3456
@@ -228,11 +230,11 @@ console.log('---string methods: repeat()---');
 // - how to use the repeat method
 console.log('hello '.repeat(3)); // `hello hello hello`
 const greeting = 'hello '
-greeting.repeat(2);
+console.log(greeting.repeat(2)); // `hello hello`
 
 const dangerZone = (n) => {
         const warning = 'Danger Zone.... Please do not enter...'
-        console.log(`${warning.repeat(n) }`);
+        console.log(`${warning.repeat(n) }`); // Danger Zone.... Please do not enter...Danger Zone.... Please do not enter...
 };
 dangerZone(3);
 
@@ -242,7 +244,7 @@ document.body.append(document.createElement('textarea'));
 document.body.append(document.createElement('button'))
 document.body.append(document.createElement('button1'));
 
-console.log('-----pratice #1-----');
+console.log('-----practice #1-----');
 // eslint-disable-next-line prettier/prettier
 
 // TEST DATA:
@@ -258,7 +260,7 @@ const flights = `_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru
 // ... jonas weekdays
 const getCode = str => str.slice(0,3).toUpperCase()
 for (const flight of flights.split('+')) {
-        // use destructuring to extract each word from the flight string and format them the add them to the final string  
+        // use destructuring to extract each word from the flight string and format them then add them to the final string  
         const [type, from, to, time] = flight.split(';');
         // format each word individually
         const output = `${type.startsWith('_Delayed') ? '🔴 ' : ''}${type.replaceAll('_', '')} from ${getCode(from)} to ${getCode(to)} (${time.replaceAll(':', 'h')})`.padStart(45)

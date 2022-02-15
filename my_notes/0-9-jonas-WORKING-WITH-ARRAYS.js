@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 /* eslint-disable strict */
@@ -208,12 +210,12 @@ console.log('-----FILTER()-----'); // !! NO MUTATION - returns a new array
 // ** examples **
 // - how to use the filter() method
 // ... filter out the negative movements and return the positive ones (deposit)
-const deposits = movements.filter((value) => value > 0);
-console.log(deposits); // [200, 450, 3000, 70]
+const depositz = movements.filter((value) => value > 0);
+console.log(depositz); // [200, 450, 3000, 70]
 
 // ... filter out the positive movements and return the negative ones (withdrawal)
-const withdrawals = movements.filter((value) => value < 0);
-console.log(withdrawals); // [-400, -650, -130]
+const withdrawalz = movements.filter((value) => value < 0);
+console.log(withdrawalz); // [-400, -650, -130]
 
 console.log('-----REDUCE()-----'); // !! NO MUTATION - returns a single value
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648743#overview
@@ -506,7 +508,7 @@ console.log(x2);
 
 console.log('-----Array.from()-----'); // !! CREATES AN ARRAY !!
 // * the Array.from() method allows us to create an array from scratch
-// * the Array.from() method also allows us to create an array from any iterable object like a nodes list, a string, a set, a map, a generator, a function, an array-like object, or an another array
+// * the Array.from() method also allows us to create an array from any iterable like a nodes list, a string, a object, a set, a map, a generator, a function, an array-like object, or an another array
 // * the Array.from() method takes in a set of parameters and creates an array of those parameters
 // * these parameters can be:
 //   - a string
@@ -517,8 +519,8 @@ console.log('-----Array.from()-----'); // !! CREATES AN ARRAY !!
 
 // *** examples ***
 // - how tp use the Array.from() method to create an array from scratch
-// ... step 1: we pass in an object with the length property as the first parameter/argument 
-// ... step 2: we pass in a second parameter which is a callback function 
+// ... step 1: we pass in an object with the length property as the first parameter/argument
+// ... step 2: we pass in a second parameter which is a map callback function
 const createNewArr = Array.from({ length: 5 }, (_, index) => index + 1); // the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
 console.log(createNewArr);
 
@@ -527,6 +529,109 @@ console.log(createNewArr);
 console.log(Array.from({ length: 100 }, (_, index) => Math.floor(Math.random(index) * 6) + 1));
 // the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
 
+// eslint-disable-next-line prettier/prettier
+console.log('-----!! How to create an array from a NODELIST using the Array.from() method and pass a callback fn as second argument to get the values of each nodelist element-----'); // !! CREATES AN ARRAY !!
+// - create an array from the movements values from the Bankist UI using the Array.from() method then use the map call back functions to get the values from the array and display them
+// step 1: pass in the node list to the Array.from() method by selecting each el using document.querySelectorAll()
+// step 2: use the map() method to loop through the nobelist to get the values from the array and display them in the console or alert window
+
+// selectorExample.addEventListener('click', e => {
+//         // 1: pass the node list to the Array.from() method as the first argument by selecting each el using document.querySelectorAll() then pass a callback function to the Array.from() method as a second argument to loop through the nodelist array and get the values from the array and display them in the console
+//         const movementsUI = Array.from(
+//                 document.querySelectorAll('.movements__value'),
+//                 el => +el.textContent.replace('€', '')
+//         ); // .reduce((acc, curr) => acc + curr // <-- can chain methods to the Array.from() method
+//         // 2: display the values for each of the elements in the nodelist (movementsUI)
+//         console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
+// });
+
+// *** more array method practice ***
+const account11 = { owner: 'Keron Williams', movements: [200, 450, -400, 3000, -650, -130, 70, 1300] };
+const account22 = { owner: 'Jessica Davis', movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30] };
+const account33 = { owner: 'Steven Thomas Williams', movements: [200, -200, 340, -300, -20, 50, 400, -460] };
+const account44 = { owner: 'Sarah Smith', movements: [430, 1000, 700, 50, 90] };
+
+const accountz = [account11, account22, account33, account44];
+
+// ** Practice Example 1:
+// - calculate the bank's deposits overall balance (sum of all the deposits)
+const bankDepositSum = accountz
+        .flatMap((acc) => acc.movements)
+        .filter((acc) => acc > 0)
+        .reduce((sum, curr) => sum + curr, 0);
+console.log(bankDepositSum); // 25180
+
+// ** Practice Example 2: 
+// - check how how many deposits the bank has that are at least 1000
+const numDeposits1000 = accountz
+        .flatMap(acc => acc.movements)
+        .filter(acc => acc >= 1000).length;
+console.log(numDeposits1000); // 6
+
+// ... different version using the reduce method
+// ~~ can use reduce to count something in an array ~~
+const numDeposits1000v2 = accountz
+        .flatMap((acc) => acc.movements)
+        // .reduce((count, curValue) => (curValue >= 1000 ? count + 1 : count), 0); // <-- the zero is the initial value of the count
+        .reduce((count, currentValue) => (currentValue >= 1000 ? ++count : count), 0);
+console.log(numDeposits1000v2); // 5
+
+// ~~~ postfix increment operator & prefix increment operator differences~~~
+let a = 10;
+console.log(a++); // 10 <-- the postfix operator ++ returns the value of the variable before it is incremented by 1
+console.log(++a); // 11 <-- the prefix ++ operator adds 1 to the value of the variable and then returns the new value... same as writing a + 1
+
+// ** Practice Example 2: 
+// - use the reduce method to create a brand new object which contains the sums of all the banks deposits and withdrawals
+const { deposits, withdrawals } = accountz.flatMap(acc => acc.movements)
+        .reduce((sums, cur) => {
+                // cur > 0 ? sums.deposits += cur : sums.withdrawals += cur;
+                sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur; // the deposits and withdrawals properties are set to 0 by default so we can just add the current value to the deposits or withdrawals property and then return the new object with the new properties set to the new values 
+                return sums;
+        }, {deposits: 0, withdrawals: 0}
+        )
+console.log(deposits, withdrawals); // 25180, -7340
+
+// .... array version of the above code
+const [ depositzz, withdrawalzz ] = accountz.flatMap(acc => acc.movements)
+        .reduce((sums, cur) => {
+                // cur > 0 ? sums.deposits += cur : sums.withdrawals += cur;
+                sums[cur > 0 ? 0 : 1] += cur; // <-- the 0 is the index of the deposits array and the 1 is the index of the withdrawals array
+                return sums;
+        }, [0, 0]);
+        
+console.log(depositzz, withdrawalzz); // 25180, -7340
+
+// ** Practice Example 3:
+// - create a fn that transforms str to title case: this is a nice title - This Is a Nice Tittle
+const convertTitleCase = (title) => {
+        const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+        const exceptions = ['a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'so', 'yet', 'at', 'by', 'for', 'from', 'in', 'into', 'like', 'of', 'off', 'on', 'onto', 'to', 'up', 'via', 'with'];
+        const titleCase = title
+                .toLowerCase()
+                .split(' ')
+                .map(word => (exceptions.includes(word) ? word : capitalize(word))).join(' ');
+        return capitalize(titleCase); 
+}
+console.log(convertTitleCase('this is a nice title')); // This Is a Nice Tittle
+console.log(convertTitleCase('this is a LONG title')); // This Is a Long Title
+console.log(convertTitleCase('and here is another title with an EXAMPLE')); // This Is a Long Title
+
+// ** Practice Example 4 
+// how to get user's information using the reduce method
+// reference: https://www.youtube.com/watch?v=kC3AasLEuBA
+// const ownerObj = accountz.reduce((acc, user) => {
+//         // return {...acc, [user.owner]: user} // <-- this is the same as the below code which accumulates all of each account information in the new object we created in the accumulator starting point '{}' using the spread operator and can be access by the property value we wish to use '[user.owner]' to access the information when we pass it to the 'ownerObj' as an argument
+//         acc[user.owner] = user
+//         return acc
+// }, {});
+// console.log(ownerObj) // {'Keron Williams': {owner: 'Keron Williams', movements: [200, 450, -400, 3000, -650, -130, 70, 1300]}, 'Jessica Davis': {owner: 'Jessica Davis', movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30]}, 'Steven Thomas Williams': {owner: 'Steven Thomas Williams', movements: [200, -200, 340, -300, -20, 50, 400, -460]}, 'Sarah Smith': {owner: 'Sarah Smith', movements: [430, 1000, 700, 50, 90]}}
+// console.log(ownerObj['Keron Williams']) // { owner: 'Keron Williams', movements: [ 200, 450, -400, 3000, -650, -130, 70, 1300 ] }
+// console.log(ownerObj['Jessica Davis']) // undefined
+
+// ** Practice Example 4 
+// how to get user's information using the reduce method
+
 // ~~ separate callbacks.. dry principle .. use when the call function condition is the same in each fn~
 // const deposit = (mov) => mov > 0;
 // console.log(movements.every(deposit)); // true
@@ -534,4 +639,82 @@ console.log(Array.from({ length: 100 }, (_, index) => Math.floor(Math.random(ind
 // console.log(movements.filter(deposit)); // [ 200, 450, 1300 ]
 // console.log(movements.find(deposit)); // 200
 // console.log(movements.map(deposit)); // [ 200, 450, 1300 ]
+
+
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648793#questions/13468474
+
+const dogs = [
+        {
+                weight: 22,
+                curFood: 250,
+                owners: ['Alice', 'Bob']
+        },
+        {
+                weight: 8,
+                curFood: 200,
+                owners: ['Matilda']
+        },
+        {
+                weight: 13,
+                curFood: 275,
+                owners: ['Sarah', 'John']
+        },
+        {
+                weight: 32,
+                curFood: 340,
+                owners: ['Michael']
+        },
+
+];
+
+console.log('-----CODING CHALLENGE #8 167-----');
+console.log('-----working with arrays #4-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648793#questions/13468474
+
+// Task 1: Your tasks: 1. Loop over the 'dogs' array containing dog objects, and foreach dog, calculate the recommended food portion and add it to the object as a new property. Do not create a new array, simply loop over the array. Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+dogs.forEach(dog => dog.recFood = Math.trunc(dog.weight ** 0.75 * 28));
+console.log(dogs); // [ { weight: 22, curFood: 250, owners: [ 'Alice', 'Bob' ], recfood: 528 }, { weight: 8, curFood: 200, owners: [ 'Matilda' ], recfood: 280 }, { weight: 13, curFood: 275, owners: [ 'Sarah', 'John' ], recfood: 515 }, { weight: 32, curFood: 340, owners: [ 'Michael' ], recfood: 740 } ]
+
+// Task 2: Find Sarah's dog and log to the console whether it's eating too much or too little. Hint: Some dogs have multiple owners, so you first need to find Sarah in the owners array, and so this one is a bit tricky (on purpose)
+const dogSarah = dogs.find((dog => dog.owners.includes('Sarah')))
+console.log(`Sarah's recommended food is too ${dogSarah.curFood > dogSarah.recFood ? 'much' : 'little'}`); // Sarah's recommended food is not too much
+
+// Task 3: Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs who eat too little ('ownersEatTooLittle').
+const ownersEatTooMuch = dogs
+        .filter(dog => dog.curFood > dog.recFood)
+        .flatMap(dog => dog.owners)
+
+const ownersEatTooLittle = dogs
+        .filter((dog) => dog.curFood < dog.recFood)
+        .flatMap(dog => dog.owners)
+  console.log(ownersEatTooLittle); // [ 'Sarah', 'John' ]      
+
+// Task 4:  Log a string to the console for each array created in 3., like this:"Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat to much`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat to much`);
+
+// task 5: Log  to the console whether there is any dog eating exactly the amount of food that is recommended (just true or false)
+const checkFood = dogs.some(dog => dog.curFood === dog.recFood);
+console.log(checkFood); // false
+
+// Task 6: Log to the console whether there is any dog eating an okay amount of food (just true or false)
+const okayAmt = dogs.some(dog =>
+        dog.curFood >
+        (dog.recFood * 0.9) && dog.curFood <
+        (dog.recFood * 1.1))
+console.log(okayAmt); // true
+
+// Task 7: Create an array containing the dogs that are eating an okay amount of food  (try to reuse the condition used in 6.)
+const okayAmtArr = dogs.filter( dog => dog.curFood > (dog.recFood * 0.90) && dog.curFood < (dog.recFood * 1.10)).map(dog => dog);
+console.log(okayAmtArr); // [ 'Michael' ]
+
+// Task 8: Create a shallow copy of the 'dogs' array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects 😉)
+const dogsCopy2 = [...dogs]
+dogsCopy2.sort((a, b) => a.recFood - b.recFood);
+console.log(dogsCopy2); // 
+
+/// .. jonas way of doing it
+const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood)
+console.log(dogsSorted ); 
+
 
