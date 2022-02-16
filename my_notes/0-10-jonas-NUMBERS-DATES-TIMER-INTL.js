@@ -133,12 +133,63 @@ console.log(Math.floor(-23.4)); // -24 <-- removes the decimal part and rounds i
 
 console.log('-----how to round decimals-----');
 // - how to round decimals
-console.log((2.7).toFixed(0)); // 3 !! <-- toFixed() converts a number to a string when it rounds to 
+console.log((2.7).toFixed(0)); // 3 !! <-- toFixed() converts a number to a string when it rounds to
 console.log((2.7).toFixed(3)); // 2.700 <-- rounds to the nearest integer and adds zeros to the end base how many decimal places you add to the  toFixed() method for example toFixed(3) will round to 3 decimal places
-console.log((2.435).toFixed(2)); // 2.44 
-console.log(+(2.435).toFixed(2)); // 2.44 
+console.log((2.435).toFixed(2)); // 2.44
+console.log(+(2.435).toFixed(2)); // 2.44
 
 console.log(+(2.435).toFixed(2)); // 80
 
 console.log('-----THE REMINDER OPERATOR-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648885#questions/16145200
+
+console.log('-----how to get the remainder of a division-----');
+
+// odd numbers: gives reminders
+console.log(5 % 2); // 1
+console.log(5 / 2); // 5 = 2 * 2 + 1
+
+console.log(8 % 3); // 2
+console.log(8 / 3); // 2 = 3 * 2 + 2
+
+// even numbers are divisible by 2 reminder is 0
+console.log(10 % 2); // 0
+console.log(10 / 2); // 5 = 2 * 2 * 2 + 2 * 2 + 1
+
+// ** practice examples  ***
+// how to use the reminder operator to change the color of the rows by the index that divisible 2 and 3 in the movements table
+/*
+labelBalance.addEventListener('click', function () {
+    [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+      // 0, 2, 4, 6
+      if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+      // 0, 3, 6, 9
+      if (i % 3 === 0) row.style.backgroundColor = 'blue';
+    });
+  });
+*/
+
+// create a fn that checks if a number is even or not
+const isEven = (num) => num % 2 === 0;
+console.log(isEven(10)); // true
+console.log(isEven(133)); // false
+
+console.log('-----NUMERIC SEPARATORS-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/29433416#questions/16145200
+
+// underscores can use as numeric separator in js to separate numbers
+console.log(1000000); // 1000000
+console.log(1_000_000); // 1000000
+console.log(15_00); // 1500
+
+// ~~ please note that you can only use underscores between numbers..not at beginning, end, next to decimal points etc~~
+// examples.. not valid.. throws an error:
+// const PI = _3._1415_
+
+// ... convert methods dont work on underscores
+// ... avoid using them on data from a an API etc
+console.log(Number('100_00')); // NAN
+console.log(Number.parseInt('100_00')); // 100 <- get only part of the number not entire number
+
+console.log('----- WORKING WITH BIGINT -----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648887#questions/16145200

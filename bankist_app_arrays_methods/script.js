@@ -235,6 +235,7 @@ btnSort.addEventListener('click', e => {
         sorted = !sorted;
 });
 
+// *** practice using array methods on nodelist***
 // eslint-disable-next-line prettier/prettier
 console.log('-----!! How to create an array from a NODE LIST using the Array.from() method and pass a callback fuck function as second argument-----'); // !! CREATES AN ARRAY !!
 // - create an array from the movements values from the Bakist UI using the Array.from() method then use the map call back functions to get the values from the array and display them
@@ -250,6 +251,7 @@ console.log('-----!! How to create an array from a NODE LIST using the Array.fro
 //         console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
 // });
 
+// How to create an array from a NODE LIST using the Array.from() method and pass a callback fuck function as second argument
 labelBalance.addEventListener('click', e => {
         e.preventDefault();
         const movUi = Array.from(
@@ -258,24 +260,12 @@ labelBalance.addEventListener('click', e => {
         );
 });
 
-// how to get user's information using the reduce method
-// reference: https://www.youtube.com/watch?v=kC3AasLEuBA
-const ownerObj = accounts.reduce((acc, user) => {
-        // return {...acc, [user.owner]: user}
-        acc[user.owner] = user;
-        return acc;
-}, {});
-console.log(ownerObj); // {'Keron Williams': {owner: 'Keron Williams', movements: [200, 450, -400, 3000, -650, -130, 70, 1300]}, 'Jessica Davis': {owner: 'Jessica Davis', movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30]}, 'Steven Thomas Williams': {owner: 'Steven Thomas Williams', movements: [200, -200, 340, -300, -20, 50, 400, -460]}, 'Sarah Smith': {owner: 'Sarah Smith', movements: [430, 1000, 700, 50, 90]}}
-console.log(ownerObj['Keron Williams']); // { owner: 'Keron Williams', movements: [ 200, 450, -400, 3000, -650, -130, 70, 1300 ] }
-console.log(ownerObj['Jessica Davis']); // { owner: 'Jessica Davis', movements: [ 5000, 3400, -150, -790, -3210, -1000, 8500, -30 ] }
-
-// ** more practice transfer
-// ... get user ages
-const people = [
-        { name: 'John', age: 20 },
-        { name: 'Mike', age: 30 },
-        { name: 'Jane', age: 25 },
-];
-const peopleInfo = people.reduce((acc, person) => ({ ...acc, [person.name]: person.age }), {});
-console.log(peopleInfo); // { John: 20, Mike: 30, Jane: 25 }
-console.log(peopleInfo['John']); // 20
+// how to use the reminder operator to change the color of the rows by the index that divisible 2 and 3 in the movements table
+labelBalance.addEventListener('click', () => {
+        [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+                if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+                // 0..2..4..6..8
+                if (i % 3 === 0) row.style.backgroundColor = 'olive';
+                // 0..3..6..9
+        });
+});
