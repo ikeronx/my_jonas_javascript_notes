@@ -9,6 +9,19 @@ const account1 = {
         movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
         interestRate: 1.2, // %
         pin: 1111,
+
+        movementsDates: [
+                '2019-11-18T21:31:17.178Z',
+                '2019-12-23T07:42:02.383Z',
+                '2020-01-28T09:15:04.904Z',
+                '2020-04-01T10:17:24.185Z',
+                '2020-05-08T14:11:59.604Z',
+                '2020-05-27T17:01:17.194Z',
+                '2020-07-11T23:36:17.929Z',
+                '2020-07-12T10:51:36.790Z',
+        ],
+        currency: 'EUR',
+        locale: 'pt-PT', // de-DE
 };
 
 const account2 = {
@@ -16,6 +29,19 @@ const account2 = {
         movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
         interestRate: 1.5,
         pin: 2222,
+
+        movementsDates: [
+                '2019-11-01T13:15:33.035Z',
+                '2019-11-30T09:48:16.867Z',
+                '2019-12-25T06:04:23.907Z',
+                '2020-01-25T14:18:46.235Z',
+                '2020-02-05T16:33:06.386Z',
+                '2020-04-10T14:43:26.374Z',
+                '2020-06-25T18:49:59.371Z',
+                '2020-07-26T12:01:20.894Z',
+        ],
+        currency: 'USD',
+        locale: 'en-US',
 };
 
 const account3 = {
@@ -61,7 +87,7 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 // ... displays the account deposit and withdrawal movements
-const displayMovements = (movements, sort = false) => {
+const displayMovements = (acc, sort = false) => {
         // to empty the containerMovements div
         containerMovements.innerHTML = '';
 
@@ -74,16 +100,26 @@ const displayMovements = (movements, sort = false) => {
         // ... !! keep in mind that sort mutates the original movements array and we dont want that
         // ... !! so we add slice to the movements array to take a copy of the underlining movements array and then sort it in an ascending order... we use slice method here instead of the [...spread operator] cause we're currently in the process of changing the methods together
         // ... and if sort is false then we just return the movements array as it is
-        const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+        const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
 
-        // loop through movements array and display each movement in the containerMovements div with a class of movement
+        // loop through movements array and display each movement and their dates in the containerMovements div with a class of movement
+        // looping over two arrays at the same time (movements and movementsDates) and using the index of the movements array to access the movementsDates array
         movs.forEach((movement, index, arr) => {
                 // check if movement is positive or negative and add the deposit or withdrawal class to container for styling purposes
                 const type = movement > 0 ? 'deposit' : 'withdrawal';
+
+                // creates a date for each of the movement from the movementsDates array in each account
+                const date = new Date(acc.movementsDates[index]);
+                const day = `${date.getDate()}`.padStart(2, '0');
+                const month = `${date.getMonth() + 1}`.padStart(2, '0');
+                const year = date.getFullYear();
+                const displayDate = `${day}/${month}/${year}`;
+
                 const html = ` 
                 <div class="movements__row">
                         <div class="movements__type movements__type--${type}">${index + 1} ${type}</div>
-                        <div class="movements__value">${movement}€</div>
+                        <div class="movements__date">${displayDate}</div>
+                        <div class="movements__value">${movement.toFixed(2)}€</div>
                 </div>`;
                 // insert the html to the movement container so it shows up in the UI
                 containerMovements.insertAdjacentHTML('afterBegin', html);
@@ -94,22 +130,23 @@ const displayMovements = (movements, sort = false) => {
 // ... displays the account balance
 const calcDisplayBalance = acc => {
         acc.balance = acc.movements.reduce((acc, value) => acc + value, 0);
-        labelBalance.textContent = `${acc.balance}€`;
+        labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
 
 // ,,, displays summary of movements (deposits and withdrawals) and interest at the bottom of the screen (IN, OUT, INTEREST)
 const calcDisplaySummary = acc => {
         const sumIn = acc.movements.filter(value => value > 0).reduce((acc, value) => acc + value, 0);
+        labelSumIn.textContent = `${sumIn.toFixed(2)}€`;
+
         const sumOut = acc.movements.filter(value => value < 0).reduce((acc, value) => acc + value, 0);
+        labelSumOut.textContent = `${sumOut.toFixed(2).replace('-', '')}€`;
+
         const sumInterest = acc.movements
                 .filter(value => value > 0)
                 .map(deposit => (deposit * acc.interestRate) / 100)
                 .filter((int, i, arr) => int >= 1)
                 .reduce((acc, int) => acc + int, 0);
-
-        labelSumIn.textContent = `${sumIn}€`;
-        labelSumOut.textContent = `${Math.abs(sumOut)}€`;
-        labelSumInterest.textContent = `${sumInterest}€`;
+        labelSumInterest.textContent = `${sumInterest.toFixed(2)}€`;
 };
 
 // .... computes the username (creates a username initial key/value pair from each account 'owner' property and adds it to each account object)
@@ -130,7 +167,7 @@ createUserNames(accounts);
 // .... updates the account UI with the account balance, summary and movements
 const updateUI = acc => {
         // display the movements
-        displayMovements(acc.movements);
+        displayMovements(acc);
         // display the balance
         calcDisplayBalance(acc);
         // display the summary
@@ -142,6 +179,15 @@ const updateUI = acc => {
 // global variable which represent and store the current account object and can be used in other functions to access the current account object properties which is stored in the memory heap due to the closure of the function (the function is not destroyed when it is called) and the variable is available in the memory heap
 let currentAccount;
 
+// create current label date
+const now = new Date();
+const day = `${now.getDate()}`.padStart(2, '0');
+const month = `${now.getMonth() + 1}`.padStart(2, '0');
+const year = now.getFullYear();
+const hours = now.getHours();
+const min = now.getMinutes();
+labelDate.textContent = `${day}/${month}/${year}, ${hours}:${min}`;
+
 btnLogin.addEventListener('click', e => {
         // prevents form refreshing the page on submit
         e.preventDefault();
@@ -152,8 +198,19 @@ btnLogin.addEventListener('click', e => {
         // then check if a current user exist (USING OPTIONAL CHAINING) and if the user exist then check if the pin is correct and if so display the account information and movements
         if (currentAccount?.pin === +inputLoginPin.value) {
                 // display UI and a welcome message
-                containerApp.style.opacity = 100;
                 labelWelcome.textContent = `Welcome ${currentAccount.owner.split(' ')[0]}`;
+                containerApp.style.opacity = 100;
+
+                // update the UI
+                // create current label date
+                const now = new Date();
+                const day = `${now.getDate()}`.padStart(2, '0');
+                const month = `${now.getMonth() + 1}`.padStart(2, '0');
+                const year = now.getFullYear();
+                const hours = `${now.getHours()}`.padStart(2, '0');
+                const min = `${now.getMinutes()}`.padStart(2, '0');
+                labelDate.textContent = `${day}/${month}/${year}, ${hours}:${min}`;
+
                 // clear input fields
                 inputLoginUsername.value = '';
                 inputLoginPin.value = '';
@@ -186,6 +243,11 @@ btnTransfer.addEventListener('click', e => {
                 // ** doing the transfer **
                 currentAccount.movements.push(-amount);
                 receiverAcc.movements.push(amount);
+
+                // add transfer dates
+                currentAccount.movementsDates.push(new Date().toISOString());
+                receiverAcc.movementsDates.push(new Date().toISOString());
+
                 // update the current UI
                 updateUI(currentAccount);
         }
@@ -194,11 +256,17 @@ btnTransfer.addEventListener('click', e => {
 /// ... checks if any of the deposits are at less more than 10% of the amount (bank rule to for a loan) on clicked
 btnLoan.addEventListener('click', e => {
         e.preventDefault();
+
         // get the amount the current account wants a loan for
-        const amount = +inputLoanAmount.value;
+        const amount = Math.floor(inputLoanAmount.value);
         // check if any of the deposits are at less more than 10% of the amount (bank rule to for a loan)
         if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+                // add movement
                 currentAccount.movements.push(amount);
+
+                // Add loan movement
+                currentAccount.movementsDates.push(new Date().toString());
+
                 // update UI
                 updateUI(currentAccount);
         }
@@ -235,7 +303,6 @@ btnSort.addEventListener('click', e => {
         sorted = !sorted;
 });
 
-// *** practice using array methods on nodelist***
 // eslint-disable-next-line prettier/prettier
 console.log('-----!! How to create an array from a NODE LIST using the Array.from() method and pass a callback fuck function as second argument-----'); // !! CREATES AN ARRAY !!
 // - create an array from the movements values from the Bakist UI using the Array.from() method then use the map call back functions to get the values from the array and display them

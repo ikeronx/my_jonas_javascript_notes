@@ -6,6 +6,49 @@
 console.log('-----CONVERTING AND CHECKING NUMBERS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648873#questions
 
+// DIFFERENT DATA! Contains movement dates, currency and locale
+const account1 = {
+        owner: 'Jonas Schmedtmann',
+        movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
+        interestRate: 1.2, // %
+        pin: 1111,
+
+        movementsDates: [
+                '2019-11-18T21:31:17.178Z',
+                '2019-12-23T07:42:02.383Z',
+                '2020-01-28T09:15:04.904Z',
+                '2020-04-01T10:17:24.185Z',
+                '2020-05-08T14:11:59.604Z',
+                '2020-07-26T17:01:17.194Z',
+                '2020-07-28T23:36:17.929Z',
+                '2020-08-01T10:51:36.790Z',
+        ],
+        currency: 'EUR',
+        locale: 'pt-PT', // de-DE
+};
+
+const account2 = {
+        owner: 'Jessica Davis',
+        movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+        interestRate: 1.5,
+        pin: 2222,
+
+        movementsDates: [
+                '2019-11-01T13:15:33.035Z',
+                '2019-11-30T09:48:16.867Z',
+                '2019-12-25T06:04:23.907Z',
+                '2020-01-25T14:18:46.235Z',
+                '2020-02-05T16:33:06.386Z',
+                '2020-04-10T14:43:26.374Z',
+                '2020-06-25T18:49:59.371Z',
+                '2020-07-26T12:01:20.894Z',
+        ],
+        currency: 'USD',
+        locale: 'en-US',
+};
+
+const accounts = [account1, account2];
+
 // floating point numbers
 console.log(23 === 23.0); // true <-- all numbers in JS are represented internally as floating point numbers. So basically always as decimals.
 
@@ -193,3 +236,103 @@ console.log(Number.parseInt('100_00')); // 100 <- get only part of the number no
 
 console.log('----- WORKING WITH BIGINT -----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648887#questions/16145200
+
+console.log(2 ** 53 - 1); // 9007199254740991
+// console.log(Number(MAX_SAFE_INTEGER)); // 9007199254740991
+
+// ~~~ BIGINT is a new predictive type that was added tp js to store number as large as possible ~~~
+// - how to use BIGINT in js... add 'n' to the end of the number
+console.log(900719925474099187897987979797n); // 9007199254740991n
+console.log(BigInt(90071992));
+
+// Bigint works with operators
+console.log(100000n + 100000n); // 200000n;
+console.log(87871327371291327n * 29312830918903890109182n); // BigInt(87871327371291327n) * BigInt(29312830918903890109182n);
+
+// can't mixed bigInt numbers with regular numbers..wont compute
+// console.log(100 + 100n); // TypeError: Cannot convert a BigInt to a number
+// console.log(Math.sqrt(16n));
+// .. use bigInt() to convert to the number to a  bigInt number then compute
+const huge = 20289830237283728378237n;
+const num = 23;
+console.log(huge * BigInt(num));
+
+// Exceptions
+console.log(20n > 15); // true
+console.log(20n === 20); // false
+console.log(typeof 20n); // 'bigint'
+console.log(20n === '20'); // true
+
+// Divisions
+console.log(11n / 3n); // 3n
+console.log(10 / 3); // 3.3333333333333335
+
+console.log(`------ CREATING DATES ------`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648895#questions/16145200
+
+console.log(`------ 4 different ways we can create a date ------`);
+
+// 1: can create a new date by using the new Date() method
+const now = new Date(); // current date
+console.log(now); // hu Feb 17 2022 13:19:23 GMT-0500 (Eastern Standard Time) <- shows current date and time
+
+// 2: can pass a string into the date constructor fn a date string to create a new date
+console.log(new Date('Thu Feb 17 2022 13:22:53')); // Thu Feb 17 2020 00:00:00 GMT-0500 (Eastern Standard Time)
+console.log(new Date('Dec  25, 2015')); // Thu Feb 17 2020 00:00:00 GMT-0500 (Eastern Standard Time)
+
+// .. can pass date strings from an object to create a new date
+console.log(new Date(account1.movementsDates[0])); // Mon Nov 18 2019 16:31:17 GMT-0500 (Eastern Standard Time)
+console.log(account1.movementsDates.map((date) => new Date(date))); // Mon Nov 18 2019 16:31:17 GMT-0500 (Eastern Standard Time)
+
+// 3: can pass into the date constructor fn the year, month, day, hour, minute, second, millisecond to create a new date
+console.log(new Date(2037, 0, 1, 5, 30, 12)); // Wed Jan 01 2037 05:30:12
+console.log(new Date(2020, 10, 31)); // ue Dec 01 2020 00:00:00 <-- js auto corrects the date to the next day
+
+// 4: can pass into the date constructor fn the amount of milliseconds since the epoch (1/1/1970) - epoch is the first day of the year 1970 since the beginning of the UNIX time system (1/1/1970) to create a new date
+console.log(new Date(0)); // Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)
+// ... create a date that's three days after epoch (unix) time
+console.log(new Date(3 * 24 * 60 * 60 * 1000)); // Thu Jan 03 1970 00:00:00 GMT-0500 (Eastern Standard Time)
+// Timestamp of day number 3: 259200000
+
+console.log(`------ how we can use methods to set or get components of a date ------`);
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future.getFullYear()); // 2037
+console.log(future.getMonth()); // 10
+console.log(future.getDate()); // 19 <-- the day of the month
+console.log(future.getDay()); // 4 <-- the day of the week... 0 is Sunday, 1 is Monday, etc
+console.log(future.getHours()); // 15 <-- the hour of the day
+console.log(future.getMinutes()); // 23 <-- the minutes
+console.log(future.getSeconds()); // 0 <-- the seconds
+console.log(future.toISOString()); // 2037-11-19T20:23:00.000Z <-- toISOString is used ta get a formatted string of the date
+console.log(future.getTime()); // 1578180800000 <-- getTime is used to get the amount of milliseconds since the epoch
+// console.log(future.toDateString()); // Wed Nov 19 2037 <-- toDateString is used to get a formatted string of the date
+// console.log(future.toTimeString()); // 15:23:00 GMT-0500 (Eastern Standard Time) <-- toTimeString is used to get a formatted string of the date
+// console.log(future.toLocaleString()); // 11/19/2037 3:23:00 PM <-- toLocaleString is used to get a formatted string of the date and time
+// console.log(future.toLocaleDateString()); // 11/19/2037 <-- toLocaleDateString is used to get a formatted string of the date
+// console.log(future.toLocaleTimeString()); // 3:23:00 PM <-- toLocaleTimeString is used to get a formatted string of the time
+// console.log(future.toJSON()); // 2037-11-19T20:23:00.000Z <-- toJSON is used to get a string of the date
+// console.log(future.toString()); // Wed Nov 19 2037 15:23:00 GMT-0500 (Eastern Standard Time) <-- toString is used to get a string of the date
+// console.log(future.valueOf()); // 2142274980000 <-- valueOf is used to get the number of milliseconds since the epoch
+// console.log(future.getTimezoneOffset()); // -300 <-- getTimezoneOffset is used to get the timezone offset in minutes
+
+// eslint-disable-next-line prettier/prettier
+console.log(`------ how you can use the timestamp to create a new date either by passing in the timestamp or by using the valueOf method ------`);
+console.log(new Date(future.valueOf())); // Wed Nov 19 2037 15:23:00 GMT-0500 (Eastern Standard Time)
+console.log(new Date(2142274980000)); // Wed Nov 19 2037 15:23:00 GMT-0500 (Eastern Standard Time)
+
+console.log(`------ how to get current timestamp for the date right now ------`);
+console.log(Date.now()); // 1574690981796 <-- the number of milliseconds since the epoch
+
+console.log(`------ set version of the methods: to change year, month, date, hour etc------`);
+future.setFullYear(2040); // <-- the setFullYear() method changes the year pf 'future' variable date from 2037 to 2040
+console.log(future); // Mon Nov 19 2040 15:23:00 GMT-0500 (Eastern Standard Time)
+
+const currDate = new Date();
+console.log(currDate); // 2020
+console.log(currDate.toLocaleDateString()); // 2020
+
+console.log(`------ OPERATIONS WITH DATES ------`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648905#questions/16497420
+
+console.log(`------ how to calculate dates ------`);
+
