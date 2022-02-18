@@ -18,10 +18,10 @@ const account1 = {
                 '2019-12-23T07:42:02.383Z',
                 '2020-01-28T09:15:04.904Z',
                 '2020-04-01T10:17:24.185Z',
-                '2020-05-08T14:11:59.604Z',
-                '2020-07-26T17:01:17.194Z',
-                '2020-07-28T23:36:17.929Z',
-                '2020-08-01T10:51:36.790Z',
+                '2022-02-11 T14:11:59.604Z',
+                '2022-02-16T17:01:17.194Z',
+                '2022-02-17T23:36:17.929Z',
+                '2022-02-18T10:51:36.790Z',
         ],
         currency: 'EUR',
         locale: 'pt-PT', // de-DE
@@ -335,4 +335,16 @@ console.log(`------ OPERATIONS WITH DATES ------`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648905#questions/16497420
 
 console.log(`------ how to calculate dates ------`);
+// - how to create a fn that takes in two dates and returns the days passed between these two dates
+const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1)) / (1000 * 60 * 60 * 24); // <- convert the days to numbers
 
+// eslint-disable-next-line prettier/prettier
+const Days1 = calcDaysPassed(
+    new Date(2022, 1, 17),
+    new Date(2022, 1, 20)
+);
+console.log(Days1); // 3
+
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648905#questions/16497420
+
+console.log(`------ INTERNATIONALIZING DATES (INTL) ------`);
