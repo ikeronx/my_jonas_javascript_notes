@@ -345,6 +345,51 @@ const Days1 = calcDaysPassed(
 );
 console.log(Days1); // 3
 
-// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648905#questions/16497420
-
 console.log(`------ INTERNATIONALIZING DATES (INTL) ------`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648909#questions/16505196
+// * Internationalization API allows us to format strings in different languages and countries (e.g. French, Spanish, etc)
+// * Intl is a global object that provides access to the internationalization API and the formatting API for dates and numbers (e.g. currency, percent, etc) using the Intl.DateTimeFormat and Intl.NumberFormat objects respectively
+// * Intl.DateTimeFormat is used to format dates and Intl.NumberFormat is used to format numbers
+
+console.log(`------ how to use the Intl() method to format dates  ------`);
+const todayDate = new Date();
+const locale = navigator.language; // <- get the current locale of the browser (e.g. en-US, fr-FR, etc)
+const options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+};
+console.log(new Intl.DateTimeFormat(locale, options).format(todayDate)); // 2/18/2022, 4:55 PM
+// console.log(new Intl.DateTimeFormat('en-US', options).format(todayDate)); // 2/18/2022
+// console.log(new Intl.DateTimeFormat('ar-SA').format(todayDate)); // ٢٠/١٨/٢٢٢٢
+// console.log(new Intl.DateTimeFormat('ko-KR').format(todayDate)); // 2022년 2월 18일
+
+console.log(`------ how to use the Intl() method to format numbers  ------`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648915#questions/16505196
+const numm = 38884762.23;
+const options2 = {
+        style: 'currency', // 'unit' 'percent' 'currency'
+        unit: 'celsius', // 'celsius' 'fahrenheit' 'kelvin'
+        currency: 'EUR', // 'USD' 'EUR' 'GBP' 'ILS' 'JPY' 'BRL' 'RUB' 'INR' 'CNY' 'KRW' 'PLN'
+        useGrouping: false, // true or false
+};
+console.log('US:       ', new Intl.NumberFormat('en-US', options2).format(numm)); // 38,884,762.23
+console.log('Germany:', new Intl.NumberFormat('de-DE', options2).format(numm)); // 3.888.476,23 €
+console.log('France:  ', new Intl.NumberFormat('fr-FR', options2).format(numm)); // 3 888 476,23 €
+console.log('Syria:   ', new Intl.NumberFormat('ar-SY', options2).format(numm)); // ٣٨٬٨٨٤٬٧٦٢٫٢٣
+console.log(navigator.language, new Intl.NumberFormat(navigator.language, options2).format(numm)); // 3,888,476.23 원
+
+console.log(`------ TIMERS: SETTIMEOUT() AND SETINTERVAL() ------`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648919#questions/16505196
+// https://www.youtube.com/watch?v=RXWAZ0C_mds&t=93s
+// * setTimeout() and setInterval() are used to set a timer that will run a function after a certain amount of time
+// * setTimeout() is used to set a timer that will run a function after a certain amount of time
+// * setInterval() is used to set a timer that will run a function every certain amount of time
+
+console.log(`------ setTimeOut ------`);
+// *** examples ***
+// - how to use setTimeout() to run a function after a certain amount of time
+
+// - how to use setInterval() to run a function every certain amount of time
