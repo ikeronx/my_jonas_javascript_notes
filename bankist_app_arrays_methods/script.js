@@ -15,10 +15,10 @@ const account1 = {
                 '2019-12-23T07:42:02.383Z',
                 '2020-01-28T09:15:04.904Z',
                 '2020-04-01T10:17:24.185Z',
-                '2020-05-08T14:11:59.604Z',
-                '2020-05-27T17:01:17.194Z',
-                '2020-07-11T23:36:17.929Z',
-                '2020-07-12T10:51:36.790Z',
+                '2022-02-11T14:11:59.604Z',
+                '2022-02-16T17:01:17.194Z',
+                '2022-02-17T23:36:17.929Z',
+                '2022-02-18T10:51:36.790Z',
         ],
         currency: 'EUR',
         locale: 'pt-PT', // de-DE
@@ -86,6 +86,36 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// FUNCTIONS
+// ... a fn that formats the numbers in the movements array using the new Intl.NumberFormat() method
+const formatCur = function (value, locale, currency) {
+        // format the movement withdrawal and deposit numbers using the ne Intl.NumberFormat method
+        return new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency,
+        }).format(value);
+};
+
+// ... a function to display the date of each transaction/movement
+const formatMovementDate = date => {
+        // a fn that takes in two dates and returns the days passed between these two dates
+        const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
+
+        // store the days passed between the current date and the date of the movement
+        const daysPassed = calcDaysPassed(new Date(), date);
+
+        // display days passed if it's today, yesterday or the less than 7 days ago
+        if (daysPassed === 0) return 'Today';
+        if (daysPassed === 1) return 'Yesterday';
+        if (daysPassed <= 7) return `${daysPassed} days ago`;
+
+        // .. else return the date of the transaction...
+        // creates a date for each of the movement from the movementsDates array in each account
+        const day = `${date.getDate()}`.padStart(2, '0');
+        const month = `${date.getMonth() + 1}`.padStart(2, '0');
+        const year = date.getFullYear();
+        return `${day}/${month}/${year}`;
+};
 // ... displays the account deposit and withdrawal movements
 const displayMovements = (acc, sort = false) => {
         // to empty the containerMovements div
@@ -102,24 +132,24 @@ const displayMovements = (acc, sort = false) => {
         // ... and if sort is false then we just return the movements array as it is
         const movs = sort ? acc.movements.slice().sort((a, b) => a - b) : acc.movements;
 
-        // loop through movements array and display each movement and their dates in the containerMovements div with a class of movement
+        // loop through movements array and display each movement and their dates in the containerMovements div that has a class of 'movement'
         // looping over two arrays at the same time (movements and movementsDates) and using the index of the movements array to access the movementsDates array
-        movs.forEach((movement, index, arr) => {
+        movs.forEach((mov, index, arr) => {
                 // check if movement is positive or negative and add the deposit or withdrawal class to container for styling purposes
-                const type = movement > 0 ? 'deposit' : 'withdrawal';
+                const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-                // creates a date for each of the movement from the movementsDates array in each account
-                const date = new Date(acc.movementsDates[index]);
-                const day = `${date.getDate()}`.padStart(2, '0');
-                const month = `${date.getMonth() + 1}`.padStart(2, '0');
-                const year = date.getFullYear();
-                const displayDate = `${day}/${month}/${year}`;
+                // displays days passed and dates for each transaction
+                const date = new Date(acc.movementsDates[index]); // <-- create a variable to store each date from the current account object 'movementDates' array
+                const displayDate = formatMovementDate(date); // <-- pass the variable to the formatMovementDate function to format it
+
+                // ... create a variable to store the formatted number from the current account object 'movements' array and pass the variable to the formatMovements function to format it
+                const displayMov = formatCur(mov, acc.locale, acc.currency);
 
                 const html = ` 
                 <div class="movements__row">
                         <div class="movements__type movements__type--${type}">${index + 1} ${type}</div>
                         <div class="movements__date">${displayDate}</div>
-                        <div class="movements__value">${movement.toFixed(2)}€</div>
+                        <div class="movements__value">${displayMov}</div>
                 </div>`;
                 // insert the html to the movement container so it shows up in the UI
                 containerMovements.insertAdjacentHTML('afterBegin', html);
@@ -130,23 +160,23 @@ const displayMovements = (acc, sort = false) => {
 // ... displays the account balance
 const calcDisplayBalance = acc => {
         acc.balance = acc.movements.reduce((acc, value) => acc + value, 0);
-        labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+        labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency);
 };
 
 // ,,, displays summary of movements (deposits and withdrawals) and interest at the bottom of the screen (IN, OUT, INTEREST)
 const calcDisplaySummary = acc => {
         const sumIn = acc.movements.filter(value => value > 0).reduce((acc, value) => acc + value, 0);
-        labelSumIn.textContent = `${sumIn.toFixed(2)}€`;
+        labelSumIn.textContent = formatCur(sumIn, acc.locale, acc.currency);
 
         const sumOut = acc.movements.filter(value => value < 0).reduce((acc, value) => acc + value, 0);
-        labelSumOut.textContent = `${sumOut.toFixed(2).replace('-', '')}€`;
+        labelSumOut.textContent = formatCur(Math.abs(sumOut), acc.locale, acc.currency);
 
         const sumInterest = acc.movements
                 .filter(value => value > 0)
                 .map(deposit => (deposit * acc.interestRate) / 100)
                 .filter((int, i, arr) => int >= 1)
                 .reduce((acc, int) => acc + int, 0);
-        labelSumInterest.textContent = `${sumInterest.toFixed(2)}€`;
+        labelSumInterest.textContent = formatCur(sumInterest, acc.locale, acc.currency);
 };
 
 // .... computes the username (creates a username initial key/value pair from each account 'owner' property and adds it to each account object)
@@ -157,7 +187,7 @@ const createUserNames = accs =>
                 acc =>
                         // creates a username initials object from the account owner property
                         (acc.username = acc.owner
-                                .toLowerCase()
+                                .toLowerCase() 
                                 .split(' ')
                                 .map(name => name[0])
                                 .join(''))
@@ -174,19 +204,39 @@ const updateUI = acc => {
         calcDisplaySummary(acc);
 };
 
+// starts logout timer when user logins
+const startLogOutTimer = () => {
+        const tick = () => {
+                const min = String(Math.trunc(time / 60)).padStart(2, 0);
+                const sec = String(time % 60).padStart(2, 0);
+                // In each call back call print remaining time to the updateUI
+                labelTimer.textContent = `${min}:${sec}`;
+
+                // when we reach 0 seconds stop timer and logout user
+                if (sec === 0) { 
+                        // stop timer
+                        clearInterval(timer); // stops timer
+                        labelWelcome.textContent = 'Login to get started'; // changes the welcome label to 'Login to get started'
+                        // logout user
+                        containerApp.style.opacity = 0; // hides the containerApp div
+                }
+                // decrease one second from the timer
+                time--;
+        };
+        // set time to 2 minutes before logout
+        let time = 120; 
+
+        // call the timer every second
+        tick(); // <-- call the tick function to start the timer
+        const timer = setInterval(tick, 1000); // starts timer every second
+        return timer; // return the timer so we can clear it later
+};
+
 // EVENT HANDLERS
 // ... logs the user in with the username and pin and displays the account information (movements, balance, interest, welcome message)
-// global variable which represent and store the current account object and can be used in other functions to access the current account object properties which is stored in the memory heap due to the closure of the function (the function is not destroyed when it is called) and the variable is available in the memory heap
-let currentAccount;
-
-// create current label date
-const now = new Date();
-const day = `${now.getDate()}`.padStart(2, '0');
-const month = `${now.getMonth() + 1}`.padStart(2, '0');
-const year = now.getFullYear();
-const hours = now.getHours();
-const min = now.getMinutes();
-labelDate.textContent = `${day}/${month}/${year}, ${hours}:${min}`;
+// GLOBAL VARIABLES which represent and store the current account object and can be used in other functions to access the current account object properties which is stored in the memory heap due to the closure of the function (the function is not destroyed when it is called) and the variable is available in the memory heap
+let currentAccount; // <-- global variable to store the current account object and can be used in other functions to access the current account object properties which is stored in the memory heap due to the closure of the function (the function is not destroyed when it is called) and the variable is available in the memory heap due to the closure of the function
+let timer; // <-- global variable to store the timer so we can clear it later
 
 btnLogin.addEventListener('click', e => {
         // prevents form refreshing the page on submit
@@ -216,6 +266,14 @@ btnLogin.addEventListener('click', e => {
                 inputLoginPin.value = '';
                 // remove focus from input fields
                 inputLoginPin.blur();
+
+                // checks if there is a timer already running from a different account and reset  it so the current account timer doesn't override previous timer
+                if (timer) {
+                        clearInterval(timer);
+                }
+                // the timer global variable is set to startLogOutTimer
+                timer = startLogOutTimer();
+
                 // update UI fn to display the account information (movements, balance, interest)
                 updateUI(currentAccount);
         }
@@ -250,6 +308,10 @@ btnTransfer.addEventListener('click', e => {
 
                 // update the current UI
                 updateUI(currentAccount);
+
+                // reset the timer... when we do transfer the current timer is cleared
+                clearInterval(timer);
+                timer = startLogOutTimer(); // ... and set a new timer
         }
 });
 
@@ -261,17 +323,24 @@ btnLoan.addEventListener('click', e => {
         const amount = Math.floor(inputLoanAmount.value);
         // check if any of the deposits are at less more than 10% of the amount (bank rule to for a loan)
         if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-                // add movement
-                currentAccount.movements.push(amount);
+                // Add movement
+                // shows movement in the after 5 seconds
+                setTimeout(() => {
+                        currentAccount.movements.push(amount);
 
-                // Add loan movement
-                currentAccount.movementsDates.push(new Date().toString());
+                        // Add loan movement
+                        currentAccount.movementsDates.push(new Date().toISOString());
 
-                // update UI
-                updateUI(currentAccount);
+                        // Update UI
+                        updateUI(currentAccount);
+                }, 5000);
         }
         // clear input fields
         inputLoanAmount.value = '';
+
+        // reset the timer... when we do loan the current timer is cleared
+        clearInterval(timer);
+        timer = startLogOutTimer(); // ... and set a new timer
 });
 
 // ... closes/deactivate/ delete the current account
@@ -290,6 +359,7 @@ btnClose.addEventListener('click', e => {
                 // hide the UI
                 containerApp.style.opacity = 0;
         }
+        // clear input fields
         inputCloseUsername.value = inputClosePin.value = '';
 });
 
@@ -332,7 +402,7 @@ labelBalance.addEventListener('click', () => {
         [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
                 if (i % 2 === 0) row.style.backgroundColor = 'orangered';
                 // 0..2..4..6..8
-                if (i % 3 === 0) row.style.backgroundColor = 'olive';
+                if (i % 2 === 0) row.style.backgroundColor = 'olive';
                 // 0..3..6..9
         });
 });

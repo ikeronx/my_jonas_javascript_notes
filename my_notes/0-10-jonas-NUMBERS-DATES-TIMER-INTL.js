@@ -385,11 +385,34 @@ console.log(`------ TIMERS: SETTIMEOUT() AND SETINTERVAL() ------`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648919#questions/16505196
 // https://www.youtube.com/watch?v=RXWAZ0C_mds&t=93s
 // * setTimeout() and setInterval() are used to set a timer that will run a function after a certain amount of time
-// * setTimeout() is used to set a timer that will run a function after a certain amount of time
-// * setInterval() is used to set a timer that will run a function every certain amount of time
+// * setTimeout() is used to set a timer that will run a function after a certain amount of time - the set timeout timer runs just once, and then stops
+// * setInterval() is used to set a timer that will run a function every certain amount of time - the set interval timer runs repeatedly until the timer is stopped
 
 console.log(`------ setTimeOut ------`);
 // *** examples ***
 // - how to use setTimeout() to run a function after a certain amount of time
+setTimeout(() => {
+        console.log('Here is your pizza 🍕'); // <-- this code will run 5 seconds later
+}, 5000);
+console.log('waiting...');
+
+// - how to pass in a argument to the setTimeout() function
+const ingredients = ['Olives 🫒', 'chilli 🌶'];
+const pizzaTimer = setTimeout(
+        (ing1, ing2) => {
+                console.log(`Here's your pizza with ${ing1} and ${ing2}`); // <-- this code will run 5 seconds later
+        },
+        5000,
+        ...ingredients // <- her we pass the ingredients array as arguments to the setTimeout() function here
+);
+// .....can use clearTimeout() to delete the timer
+if (ingredients.includes('chilli 🌶')) clearTimeout(pizzaTimer); // <-- the setTimeout pizzaTimer fn won't run if the 'chilli 🌶' ingredient is included in the ingredients array
 
 // - how to use setInterval() to run a function every certain amount of time
+// setInterval
+setInterval(() => {
+        const noww = new Date();
+        // console.log(noww.toLocaleTimeString()); // <-- this code will run every second
+}, 1000); // <-- this code will run every 5 secondS
+// 2:00:40 PM
+// 2:00:50 PM

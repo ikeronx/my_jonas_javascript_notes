@@ -316,7 +316,7 @@ console.log('-----IIFE-----');
 
 // ... block version (with curly braces)
 {
-        console.log('hello');
+ console.log('hello');
 }
 
 console.log('-----CLOSURES-----');
