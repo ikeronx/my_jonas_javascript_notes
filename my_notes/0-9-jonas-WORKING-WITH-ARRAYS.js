@@ -717,3 +717,4 @@ console.log(dogsCopy2); //
 const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood)
 console.log(dogsSorted ); 
 
+  
