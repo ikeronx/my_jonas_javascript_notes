@@ -332,3 +332,29 @@ const calcAverageHumanAge = (dogAges) => {
 console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3])); // 44
 console.log(calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4])); // 47
 
+console.log('-----CODING CHALLENGE #8 212-----');
+console.log('-----OOP #1-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649063#questions
+const Car = function (make, speed) {
+        this.make = make;
+        this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+        this.speed += 10;
+        console.log(`'${this.make}' going at ${this.speed} km/h`);
+};
+
+Car.prototype.brake = function () {
+        this.speed -= 5;
+        console.log(`'${this.make}' going at ${(this.speed)} km/h`);
+};
+const bmw = new Car('BMW', 120);
+const mercedes = new Car('Mercedes', 95);
+bmw.accelerate();
+bmw.accelerate();
+bmw.brake();
+bmw.accelerate();
+
+mercedes.accelerate();
+mercedes.brake();
