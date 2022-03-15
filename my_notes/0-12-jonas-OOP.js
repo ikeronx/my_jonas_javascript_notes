@@ -1,7 +1,9 @@
+/* eslint-disable max-classes-per-file */
 /* eslint-disable no-console */
 /* eslint-disable strict */
 // eslint-disable-next-line lines-around-directive
 // eslint-disable-next-line max-classes-per-file
+
 'use strict';
 
 console.log('-----WHAT IS OBJECT-ORIENTED PROGRAMMING?-----');
@@ -131,17 +133,11 @@ class User { // <-- class blueprint
                 console.log(`${this.name} is ${age} years old`);
                 return age;
         }
-
-        // SETTERS and GETTERS
-        get age() {
-                return new Date().getFullYear() - this.birthYear;
-        }
 }
 
 const john = new User('John', 1991); // <-- instance of the class
 john.speak(); // Hello, my name is John // <-- prototypical inheritance
 john.checkAge(); // John is 31 years old
-console.log(john.age); // 31 <-- getter
 
 console.log('-----SETTERS AND GETTERS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649073#questions
@@ -153,27 +149,29 @@ console.log('-----SETTERS AND GETTERS-----');
 const account = {
         owner: 'John',
         movements: [200, 530, 120, 300],
-
+        // GETTER - nget value
         get latest() {
                 return this.movements[this.movements.length - 1];
         },
+        // SETTER - set value (can be used to validate the value)
         set latest(mov) {
                 this.movements.push(mov);
         },
 };
-// to get the value of the latest movement
+// how to get the value of the latest movement
 console.log(account.latest); // 300
 // to set the value of the latest movement
 account.latest = 500;
 console.log(account.movements); // [200, 530, 120, 300, 500]
 
-
-class UserCl { // <-- class blueprint
+class UserCl {
+        // <-- class blueprint
         constructor(name, birthYear) {
-                this.name = name;
+                this.fullName = name;
                 this.birthYear = birthYear;
         }
 
+        // INSTANCE METHODS
         speak() {
                 console.log(`Hello, my name is ${this.name}`);
         }
@@ -184,8 +182,122 @@ class UserCl { // <-- class blueprint
                 return age;
         }
 
-        // SETTERS and GETTERS
+        // GETTERS
         get age() {
                 return new Date().getFullYear() - this.birthYear;
         }
+
+        // !! important when sett a property that already exist (this.fullname)... make sure to use the pattern that also get the property again after setting it
+        // SETTERS
+        set fullName(name) {
+                // if name argument passed has a space change the name to the fill name if not do nothing
+                if (name.includes(' ')) this._fullName = name;
+                else console.log(`${name} is not a full name`);
+        }
+
+        // getter for fullName
+        get fullName() {
+                return this._fullName;
+        }
+
+        // STATIC METHODS
+        // - how to create static methods on the class
+        static hey() {
+                console.log('hey');
+        }
 }
+// get value
+const eric = new UserCl('Eric', 1990); // <-- instance of the class
+console.log(eric.age); // 32
+
+// set value
+eric.fullName = 'Eric Smith';
+console.log(eric); // UserCl { _fullName: 'Eric Smith', birthYear: 1990 }
+
+const kaydel = new UserCl('Kaydel Gordon', 1990);
+console.log(kaydel); // Kaydel Gordon
+console.log(kaydel.fullName); // Kaydel Gordon
+
+// call static method
+UserCl.hey(); // hey
+
+console.log('-----STATIC METHODS-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649077#questions
+// * static methods are available on the class itself..constructor (not on the instances)
+// * please that static methods are notr available on the instances only on the class/constructor itself
+
+// ** example of static methods **8
+Array.from(document.querySelectorAll('h1'));
+Number.parseFloat('1.2'); // 1.2
+
+// - how to create static methods (add it to a constructor)
+Person.hey = function () {
+        console.log('hey there ');
+        console.log(this); // Person {}
+};
+Person.hey(); // hey there
+
+console.log('-----OBJECT.CREATE-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649081#questions
+// * object.create is used to create a new object with the properties and methods of another object
+// * we can use Object.create to manually set the prototype of an object to any other object we want
+
+// ** example of object.create **
+// - how to create an object that will  be the prototype of another object
+
+// step 1: create the object that will be the prototype
+const PersonProto = {
+        calcAge() {
+                console.log(new Date().getFullYear() - this.birthYear);
+        },
+        init(fullName, birthYear) {
+                this.fullName = fullName;
+                this.birthYear = birthYear;
+        },
+};
+// step 2: create the object that will inherit from the prototype
+const johnProto = Object.create(PersonProto);
+// step 3: set the properties and methods of the object
+johnProto.init('John Smith', 1990);
+johnProto.calcAge(); // 32
+
+console.log('-----INHERITANCE BETWEEN "CLASSES": CONSTRUCTOR FUNCTIONS-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649085#questions
+
+// ~~ real inheritance between classes ~~
+// * we can use the keyword "extends" to inherit properties and methods from one class to another
+
+// - how to inherit properties and methods from one class to another
+// STEP 1: create the parent class
+class PersonParentClass {
+        constructor(name, birthYear) {
+                this.name = name;
+                this.birthYear = birthYear;
+        }
+
+        calcAge() {
+                console.log(new Date().getFullYear() - this.birthYear);
+        }
+
+        // static method
+        static greeting() {
+                console.log('Hey there');
+        }
+}
+// STEP 2: create the child class
+class Student extends PersonParentClass {
+        constructor(name, birthYear, major) {
+                // call the parent class constructor
+                super(name, birthYear);
+                // add properties to the child class
+                this.major = major;
+        }
+
+        hasMajor() {
+                return !!this.major;
+        }
+}
+// STEP 3: create an instance of the child class
+const james = new Student('James', 1990, 'Computer Science');
+console.log(james); // Student { name: 'James', birthYear: 1990, major: 'Computer Science' }
+console.log(james.hasMajor()); // true

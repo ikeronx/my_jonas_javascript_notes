@@ -358,3 +358,39 @@ bmw.accelerate();
 
 mercedes.accelerate();
 mercedes.brake();
+
+console.log('-----CODING CHALLENGE #9 217-----');
+console.log('-----OOP #2-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649083#questions
+
+class Car2 {
+        constructor(make, speed) {
+                this.make = make;
+                this.speed = speed;
+        }
+
+        accelerate() {
+                this.speed += 10;
+                console.log(`'${this.make}' going at ${this.speed} km/h`);
+        }
+
+        brake() {
+                this.speed -= 5;
+                console.log(`'${this.make}' going at ${this.speed} km/h`);
+        }
+
+        // getter
+        get speedUS() {
+                return this.speed / 1.6;
+        }
+
+        // setter
+        set speedUS(speed) {
+                this.speed = speed * 1.6;
+        }
+}
+const ford = new Car2('FORD', 120);
+console.log(ford.speedUS); // 75
+ford.speedUS = 50;
+console.log(ford); // Car { make: 'FORD', speed: 80 }
+
