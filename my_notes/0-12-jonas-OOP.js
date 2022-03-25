@@ -266,12 +266,45 @@ console.log('-----INHERITANCE BETWEEN "CLASSES": CONSTRUCTOR FUNCTIONS-----');
 
 // ~~ real inheritance between classes ~~
 // * we can use the keyword "extends" to inherit properties and methods from one class to another
+// * we can use the keyword "super" to call the constructor of the parent class
+
+// ** EXAMPLES **
+// - how to inherit properties and methods from one constructor function to another
+// step 1: create the parent constructor function
+const PersonParentConstructor = function (firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+};
+PersonParentConstructor.prototype.calcAge = function () {
+        console.log(new Date().getFullYear() - this.birthYear);
+};
+
+// step 2: create the child constructor function
+const StudentChildConstructor = function (firstName, birthYear, course) {
+        // call the parent constructor
+        PersonParentConstructor.call(this, firstName, birthYear);
+        this.course = course;
+};
+// step 3: inherit the prototype from the parent constructor
+StudentChildConstructor.prototype = Object.create(PersonParentConstructor.prototype);
+
+// step 4:create the child constructor method
+StudentChildConstructor.prototype.introduce = function () {
+        console.log(`Hi, my name is ${this.firstName} and I am studying ${this.course}`);
+};
+
+// step 5: create an instance of the child constructor function
+const yoyo = new StudentChildConstructor('Yoyo', 1990, 'Marketing');
+yoyo.introduce(); // Hi, my name is Yoyo and I am studying Marketing
+yoyo.calcAge(); // 28
+console.log('-----INHERITANCE BETWEEN "CLASSES": ES6 CLASSES-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649089#questions
 
 // - how to inherit properties and methods from one class to another
 // STEP 1: create the parent class
 class PersonParentClass {
-        constructor(name, birthYear) {
-                this.name = name;
+        constructor(firstName, birthYear) {
+                this.firstName = firstName;
                 this.birthYear = birthYear;
         }
 
@@ -284,11 +317,12 @@ class PersonParentClass {
                 console.log('Hey there');
         }
 }
+
 // STEP 2: create the child class
-class Student extends PersonParentClass {
-        constructor(name, birthYear, major) {
+class StudentChildClass extends PersonParentClass {
+        constructor(firstName, birthYear, major) {
                 // call the parent class constructor
-                super(name, birthYear);
+                super(firstName, birthYear);
                 // add properties to the child class
                 this.major = major;
         }
@@ -297,7 +331,8 @@ class Student extends PersonParentClass {
                 return !!this.major;
         }
 }
+
 // STEP 3: create an instance of the child class
-const james = new Student('James', 1990, 'Computer Science');
+const james = new StudentChildClass('James', 1990, 'Computer Science');
 console.log(james); // Student { name: 'James', birthYear: 1990, major: 'Computer Science' }
 console.log(james.hasMajor()); // true
