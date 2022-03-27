@@ -281,14 +281,19 @@ PersonParentConstructor.prototype.calcAge = function () {
 
 // step 2: create the child constructor function
 const StudentChildConstructor = function (firstName, birthYear, course) {
-        // call the parent constructor
+        // call the parent constructor parent constructor function
         PersonParentConstructor.call(this, firstName, birthYear);
+        // set the child constructor function properties
         this.course = course;
 };
-// step 3: inherit the prototype from the parent constructor
+
+// step 3: linking prototypes: inherit the prototype properties (methods) [calcAge()] from the parent constructor ... - how link two constructor functions together
 StudentChildConstructor.prototype = Object.create(PersonParentConstructor.prototype);
 
-// step 4:create the child constructor method
+// step 4: set the child constructor back to the child constructor function prototype (methods) [calcAge()] from the parent constructor (Student) [.__proto__]
+StudentChildConstructor.prototype.constructor = StudentChildConstructor;
+
+// step 5: create the child constructor prototype properties (methods)
 StudentChildConstructor.prototype.introduce = function () {
         console.log(`Hi, my name is ${this.firstName} and I am studying ${this.course}`);
 };
@@ -297,6 +302,7 @@ StudentChildConstructor.prototype.introduce = function () {
 const yoyo = new StudentChildConstructor('Yoyo', 1990, 'Marketing');
 yoyo.introduce(); // Hi, my name is Yoyo and I am studying Marketing
 yoyo.calcAge(); // 28
+
 console.log('-----INHERITANCE BETWEEN "CLASSES": ES6 CLASSES-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649089#questions
 
@@ -321,18 +327,141 @@ class PersonParentClass {
 // STEP 2: create the child class
 class StudentChildClass extends PersonParentClass {
         constructor(firstName, birthYear, major) {
-                // call the parent class constructor
+                // call the parent class constructor function (PersonParentClass) and pass the arguments
+                // !! this always needs to happen first
                 super(firstName, birthYear);
                 // add properties to the child class
                 this.major = major;
         }
 
-        hasMajor() {
-                return !!this.major;
+        introduce() {
+                console.log(`Hi, my name is ${this.firstName} and I am studying ${this.major}`);
+        }
+
+        calcAge() {
+                console.log(
+                        `I'm ${2037 - this.birthYear} years old but I feel like I'm ${
+                                2037 - this.birthYear + 10
+                        } years old`
+                );
         }
 }
 
 // STEP 3: create an instance of the child class
 const james = new StudentChildClass('James', 1990, 'Computer Science');
 console.log(james); // Student { name: 'James', birthYear: 1990, major: 'Computer Science' }
-console.log(james.hasMajor()); // true
+james.introduce(); // Hi, my name is James and I am studying Computer Science
+james.calcAge(); // I'm 47 years old but I feel like I'm 57 years old
+
+console.log('-----INHERITANCE BETWEEN "CLASSES": OBJECT.CREATE-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649093#notes
+
+// step 1: create the parent object that will be the prototype of the child class
+const PersonProtoo = {
+        calcAge() {
+                console.log(new Date().getFullYear() - this.birthYear);
+        },
+        init(fullName, birthYear) {
+                this.fullName = fullName;
+                this.birthYear = birthYear;
+        },
+};
+
+// step 2: create the child object that will inherit from the prototype
+const StudentProto = Object.create(PersonProtoo);
+
+// step 3: set the properties and methods of the parent object to the child object
+StudentProto.init = function (fullName, birthYear, major) {
+        PersonProtoo.init.call(this, fullName, birthYear);
+        this.major = major;
+};
+
+StudentProto.introduce = function () {
+        console.log(`Hi, my name is ${this.fullName} and I am studying ${this.major}`);
+};
+
+// step 4: create an instance of the child object
+const jamesProtoo = Object.create(StudentProto);
+jamesProtoo.init('James', 1990, 'Computer Science');
+jamesProtoo.introduce(); // Hi, my name is James and I am studying Computer Science
+jamesProtoo.calcAge(); // 32
+
+console.log('-----ANOTHER CLASS EXAMPLE-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649103#notes
+
+class Account {
+        constructor(name, age, pin ) {
+                this.name = name;
+                this.age = age;
+
+                // protected properties
+                this._pin = pin;
+                this._movements = [];
+                this.locale = navigator.language;
+
+                console.log(`Thank you for opening an account with us ${this.name}`);
+        }
+
+        deposits(val) {
+                this._movements.push(val);
+        }
+
+        withdraws(val) {
+                // we call other methods inside a certain method
+                this.deposits(-val);
+        }
+
+        depositSum() {
+                return this._movements.filter((mov) => mov > 0).reduce((acc, curr) => acc + curr, 0);
+        }
+
+        withdrawalsSum() {
+                return this._movements.filter((mov) => mov < 0).reduce((acc, curr) => acc + curr, 0);
+        }
+
+        movementsSum() {
+                return this._movements.reduce((acc, curr) => acc + curr, 0);
+        }
+
+        getAccPin() {
+                return this._pin;
+        }
+
+        // eslint-disable-next-line class-methods-use-this
+        _approveLoan(_val) {
+                return true;
+        }
+
+        requestLoan(val) {
+                if (this._approveLoan(val)) {
+                        this.deposits(val);
+                        console.log(`Your loan has been approved`);
+                }
+        }
+}
+const acc1 = new Account('John', 32, 1234);
+
+// to add movement's to the account
+acc1.deposits(200);
+acc1.deposits(200);
+acc1.withdraws(100);
+acc1.withdraws(50);
+
+// to use the methods
+console.log(acc1.depositSum()); // 400
+console.log(acc1.withdrawalsSum()); // -150
+console.log(acc1.movementsSum()); // 250
+console.log(acc1.getAccPin()); // 1234
+acc1.requestLoan(1000); // Your loan has been approved
+console.log(acc1); // Account { name: 'John', age: 32, pin: 1234, movements: [ 200, 200, -100, -50, 1000 ] }
+
+console.log('-----ENCAPSULATION: PROTECTED PROPERTIES AND METHODS-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649109#notes
+// * Encapsulation means to keep certain methods and properties private and only accessible from within the class itself
+// * The rest of the methods and properties are public and can be accessed from outside the class // exposed as a public interface 
+
+// TWO BIG REASONS WHY NEED ENCAPSULATION AND DATA PRIVACY:
+// 1. to prevent code from outside of a class to accidentally manipulate or data inside the class.
+// 2. when we expose only a small interface so a small API consisting only of a few public methods then we can change all the other internal methods with more confidence
+
+// ** EXAMPLE 1:

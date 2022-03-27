@@ -394,3 +394,31 @@ console.log(ford.speedUS); // 75
 ford.speedUS = 50;
 console.log(ford); // Car { make: 'FORD', speed: 80 }
 
+console.log('-----CODING CHALLENGE #10 219-----');
+console.log('-----OOP #3-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649087#overview
+
+const EV = function (make, speed, charge) {
+        Car.call(this, make, speed);
+        this.charge = charge;
+};
+
+EV.prototype = Object.create(Car.prototype);
+EV.prototype.constructor = EV;
+
+EV.prototype.chargeBattery = function (chargeTo) {
+        this.charge = chargeTo;
+};
+
+EV.prototype.accelerate = function () {
+        this.speed += 20;
+        this.charge -= 1;
+        console.log(`'${this.make}' is going at ${this.speed} km/h with a charge of ${this.charge}%`);
+};
+
+const car1 = new EV('Tesla', 120, 23);
+car1.chargeBattery(90);
+console.log(car1); // {make: 'Tesla', speed: 120, charge: 90}
+car1.accelerate(); // Tesla is going at 140 km/h with a charge of 89%
+car1.accelerate(); // Tesla is going at 160 km/h with a charge of 88%
+car1.brake(); // Tesla is going at 155 km/h
