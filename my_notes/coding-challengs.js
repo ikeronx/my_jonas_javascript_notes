@@ -377,6 +377,7 @@ class Car2 {
         brake() {
                 this.speed -= 5;
                 console.log(`'${this.make}' going at ${this.speed} km/h`);
+                return this
         }
 
         // getter
@@ -422,3 +423,33 @@ console.log(car1); // {make: 'Tesla', speed: 120, charge: 90}
 car1.accelerate(); // Tesla is going at 140 km/h with a charge of 89%
 car1.accelerate(); // Tesla is going at 160 km/h with a charge of 88%
 car1.brake(); // Tesla is going at 155 km/h
+
+console.log('-----CODING CHALLENGE #10 219-----');
+console.log('-----OOP #3-----');
+
+class EVCL extends Car2 {
+        // private fields
+        #charge;
+
+        constructor(make, speed, charge) {
+                super(make, speed);
+                this.#charge = charge;
+        }
+
+        chargeBattery(chargeTo) {
+                this.#charge = chargeTo;
+                return this;
+        }
+
+        accelerate() {
+                this.speed += 20;
+                this.#charge -= 1;
+                console.log(`'${this.make}' is going at ${this.speed} km/h with a charge of ${this.#charge}%`);
+                return this;
+        }
+}
+
+const rivian = new EVCL('Rivian', 120, 23);
+console.log(rivian); // {make: 'Rivian', speed: 120, charge: 23}
+rivian.accelerate().accelerate().brake().chargeBattery(90).accelerate(); // Rivian is going at 140 km/h with a charge of 89%
+console.log(rivian.speedUS); // 109.375

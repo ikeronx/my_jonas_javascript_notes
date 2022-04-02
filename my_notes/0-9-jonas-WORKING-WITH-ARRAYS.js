@@ -386,11 +386,11 @@ const nums4 = [11, 9, 600];
 const allNum = nums4.every((value) => value > 10);
 console.log(allNum); // false
 
-console.log('-----FLAT() FLATMAP()-----'); // !! NO MUTATION - returns a boolean
+console.log('-----FLAT() FLATMAP()-----'); // !! NO MUTATION 
 console.log('-----flat()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648775#questions
 // * the flat() method allows us to flatten an array of arrays into a single array
-// * the flat() method does not modify/mutate the original array
+// * the flat() method does not modify/mutate the original arAlfred Chiriacray
 // * the flat() method returns a new array
 
 // ** examples **

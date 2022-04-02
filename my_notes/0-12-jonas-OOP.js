@@ -206,11 +206,11 @@ class UserCl {
                 console.log('hey');
         }
 }
-// get value
+// - how to get value using the getter method
 const eric = new UserCl('Eric', 1990); // <-- instance of the class
 console.log(eric.age); // 32
 
-// set value
+// how to set set value using setter method
 eric.fullName = 'Eric Smith';
 console.log(eric); // UserCl { _fullName: 'Eric Smith', birthYear: 1990 }
 
@@ -224,11 +224,11 @@ UserCl.hey(); // hey
 console.log('-----STATIC METHODS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649077#questions
 // * static methods are available on the class itself..constructor (not on the instances)
-// * please that static methods are notr available on the instances only on the class/constructor itself
+// * please note that static methods are not available on the instances only on the class/constructor itself
 
 // ** example of static methods **8
-Array.from(document.querySelectorAll('h1'));
-Number.parseFloat('1.2'); // 1.2
+Array.from(document.querySelectorAll('h1')); // .from() is a static method that converts a node list to an array
+Number.parseFloat('1.2'); // 1.2 // .parseFloat() is a static method that converts a string to a number
 
 // - how to create static methods (add it to a constructor)
 Person.hey = function () {
@@ -390,11 +390,11 @@ console.log('-----ANOTHER CLASS EXAMPLE-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649103#notes
 
 class Account {
-        constructor(name, age, pin ) {
+        constructor(name, age, pin) {
                 this.name = name;
                 this.age = age;
 
-                // protected properties
+                // protected properties (encapsulation)... properties that are not supposed ton be touch outside the class
                 this._pin = pin;
                 this._movements = [];
                 this.locale = navigator.language;
@@ -402,12 +402,22 @@ class Account {
                 console.log(`Thank you for opening an account with us ${this.name}`);
         }
 
+        /// - how to access and return private properties
+        // public interface (methods)
+        getMovements() {
+                return this._movements;
+        }
+
+        getAccPin() {
+                return this._pin;
+        }
+
         deposits(val) {
                 this._movements.push(val);
         }
 
         withdraws(val) {
-                // we call other methods inside a certain method
+                // we can call other methods inside another method
                 this.deposits(-val);
         }
 
@@ -423,10 +433,7 @@ class Account {
                 return this._movements.reduce((acc, curr) => acc + curr, 0);
         }
 
-        getAccPin() {
-                return this._pin;
-        }
-
+        // private interface (methods)
         // eslint-disable-next-line class-methods-use-this
         _approveLoan(_val) {
                 return true;
@@ -452,16 +459,144 @@ console.log(acc1.depositSum()); // 400
 console.log(acc1.withdrawalsSum()); // -150
 console.log(acc1.movementsSum()); // 250
 console.log(acc1.getAccPin()); // 1234
+console.log(acc1.getMovements()); // [ 200, 200, -100, -50 ]
 acc1.requestLoan(1000); // Your loan has been approved
 console.log(acc1); // Account { name: 'John', age: 32, pin: 1234, movements: [ 200, 200, -100, -50, 1000 ] }
 
 console.log('-----ENCAPSULATION: PROTECTED PROPERTIES AND METHODS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649109#notes
 // * Encapsulation means to keep certain methods and properties private and only accessible from within the class itself
-// * The rest of the methods and properties are public and can be accessed from outside the class // exposed as a public interface 
+// * The rest of the methods and properties are public and can be accessed from outside the class // exposed as a public interface
 
 // TWO BIG REASONS WHY NEED ENCAPSULATION AND DATA PRIVACY:
 // 1. to prevent code from outside of a class to accidentally manipulate or data inside the class.
 // 2. when we expose only a small interface so a small API consisting only of a few public methods then we can change all the other internal methods with more confidence
 
 // ** EXAMPLE 1:
+class Account2 {
+        constructor(name, age, pin) {
+                this.name = name;
+                this.age = age;
+
+                // protected properties (encapsulation)... properties that are not supposed to be touch outside the class
+                // - how to create private properties by using the convention _ + property name
+                this._pin = pin;
+                this._movements = [];
+                this.locale = navigator.language;
+
+                console.log(`Thank you for opening an account with us ${this.name}`);
+        }
+
+        // public interface (methods)
+        /// - how to access and return private properties
+        getMovements() {
+                return this._movements;
+        }
+
+        requestLoan(val) {
+                // - how to access the private methods (_approveLoan) from the public interface (requestLoan)
+                // - how to call other methods inside a certain method
+                if (this._approveLoan(val)) {
+                        this.deposits(val);
+                        console.log(`Your loan has been approved`);
+                }
+        }
+
+        getAccPin() {
+                return this._pin;
+        }
+
+        // private interface (methods)
+        // - how to create private methods by using the convention _ + method name
+        // eslint-disable-next-line class-methods-use-this
+        // eslint-disable-next-line class-methods-use-this
+        _approveLoan(_val) {
+                return true;
+        }
+}
+
+console.log('-----ENCAPSULATION: PRIVATE CLASS FIELDS AND METHODS-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649111#notes
+// * Private class fields and methods are not accessible from outside the class
+
+// ~~ There four different kinds of fields (properties) and methods in JavaScript:
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+// (there is also the static version)
+
+class Account3 {
+        // ~~ please note that fields are supposed to be outside the constructor
+        // !! these fields are available on the instances themselves and not the prototype of the class
+
+        // 1) -how define Public fields (instances)
+        locale = navigator.language;
+
+        // 2) - how define a Private fields (instances)
+        #movements = [];
+
+        #pin;
+
+        constructor(owner, currency, pin) {
+                this.owner = owner;
+                this.currency = currency;
+                this.#pin = pin; // redefining the private field
+
+                // Protected property
+                // this._movements = [];
+                // this.locale = navigator.language;
+
+                console.log(`Thanks for opening an account, ${owner}`);
+        }
+
+        // 3) Public methods
+
+        // Public interface
+        getMovements() {
+                return this.#movements; // to access the private field
+        }
+
+        deposit(val) {
+                this.#movements.push(val);
+                return this; // to chain methods
+        }
+
+        withdraw(val) {
+                this.deposit(-val); // to call other methods inside a certain method
+                return this; // to chain methods
+        }
+
+        requestLoan(val) {
+                if (this._approveLoan(val)) {
+                        // if (this.#approveLoan(val)) {
+                        this.deposit(val);
+                        console.log(`Loan approved`);
+                        return this; // to chain methods
+                }
+        }
+
+        getAccPin() {
+                return this.#pin; // to access the private field
+        }
+
+        static helper() {
+                console.log('Helper');
+        }
+
+        // 4) Private methods
+        // eslint-disable-next-line class-methods-use-this
+        _approveLoan(_val) {
+                // #approveLoan(_val) {
+                return true;
+        }
+}
+
+const acc2 = new Account3('John', 'USD', 1234);
+console.log(acc2);
+console.log(acc2.getAccPin()); // 1234
+
+console.log('---- CHAINING METHODS ----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649117#notes
+acc2.deposit(200).deposit(200).withdraw(100).withdraw(50).requestLoan(1000);
+console.log(acc2.getMovements()); // // [ 200, 200, -100, -50, 1000 ]
