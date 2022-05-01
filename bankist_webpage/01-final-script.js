@@ -25,7 +25,7 @@ const closeModal = function () {
         overlay.classList.add('hidden');
 };
 
-btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+btnsOpenModal.forEach((btn) => btn.addEventListener('click', openModal));
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -36,6 +36,8 @@ document.addEventListener('keydown', function (e) {
         }
 });
 
+console.log('-----IMPLEMENTING SMOOTH SCROLLING-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648955#questions/16505196
 /// ////////////////////////////////////
 // Button scrolling
 btnScrollTo.addEventListener('click', function (e) {
@@ -67,6 +69,8 @@ btnScrollTo.addEventListener('click', function (e) {
         section1.scrollIntoView({ behavior: 'smooth' });
 });
 
+console.log('-----IMPLEMENTING PAGE NAVIGATION-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648971#notes
 /// ////////////////////////////////////
 // Page navigation
 
@@ -92,18 +96,19 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
         }
 });
 
+console.log('----- IMPLEMENTING / BUILDING A TABBED COMPONENT-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648979#notes
 /// ////////////////////////////////////
 // Tabbed component
-
 tabsContainer.addEventListener('click', function (e) {
         const clicked = e.target.closest('.operations__tab');
 
-        // Guard clause
+        // Guard clause - if clicked element is not a tab element nothing happens
         if (!clicked) return;
 
         // Remove active classes
-        tabs.forEach(t => t.classList.remove('operations__tab--active'));
-        tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+        tabs.forEach((t) => t.classList.remove('operations__tab--active'));
+        tabsContent.forEach((c) => c.classList.remove('operations__content--active'));
 
         // Activate tab
         clicked.classList.add('operations__tab--active');
@@ -114,6 +119,8 @@ tabsContainer.addEventListener('click', function (e) {
         );
 });
 
+console.log('-----IMPLEMENTING MENU FADE ANIMATION-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648983#notes
 /// ////////////////////////////////////
 // Menu fade animation
 const handleHover = function (e) {
@@ -122,7 +129,7 @@ const handleHover = function (e) {
                 const siblings = link.closest('.nav').querySelectorAll('.nav__link');
                 const logo = link.closest('.nav').querySelector('img');
 
-                siblings.forEach(el => {
+                siblings.forEach((el) => {
                         if (el !== link) el.style.opacity = this;
                 });
                 logo.style.opacity = this;
@@ -133,9 +140,10 @@ const handleHover = function (e) {
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
+console.log('-----IMPLEMENTING A STICKY NAVIGATION: THE INTERSECTION OBSERVER API-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648993#notes
 /// ////////////////////////////////////
 // Sticky navigation: Intersection Observer API
-
 const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
 
@@ -155,6 +163,8 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 
 headerObserver.observe(header);
 
+console.log('-----IMPLEMENTING / REVEALING ELEMENTS ON SCROLL-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648995#notes
 /// ////////////////////////////////////
 // Reveal sections
 const allSections = document.querySelectorAll('.section');
@@ -178,6 +188,9 @@ allSections.forEach(function (section) {
         section.classList.add('section--hidden');
 });
 
+console.log('----- IMPLEMENTING LAZY LOADING IMAGES-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648999#notes
+/// ////////////////////////////////////
 // Lazy loading images
 const imgTargets = document.querySelectorAll('img[data-src]');
 
@@ -202,8 +215,10 @@ const imgObserver = new IntersectionObserver(loadImg, {
         rootMargin: '200px',
 });
 
-imgTargets.forEach(img => imgObserver.observe(img));
+imgTargets.forEach((img) => imgObserver.observe(img));
 
+console.log('----- BUILDING A SLIDER COMPONENT: PART 1 -----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649001#notes
 /// ////////////////////////////////////
 // Slider
 const slider = function () {
@@ -226,7 +241,7 @@ const slider = function () {
         };
 
         const activateDot = function (slide) {
-                document.querySelectorAll('.dots__dot').forEach(dot => dot.classList.remove('dots__dot--active'));
+                document.querySelectorAll('.dots__dot').forEach((dot) => dot.classList.remove('dots__dot--active'));
 
                 document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
         };
@@ -269,6 +284,8 @@ const slider = function () {
         btnRight.addEventListener('click', nextSlide);
         btnLeft.addEventListener('click', prevSlide);
 
+        console.log('----- BUILDING A SLIDER COMPONENT: PART 2 -----');
+        // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649003#notes
         document.addEventListener('keydown', function (e) {
                 if (e.key === 'ArrowLeft') prevSlide();
                 e.key === 'ArrowRight' && nextSlide();
