@@ -8,8 +8,8 @@ console.log('-----DEFAULT PARAMETERS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648643#overview
 const bookings = [];
 const createBooking = (
-        // .. you can compute default parameters values
-        // .. you can use the default values of the parameters set before it
+        // 👉🏽 you can compute default parameters values
+        // 👉🏽 you can use the default values of the parameters set before it
         flightNum,
         numPassengers = 1,
         price = 199 * numPassengers
@@ -24,16 +24,16 @@ const createBooking = (
         bookings.push(booking);
 };
 createBooking('LH123'); // {flightNum: 'LH123', numPassengers: 1, price: 199}
-// -  how to overwrite default parameters by passing argument when you invoke the function
+// 🛠 how to overwrite default parameters by passing argument when you invoke the function
 createBooking('LH123', 2, 800); // {flightNum: 'LH123', numPassengers: 7, price: 0}
 createBooking('LH123', 2); // {flightNum: 'LH123', numPassengers: 2, price: 398}
 createBooking('LH123', 5); // {flightNum: 'LH123', numPassengers: 5, price: 995}
-// - how to skip an argument - you add undefined in its place when you invoke the function.
+// 🛠 how to skip an argument - you add undefined in its place when you invoke the function.
 createBooking('LH123', undefined, 1000); // {flightNum: 'LH123', numPassengers: 1, price: 1000}
 
 console.log('-----HOW PASSING ARGUMENTS WORKS: VALUE VS. REFERENCE-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648645#notes
-// !! It's important to know how primitives and objects (reference) types works in the context of functions
+// ❗️❗️ It's important to know how primitives and objects (reference) types works in the context of functions
 const flight = 'LH234';
 const leanna = {
         name: 'Le-Anna McGuire',
@@ -69,19 +69,19 @@ const newPassport = (person) => {
         person.passport = Math.trunc(Math.random() * 100000);
 };
 
-// !! please note that the interaction of different functions with the same object can create issues
-// !! be aware of this
+// ❗️❗️ please note that the interaction of different functions with the same object can create issues
+// ❗️❗️ be aware of this
 newPassport(leanna);
 checkIn(flight, leanna);
 // console.log(leanna);
 
-// # javascript does not pass by reference only by values
-// # in javascript we pass a reference of the values TO the function and not BY reference
+// 👉🏽 javascript does not pass by reference only by values
+// 👉🏽 in javascript we pass a reference of the values TO the function and not BY reference
 
 console.log('-----HIGHER ODER #1: FUNCTIONS ACCEPTING CALLBACK FUNCTIONS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648655#questions
-// There are two types of higher order functions:
-// * 1. Function that receives another function... like addEventListener using callbacks for example
+// 👉🏽 There are two types of higher order functions:
+// 🎯 Function that receives another function... like addEventListener using callbacks for example
 
 // *** EXAMPLE 1 ***
 const oneWord = (str) => str.replace(/ /g, '').toLowerCase();
@@ -91,11 +91,11 @@ const upperFirstWord = (str) => {
         return [firstWord.toUpperCase(), ...others].join(' ');
 };
 
-// - how to pass a function to another function
-// ... step 1: set the str and the upperFirstWord fn to the higher oder transformer function as parameters
+// 🛠 how to pass a function to another function
+// ... step 1️⃣: set the str and the upperFirstWord fn to the higher oder transformer function as parameters
 const transformer = (str, fn) => {
         console.log(`The original string: ${str}`); // The original string: JAVASCRIPT is the best!
-        // ... step 3: invoke the upperFirstWord/oneWord fn inside the transformer (higher order fn) like this:
+        // ... step 3️⃣: invoke the upperFirstWord/oneWord fn inside the transformer (higher order fn) like this:
         console.log(`Transformed string: ${fn(str)}`); // Transformed string: javascriptisthebestest!!!!
 
         // functions also have properties cause they are objects
@@ -104,7 +104,7 @@ const transformer = (str, fn) => {
         // Transformed ny: upperFirstWord 🆙
         // Transformed by: oneWord  1️⃣
 };
-// ... step 2: invoke the transformer higher order function then
+// ... step 2️⃣: invoke the transformer higher order function then
 // ... then pass the str and the upperFirstWord or oneWord function that are callback functions as an arguments like this:
 transformer('Javascript is the best!', upperFirstWord); // <-- callback fn
 transformer('Javascript is the bestest!!!!', oneWord); // <-- callback fn
@@ -117,10 +117,10 @@ document.body.addEventListener('hover', high5); // <-- callback fn
 
 console.log('-----HIGHER ODER #2: FUNCTIONS RETURNING FUNCTIONS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648657#overview
-// * 2. Function that returns new function
+// 🎯 Function that returns new function
 
 // *** EXAMPLE 1 ***
-// - how to make a function return another function
+// 🛠 how to make a function return another function
 const greet = function (greeting) {
         return function (name) {
                 console.log(`${greeting} ${name}`);
@@ -132,7 +132,7 @@ greeterHey('Leanna'); // Hey Leanna
 greeterWadUp('Willis'); // Wad Up! Willis
 greet('Hello sexy')('Terry'); // Hello sexy Terry
 
-// - how to write is an arrow function...
+// 🛠  how to write is an arrow function...
 const greetArr = (greeting) => (name) => console.log(`${greeting} ${name}`);
 
 const greeterBye = greetArr('Byeeeee!!');
@@ -142,15 +142,15 @@ greetArr('Adios')('Marvin'); // Adios Marvin
 console.log('-----FUNCTION METHODS: CALL() APPLY()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648663#overview
 // https://www.javascripttutorial.net/javascript-function-type/
-// A function object has three important methods: apply(), call() and bind().
-// ... the call() and apply() methods call a fn with a given 'this' value and ARGUMENTS
-// ... differences between the call() and apply() method:
-// ... 1. you pass the arguments to the call() function individually - say.call(cat, 'What does a cat say?')
-// ... 2. you pass the arguments to the apply() method as an array-like object - say.apply(cat, ['What does a cat say?']);
-// ... these methods allows us to explicity define the this keyword in any function we choose
+// 👉🏽 A function object has three important methods: apply(), call() and bind().
+// 👉🏽 the call() and apply() methods call a fn with a given 'this' value and ARGUMENTS
+// 👉🏽 differences between the call() and apply() method:
+// 📌 1. you pass the arguments to the call() function individually - say.call(cat, 'What does a cat say?')
+// 📌 2. you pass the arguments to the apply() method as an array-like object - say.apply(cat, ['What does a cat say?']);
+// 👉🏽 these methods allows us to explicity define the this keyword in any function we choose
 
 // *** EXAMPLES ***
-// - how to use the call() and bind() method
+// 🛠  how to use the call() and bind() method
 const lufthansa = {
         airline: 'Lufthansa',
         iataCode: 'LH',
@@ -176,11 +176,11 @@ const swiss = {
         bookings: [],
 };
 
-// ... step 1. we can take lufthansa.book fn and store it in a new variole since javascript has first call functions:
+// ... step 1️⃣. we can take lufthansa.book fn and store it in a new variole since javascript has first call functions:
 // eslint-disable-next-line prefer-destructuring
 const book = lufthansa.book;
 
-// ... step 2. we can apply the book variable fn which is the lufthansa book method to the eurowings object
+// ... step 2️⃣. we can apply the book variable fn which is the lufthansa book method to the eurowings object
 // ... to objects (eurowings, lufthansa etc) by using function methods to point to the object 'this' keyword:
 console.log('-----call() method-----');
 // the call() method calls the book function which will then point to the objects (swiss, lufthansa, eurowings etc) 'this' keyword then we set the arguments
@@ -196,14 +196,14 @@ console.log('-----apply() method-----');
 const flightData = [583, 'George Cooper'];
 book.apply(swiss, flightData); // George Cooper booked a seat on Swiss Air Lines flight LX583
 
-// better way:
+// 🌟 better way:
 // is using the call() method with the spread operator instead of using the apply method:
 book.call(swiss, ...flightData); // George Cooper booked a seat on Swiss Air Lines flight LX583
 
 console.log('-----FUNCTION METHODS: BIND()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648667#overview
-// * the bind() method creates a new function instance whose this value is bound to the object that you provide
-// !! using the bind() method will not call the function but will return a new function instance
+// 👉🏽 the bind() method creates a new function instance whose this value is bound to the object that you provide
+// ❗️❗️ using the bind() method will not call the function but will return a new function instance
 
 // *** example ***
 const bookSwiss = book.bind(swiss);
@@ -213,7 +213,7 @@ bookSwiss(45, 'Robyn Fenty'); // Robyn Fenty booked a seat on Swiss Air Lines fl
 bookLufthansa(456, 'Kaydel Gordon'); // Kaydel Gordon booked a seat on Lufthansa flight LH456
 bookEurowings(245, 'Kayum Stapleton'); // Kayum Stapleton booked a seat on Eurowings flight EW245
 
-// - how to preset the arguments when you use the bind() method:
+// 🛠 how to preset the arguments when you use the bind() method:
 // ... preset the book 'flightNum' value/argument
 const bookSwiss249 = book.bind(swiss, 249);
 bookSwiss249('Robyn Fenty'); // Robyn Fenty booked a seat on Swiss Air Lines flight LX249
@@ -221,31 +221,31 @@ bookSwiss249('Jerry'); // Jerry booked a seat on Swiss Air Lines flight LX249
 
 console.log('-----other situations when we can use the function methods-----');
 // *** with event listeners example **
-// - how to use the bind() method with event listeners:
-// ... step 1. add a new properties to the lufthansa object
+// 🛠 how to use the bind() method with event listeners:
+// ... step 1️⃣. add a new properties to the lufthansa object
 lufthansa.planes = 300;
 lufthansa.buyPlane = function () {
-        // ... step 2. <-- make sure the function is not an arrow function when you use the bind() method to call the function in the addeventlistener below
+        // ... step 2️⃣. <-- make sure the function is not an arrow function when you use the bind() method to call the function in the addeventlistener below
         console.log(this);
         this.planes++;
 
         console.log(`${this.airline} now has ${this.planes} planes`);
 };
 const buyPlaneBtn = document.querySelector('.buy');
-// ... step 3. bind() the lufthansa.buyPlane fn to the lufthansa object to point to the lufthansa object 'this' keyword and add the lufthansa object to the event listener as a callback function
+// ... step 3️⃣. bind() the lufthansa.buyPlane fn to the lufthansa object to point to the lufthansa object 'this' keyword and add the lufthansa object to the event listener as a callback function
 buyPlaneBtn.addEventListener('click', lufthansa.buyPlane.bind(lufthansa)); // Lufthansa now has 301 planes
 
 // *** with partial applications ***
-// * partial application means with can preset parameters
-// * partial application is a function that takes a function as an argument and returns a function
+// 👉🏽  partial application means with can preset parameters
+// 👉🏽  partial application is a function that takes a function as an argument and returns a function
 
 // *** example ***
-// - how to use the partial application method:
-// ... step 1. create a fn general fn that we'll bind to
+// 🛠  how to use the partial application method:
+// ... step 1️⃣. create a fn general fn that we'll bind to
 const addTax = (rate, value) => value + value * rate;
 console.log(addTax(0.1, 200)); // 123.23
 
-// ... step 2. use the bind() method to bind() the addVat to the addTax fn and preset the rate (argument) and use null in place of the object 'this' keyword we want to point to:
+// ... step 2️⃣. use the bind() method to bind() the addVat to the addTax fn and preset the rate (argument) and use null in place of the object 'this' keyword we want to point to:
 const addVAT = addTax.bind(null, 0.23);
 console.log(addVAT(100)); // 123
 console.log(addVAT(50)); // 61.5
@@ -297,11 +297,11 @@ console.log(poll.displayResults.call({ answers: [5, 2, 3, 9, 6] })); // [5, 2, 3
 
 console.log('-----IIFE-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648679#overview
-// * Immediately Invoked Function Expression (IIFE)
-// ... IIFE is only executed once when the page loads
-// ... best use-case is with async await functions and it's a way to avoid the 'this' keyword confusion when using the 'this' keyword inside the IIFE
+// 👉🏽 Immediately Invoked Function Expression (IIFE)
+// 📌 IIFE is only executed once when the page loads
+// 📌 best use-case is with async await functions and it's a way to avoid the 'this' keyword confusion when using the 'this' keyword inside the IIFE
 
-// - how  to use the IIFE:
+// 🛠  how  to use the IIFE:
 // *** examples ***
 (function () {
         console.log('This will never run again');
@@ -321,10 +321,10 @@ console.log('-----IIFE-----');
 
 console.log('-----CLOSURES-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648683#overview
-// * closures make the function remember and access the variables from the scope in which it was created even if that execution context is gone
-// ... closures are useful when you want to access a variable from a function that has already returned
+// 👉🏽 closures make the function remember and access the variables from the scope in which it was created even if that execution context is gone
+// 📌 closures are useful when you want to access a variable from a function that has already returned
 
-// - how to use closures:
+// 🛠  how to use closures:
 // *** example ***
 const secureBooking = function () {
         let passenger = 0;
@@ -342,7 +342,7 @@ booker(); // 1 passenger booked a seat
 booker(); // 2 passenger booked a seat
 booker(); // 3 passenger booked a seat
 
-// you can inspect the variable environment of a fn like this:
+// 💡 you can inspect the variable environment of a fn like this:
 console.dir(booker);
 
 console.log('-----more closure examples-----');
@@ -379,6 +379,3 @@ const boardPassengers = function (num, wait) {
 };
 
 const bording = boardPassengers(180, 3);
-
-
-

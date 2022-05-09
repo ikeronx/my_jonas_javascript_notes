@@ -20,19 +20,19 @@ console.log(airline.indexOf('P')); // 2 <-- finds the index of the FIRST occurre
 console.log(airline.lastIndexOf('P')); // 8 <-- finds the index of the LAST occurrence of the letter after the index
 console.log(airline.indexOf('Air')); // 4
 
-// - how to extract part of a string.. use the slice method
+// 🛠 how to extract part of a string.. use the slice method
 console.log(airline.slice(4)); // Air Portugal <-- returns the string from the index 4
 console.log(airline.slice(4, 7)); // Air <-- the end index / value is not included
-// ... how to extract the first word in string without knowing any of the indexes
+// 🛠 how to extract the first word in string without knowing any of the indexes
 console.log(airline.slice(0, airline.indexOf(' '))); // Air
-// ... how to extract the last word in string without knowing any of the indexes
+// 🛠 how to extract the last word in string without knowing any of the indexes
 console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Air
 
-// ... how extract letters starting from the end of the string
+// 🛠 how extract letters starting from the end of the string
 console.log(airline.slice(-1)); // l
-// ... how to extract letters either from the beginning or the end of the string
+// 🛠 how to extract letters either from the beginning or the end of the string
 console.log(airline.slice(1, -3)); // AP Air Portu
-// ... how to extract all the letters except the last letter from a string
+// 🛠 how to extract all the letters except the last letter from a string
 console.log(airline.slice(0, -1)); // AP Air Portuga
 
 // **** REAL WORLD EXAMPLES ****
@@ -101,12 +101,12 @@ checkEmail('yes@com', 'yes@7com'); // Email is incorrect 👎🏾
 
 console.log('---string methods: replace() replaceAll()---');
 
-// - how to replace characters in a string
+// 🛠 how to replace characters in a string
 const priceGB = '288,97€';
 const priceUS = priceGB.replace('€', '$').replace(',', '.');
 console.log(priceUS); // 288.97$
 
-// - how replace all the occurrences of a word in a string
+// 🛠 how replace all the occurrences of a word in a string
 const announcement = ' All passengers come to boarding door 23. Boarding door 23. ';
 console.log(announcement.replaceAll('door', 'gate')); // All passengers come to boarding door X. Boarding door X.
 // .... regular expression version
@@ -114,18 +114,18 @@ console.log(announcement.replaceAll(/door/g, 'gate')); // All passengers come to
 
 console.log('--- string methods: includes() startsWith() endsWith() these three methods return boolean values: ---');
 
-// - how to check if a string includes a word
+// 🛠 how to check if a string includes a word
 const planeID = 'Airbus A320neo';
 console.log(planeID.includes('20neo')); // true
 console.log(planeID.includes('Boeing')); // false
 
-// - how check if a string starts with a word
+// 🛠 how check if a string starts with a word
 const userName = 'Keron Williams';
 console.log(userName.startsWith('Keron')); // true
 console.log(userName.startsWith('Keron8')); // false
 
 // **** REAL WORLD EXAMPLES ****
-// - how check if a string ends with a word
+// 🛠 how check if a string ends with a word
 // 1. check if planeID begins with Airbus and ends with 'neo'
 if(planeID.includes('Airbus') && planeID.endsWith('neo')) {
         console.log(`${planeID} is part of the Airbus plane family`);
@@ -133,7 +133,7 @@ if(planeID.includes('Airbus') && planeID.endsWith('neo')) {
 
 // 2. check if passenger baggage is allowed to be on the plane
 const checkBaggage = (items) => {
-    // * when we receive user input always put it into lowercase first
+    // ❗️❗️ when we receive user input always put it into lowercase first
     const itemsLower = items.toLowerCase();
     const checkForWeapons = itemsLower.includes('gun') || itemsLower.includes('knife') 
         ? 'You are NOT allowed on board 🚫'
@@ -150,18 +150,18 @@ console.log('-----STRINGS PART 3-----');
 console.log('---string methods: split() join()---');
 
 // *** SPLIT METHOD ***
-// * the split method allows us to split a string into multiple parts which creates an array of substrings base on a divider (delimiter) 
+// 👉🏽 the split method allows us to split a string into multiple parts which creates an array of substrings base on a divider (delimiter) 
 // - how use the split method
 console.log('a+very+long+string'.split('+')); // <-- removes the '+' divider returns array of strings ['a', 'very', 'long', 'string']
 console.log('Keron Williams'.split(' ')); // <-- remove the space ' ' divider returns array of string['Keron', 'Williams']
 
-// - how use to destructing to create variables from the split method
+// 🛠 how use destructing to create variables from the split method
 const [firstName, lastName] = 'Keron Williams '.split(' ');
 console.log(firstName, lastName); // Keron Williams
 
 // *** JOIN METHOD ***
-// * the join method allows us to join an array of strings into a single string with a divider (delimiter)
-// - how to use the join method to join strings in an array ... return Mr Keron williams
+// 👉🏽 the join method allows us to join an array of strings into a single string with a divider (delimiter)
+// 🛠 how to use the join method to join strings in an array ... return Mr Keron williams
 const newName = ['Mr.', firstName, lastName.toLocaleLowerCase()].join(' ') // Mr. Keron williams
 console.log(newName); // Mr. Keron williams
 // const newName2 = ['Mr.', firstName, lastName.toLocaleLowerCase()].join('+') // Mr.+Keron+williams
@@ -204,8 +204,8 @@ const passenger4NewName = passenger4.slice(0, passenger4.indexOf(' ')).toUpperCa
 console.log(passenger4NewName); // JESSICA ann smith davis
 
 console.log('---string methods: padStart() padEnd()---');
-// * padding a string means to add a number of characters to a string until the string has a certain desired length 
-// - how to pad a string
+// 👉🏽 padding a string means to add a number of characters to a string until the string has a certain desired length 
+// 🛠 how to pad a string
 console.log('hello'.padStart(10, '*')); // '       hello'
 console.log('hello'.padStart(23, '*')); // '*******hello'
 console.log('hello'.padStart(10, '$')); // 'hello-----'
@@ -226,8 +226,8 @@ console.log(massCreditCard(1234567890123456)); // ************3456
 console.log(massCreditCard('12345678901234567')); // ************34567
 
 console.log('---string methods: repeat()---');
-// * the repeat method allows us to repeat a string a certain number of times
-// - how to use the repeat method
+// 👉🏽 the repeat method allows us to repeat a string a certain number of times
+// 🛠 how to use the repeat method
 console.log('hello '.repeat(3)); // `hello hello hello`
 const greeting = 'hello '
 console.log(greeting.repeat(2)); // `hello hello`

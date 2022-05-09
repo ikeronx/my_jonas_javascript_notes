@@ -69,8 +69,8 @@ console.log('----LOOPING OBJECTS----');
 // ******* Looping objects ********
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648577#announcements
 
-// - how to loop through objects using for of loop
-// 1. how to get the object PROPERTIES/KEYS use the Object.keys() method
+// 🛠 how to loop through objects using for of loop
+// 1. 🛠 how to get the object PROPERTIES/KEYS use the Object.keys() method
 
 const openingHoursProperties = Object.keys(restaurant.openingHours);
 // .... loop through the restaurant openingHours object using for of loop
@@ -81,11 +81,11 @@ for (const day of openingHoursProperties) {
 }
 console.log(openingStr); // we are open 3 days: Thursday, Friday, Saturday, Sunday
 
-// 2. how to get the object VALUES use the Object.values() method
+// 2. 🛠  how to get the object VALUES use the Object.values() method
 const openingHoursValues = Object.values(restaurant.openingHours);
 console.log(openingHoursValues); // [ { open: 12, close: 22 }, { open: 11, close: 23 }, { open: 0, close: 12 + 12 } ]
 
-// 3. how to get the object ENTRIES (both properties/keys and values) use the Object.entries() method
+// 3. 🛠 how to get the object ENTRIES (both properties/keys and values) use the Object.entries() method
 const openingHoursEntries = Object.entries(restaurant.openingHours);
 // console.log(openingHoursEntries); // [ [ 'Monday', { open: 12, close: 22 } ], [ 'Tuesday', { open: 11, close: 23 } ], [ 'Wednesday', { open: 0, close: 12 + 12 } ], [ 'Thursday', { open: 12, close: 22 } ], [ 'Friday', { open: 11, close: 23 } ], [ 'Saturday', { open: 0, close: 12 + 12 } ], [ 'Sunday', { open: 12, close: 22 } ] ]
 
@@ -109,7 +109,7 @@ for (const [key, { open, close }] of openingHoursEntries) {
 console.log('----ENHANCING OBJECT LITERALS ----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648565#announcements
 // * 1. first es6 enhanced object literal
-// how to add a object literal inside another object literal by using ES6 enhanced object literals
+// 🛠  how to add a object literal inside another object literal by using ES6 enhanced object literals
 const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const openingHours = {
         [weekdays[4]]: {
@@ -135,15 +135,15 @@ const restaurant2 = {
         mainMenu: ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 '],
         // * 1. ES6 enhanced object literal
         openingHours,
-        // 1. how to make a function return an array and destruct the result into different variables.... receive values from the object's arrays (mainMenu, etc) using indexes
+        // 1. 🛠 how to make a function return an array and destruct the result into different variables.... receive values from the object's arrays (mainMenu, etc) using indexes
         order(categoryIndex, starterIndex, MainIndex) {
                 return [this.categories[categoryIndex], this.starterMenu[starterIndex], this.mainMenu[MainIndex]];
         },
-        // 2. how to make a function accept multiple arguments then use the spread operator to pass those arguments...
+        // 2.🛠   how to make a function accept multiple arguments then use the spread operator to pass those arguments...
         orderPizza(...ingredients) {
                 console.log(`Here's your delicious Pizza with ${ingredients.join(', ')}`);
         },
-        // 3. how to use rest operator as an argument which returns an array
+        // 3. 🛠  how to use rest operator as an argument which returns an array
         orderFood(mainMenuIndex, mainIngredient, ...otherIngredients) {
                 console.log(
                         `Here's your delicious ${
@@ -155,7 +155,7 @@ const restaurant2 = {
 console.log(restaurant2);
 
 // 2. second es6 enhanced object literal
-// how to compute properties names dynamically
+// 🛠  how to compute properties names dynamically
 const weekdays2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const hours2 = {
         [weekdays[4]]: {

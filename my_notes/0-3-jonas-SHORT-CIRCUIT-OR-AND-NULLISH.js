@@ -40,7 +40,7 @@ const restaurant = {
 console.log('----SHORT CIRCUITING (|| and &&)----');
 // ****** SHORT CIRCUITING *********
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648547#announcements
-// short circuiting means that if the first value is a truthy value then it will immediately return that value and not evaluate the second value
+// 👉 short circuiting means that if the first value is a truthy value then it will immediately return that value and not evaluate the second value
 console.log('----OR----');
 console.log(3 || 'Keron'); // 3
 console.log(0 || 14); // 14
@@ -54,7 +54,7 @@ console.log(null || undefined || 0 || '' || false || "what's up" || 23); // what
 // restaurant.numGuests = 25;
 const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
 console.log(guest1); // 10
-// ... shorter way to write this example using the OR operator
+// 💡 shorter way to write this example using the OR operator
 // can use the OR operator to set a default value for a variable if it is not defined in the object
 const guest2 = restaurant.numGuests || 15;
 console.log(guest2); // 15
@@ -69,7 +69,7 @@ console.log(true && 'Keron' && null && 23); // null
 if (restaurant.orderFood) {
         restaurant.orderFood(0, 'Chicken 🍗', 'Pineapple 🍍');
 }
-// ... shorter way to write this if/else example using the && operator
+// 💡 shorter way to write this if/else example using the && operator
 // can use the && operand to execute a block of code if the condition is true
 restaurant.orderFood && restaurant.orderFood(0, 'Chicken 🍗', 'Pineapple 🍍'); // Here's your delicious Pizza 🍕 with Chicken 🍗 and Pineapple 🍍
 
@@ -97,7 +97,7 @@ const rest2 = {
 
 console.log('---||=---');
 // OR assignment operator
-// - how to add a new property to an object using the logical assignment operator
+// 🛠  how to add a new property to an object using the logical assignment operator
 rest1.owner ||= 'Will Smith';
 rest2.owner ||= 'James Gordon';
 console.log(rest1.owner); // Keron Williams
@@ -113,7 +113,7 @@ console.log(rest2.numGuests); // 0
 console.log('---&&=---');
 // AND assignment operator
 
-// - how to replace a property value in an object using the logical assignment operator &&=
+// 🛠 how to replace a property value in an object using the logical assignment operator &&=
 // rest1.owner = rest1.owner && 'Anonymous1';
 rest1.owner &&= 'Anonymous1';
 console.log(rest1.owner); // Anonymous1

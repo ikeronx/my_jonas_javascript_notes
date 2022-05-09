@@ -266,7 +266,7 @@ const calcAverageHumanAge = (dogAges) => {
         const humanAge = dogAges
                 .map((dogAge) => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
                 .filter((dogAge) => dogAge >= 18)
-                // !! use the arr variable in reduce method to get the length of the new array to calculate the average
+                // 💡 !! use the arr variable in reduce method to get the length of the new array to calculate the average
                 .reduce((acc, dogAge, i, arr) => acc + dogAge / arr.length, 0);
         return Math.round(humanAge);
 };
@@ -320,8 +320,8 @@ const withdrawalGreater400 = movements2
 console.log(withdrawalGreater400); // 650
 
 // eslint-disable-next-line prettier/prettier
-console.log('-----how to use the find() method to find an object in an array based on some property of that object-----');
-// - how to use the find() method to find an object in an the array based on some property value of that object
+console.log('----- 💡 how to use the find() method to find an object in an array based on some property of that object-----');
+// - 💡 how to use the find() method to find an object in an the array based on some property value of that object
 const user1 = {
         name: 'John',
         age: 30,
