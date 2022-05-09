@@ -97,7 +97,7 @@ console.log(Math.sqrt(25)); // 5
 console.log(25 ** (1 / 2)); // 5 <-- ** is the power operator
 console.log(25 ** 0.5); // 5
 
-// - hpw to calculate the cubic root of a number
+// - how to calculate the cubic root of a number
 console.log(Math.cbrt(27)); // 3
 console.log(27 ** (1 / 3)); // 3
 

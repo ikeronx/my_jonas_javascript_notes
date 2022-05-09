@@ -10,70 +10,70 @@ console.log('-----SIMPLE ARRAY METHODS: SLICE() SPLICE() REVERSE() CONCAT() JOIN
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648703#overview
 
 console.log('-----slice() method-----'); // !! NO MUTATION - returns a new array
-// * the slice method allows us to extract or take out elements from an array/ slice a portion of an array without modifying/mutating the original array
-// * the slice method returns a new array with the extracted items
+// 👉🏽 the slice method allows us to extract or take out elements from an array/ slice a portion of an array without modifying/mutating the original array
+// 👉🏽 the slice method returns a new array with the extracted items
 
 // ** examples **
-// - how to use the slice() method
+// 🛠 how to use the slice() method
 const arr = ['a', 'b', 'c', 'd', 'e'];
 console.log(arr.slice(2)); // ['c', 'd', 'e'] <-- starts extraction at index 2
 console.log(arr.slice(0, 3)); // ['a', 'b', 'c'] <-- tarts extracting at index 0  up to but not including index 3
-// - how to extract a portion of an array starting from the end of the array, use a negative index
+// 🛠 how to extract a portion of an array starting from the end of the array, use a negative index
 console.log(arr.slice(-2)); // ['d', 'e']
-// - how to get the last element of array, use -1
+// 🛠 how to get the last element of array, use -1
 console.log(arr.slice(-1)); // ['e'];
-// - how to starts extracting elements starting at index 1 except for the last two elements
+// 🛠 how to starts extracting elements starting at index 1 except for the last two elements
 console.log(arr.slice(1, -2)); // ['b', 'c'];
-// - how to use the slice() method to create a shallow copy of an array - use the slice method on an array without passing any arguments
+// 🛠 how to use the slice() method to create a shallow copy of an array - use the slice method on an array without passing any arguments
 console.log(arr.slice()); // ['a', 'b', 'c', 'd', 'e']
 
 console.log('-----splice() method-----'); // !! MUTATION - modifies the original array
-// * the splice method allows us to delete one oe more elements from of an array which modifies/mutates the original array by returning the original array without the deleted elements
-// * the splice method returns an array without the deleted elements
-// * difference between splice() and slice() is that splice mutates the original array but slice does not
-// * the splice method can take up to three arguments:
-// - the first argument is the index where the splice will start
-// - the second argument is the number of items to remove
-// - the third argument is the items to add to the array
+// 👉🏽 the splice method allows us to delete one oe more elements from of an array which modifies/mutates the original array by returning the original array without the deleted elements
+// 👉🏽 the splice method returns an array without the deleted elements
+// 👉🏽 difference between splice() and slice() is that splice mutates the original array but slice does not
+// 👉🏽 the splice method can take up to three arguments:
+// 📌 the first argument is the index where the splice will start
+// 📌 the second argument is the number of items to remove
+// 📌 the third argument is the items to add to the array
 
 // ** examples **
-// - how to use the splice() method to delete elements from an array
+// 🛠 how to use the splice() method to delete elements from an array
 const arr2 = ['a', 'b', 'c', 'd', 'e'];
 arr2.splice(2); // ['c', 'd', 'e'] <-- deletes elements starting at index 2
 console.log(arr2); // ['a', 'b'} <-- returns the mutated array without the deleted elements
 
-// - how to delete the last element of an array
+// 🛠 how to delete the last element of an array
 const arr3 = [1, 2, 3];
 arr3.splice(-1); // [3] <-- deletes the last element of the array
 console.log(arr3); // [1, 2] <-- returns the mutated array without the last element
 
-// - how to delete one or more elements starting from a certain index - the first argument is the index where the splice will start and the second argument is the number of items to remove
+// 🛠 how to delete one or more elements starting from a certain index - the first argument is the index where the splice will start and the second argument is the number of items to remove
 const arr4 = [1, 2, 3, 4, 5];
 arr4.splice(2, 2); // [3, 4] <-- deletes elements starting at index 2 and up to but not including index 3
 console.log(arr4); // [1, 2, 5] <-- returns the mutated array without the deleted elements
 
-// - how to use the splice to add or remove items from an array at a certain index
+// 🛠 how to use the splice to add or remove items from an array at a certain index
 const familyMembers = ['Kaydel', 'Audwin', 'Keron', 'Max'];
 familyMembers.splice(3, 0, 'Andrea');
 console.log(familyMembers); // ['Kaydel', 'Audwin', 'Keron', 'Andrea', 'Max'] <-- adds the element 'Andrea' to the array at index 3
 
 console.log('-----reverse() method-----'); // !! MUTATION
-// * the reverse method reverses the order of the elements in an array
-// * the reverse method modifies/mutates the original array by returning the original with the reversed order of the elements
+// 👉🏽 the reverse method reverses the order of the elements in an array
+// 👉🏽 the reverse method modifies/mutates the original array by returning the original with the reversed order of the elements
 
 // ** examples **
-// - how to use the reverse() method
+// 🛠 how to use the reverse() method
 const arr5 = ['c', 'b', 'a'];
 arr5.reverse();
 console.log(arr5); // ['a', 'b', 'c'] <-- returns the reversed array
 
 console.log('-----concat() method -----'); // !! NO MUTATION - returns a new array
-// * the concat method allows us to join two or more arrays together
-// * the concat method does not modify/mutate the original array
-// * the concat method returns a new array with the joined arrays
+// 👉🏽 the concat method allows us to join two or more arrays together
+// 👉🏽 the concat method does not modify/mutate the original array
+// 👉🏽 the concat method returns a new array with the joined arrays
 
 // ** examples **
-// - how to use the concat() method
+// 🛠 how to use the concat() method
 const arr6 = ['a', 'b', 'c'];
 const arr7 = ['d', 'e', 'f'];
 const arr8 = arr6.concat(arr7);
@@ -84,29 +84,29 @@ const arr9 = [...arr6, ...arr7];
 console.log(arr9); // ['a', 'b', 'c', 'd', 'e', 'f'] <-- returns the joined array
 
 console.log('-----join() method-----'); // !! NO MUTATION
-// * the join method allows us to join the elements of an array into a string separated by a specified character or string (default is a comma)
-// * the join method does not modify/mutate the original array
-// * the join method returns a string
+// 👉🏽 the join method allows us to join the elements of an array into a string separated by a specified character or string (default is a comma)
+// 👉🏽 the join method does not modify/mutate the original array
+// 👉🏽 the join method returns a string
 
 // ** examples **
-// - how to use the join() method
+// 🛠 how to use the join() method
 const arr10 = ['a', 'b', 'c'];
 console.log(arr10.join('+')); // 'a,b,c' <-- returns the joined array as a string
 console.log(arr10.join('').padStart(10, '-')); // 'a,b,c' <-- returns the joined array as a string
 
 console.log('-----THE NEW AT METHOD: AT()-----'); // !! NO MUTATION - returns a new array
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/29433412#overview
-// * the at method allows us to access the element at a certain index in an array
-// * the at method does not modify/mutate the original array
-// * the at method returns the element at the specified index
+// 👉🏽 the at method allows us to access the element at a certain index in an array
+// 👉🏽 the at method does not modify/mutate the original array
+// 👉🏽 the at method returns the element at the specified index
 
 // ** examples **
-// - how to use the at() method
+// 🛠 how to use the at() method
 const users = ['John', 'Bob', 'Kate'];
 console.log(users.at(1)); // 'Bob' <-- returns the element at index 2
-// - how to use the at() method to access the last element of an array
+// 🛠 how to use the at() method to access the last element of an array
 console.log(users.at(-1)); // 'Kate' <-- returns the element at the last index
-// - how to use the at() method to access the first element of an array
+// 🛠 how to use the at() method to access the first element of an array
 console.log(users.at(0)); // 'John' <-- returns the element at the first index
 
 // ... works on strings too
@@ -115,12 +115,12 @@ console.log(str.at(6)); // 'W' <-- returns the element at index 1
 
 console.log('-----LOOPING ARRAYS: FOREACH()-----'); // !! NO MUTATION - returns a new array
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648707#overview
-// * the forEach method allows us to loop through an array and perform a function on each element
-// * the forEach method does not modify/mutate the original array
+// 👉🏽 the forEach method allows us to loop through an array and perform a function on each element
+// 👉🏽 the forEach method does not modify/mutate the original array
 
 console.log('----- forEach() -----');
 // ** examples **
-// - how to use the forEach() method
+// 🛠 how to use the forEach() method
 // ... loop over the movements array a print a message for each movement in the array
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 movements.forEach((value, index, arr) => {
@@ -144,11 +144,11 @@ for (const [index, value] of movements.entries()) {
 
 console.log('-----FOREACH() WITH MAPS AND SETS DATA STRUCTURE-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648709#overview
-// * the forEach method allows us to loop through maps and sets and perform a function on each element
+// 👉🏽 the forEach method allows us to loop through maps and sets and perform a function on each element
 
 console.log('-----map data structure-----');
 // ** examples **
-// - how to loop through the a map and print the key and value of each element
+// 🛠 how to loop through the a map and print the key and value of each element
 const currencies = new Map([
         ['USD', 'United States dollar'],
         ['EUR', 'Euro'],
@@ -162,7 +162,7 @@ currencies.forEach((value, key, map) => {
 });
 
 console.log('-----set data structure-----');
-// - how to use the forEach() method to loop through a set of elements
+// 🛠 how to use the forEach() method to loop through a set of elements
 const colors = new Set(['red', 'green', 'blue', 'red']);
 colors.forEach((color) => {
         console.log(`${color}`);
@@ -173,23 +173,23 @@ colors.forEach((color) => {
 
 console.log('-----DATA TRANSFORMATIONS: MAP() FILTER() REDUCE()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648727#overview
-// the map returns ALL the elements of an array as a new array
-// the filter returns SOME of the elements of an array that pass a test as a new array
-// the reduce returns a SINGLE value after iterating through the elements of an array
+// 👉🏽 the map returns ALL the elements of an array as a new array
+// 👉🏽 the filter returns SOME of the elements of an array that pass a test as a new array
+// 👉🏽 the reduce returns a SINGLE value after iterating through the elements of an array
 
 console.log('-----MAP()-----'); // !! NO MUTATION - returns a new array
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648731#overview
-// * the map method allows us to loop through an array and perform a function on each element in the array
-// * the map method does not modify/mutate the original array
-// * the map method returns a new array with the transformed elements
+// 👉🏽 the map method allows us to loop through an array and perform a function on each element in the array
+// 👉🏽 the map method does not modify/mutate the original array
+// 👉🏽 the map method returns a new array with the transformed elements
 
 // ** examples **
-// - how to use the map() method
+// 🛠 how to use the map() method
 const eurToUsd = 1.1;
 const movementsUSD = movements.map((value) => Math.round(value * eurToUsd) / 1);
 console.log(movementsUSD); // [200, 450, -400, 3000, -650, -130, 70, 1300]
 
-// - how to use the map() method to the value and index
+// 🛠 how to use the map() method to the value and index
 const myArray = [2, 4, 5, 7, 9, 12, 14];
 const doubleEl = myArray.map((num, index) => `${index + 1}: ${num * 2}`);
 console.log(doubleEl.join(', ')); // 1: 4, 2: 8, 3: 10, 4: 14, 5: 18, 6: 24, 7: 28
@@ -202,13 +202,13 @@ console.log(movementsDescriptions); // [ 'Movement 1: You deposited $200', 'Move
 
 console.log('-----FILTER()-----'); // !! NO MUTATION - returns a new array
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648737#overview
-// * the filter method allows us to loop through an array and perform a function on each element in the array
-// * the filter returns SOME of the elements of an array that pass a test in a new array
-// * the filter method does not modify/mutate the original array
-// * the filter method returns a new array with the filtered elements
+// 👉🏽 the filter method allows us to loop through an array and perform a function on each element in the array
+// 👉🏽 the filter returns SOME of the elements of an array that pass a test in a new array
+// 👉🏽 the filter method does not modify/mutate the original array
+// 👉🏽 the filter method returns a new array with the filtered elements
 
 // ** examples **
-// - how to use the filter() method
+// 🛠 how to use the filter() method
 // ... filter out the negative movements and return the positive ones (deposit)
 const depositz = movements.filter((value) => value > 0);
 console.log(depositz); // [200, 450, 3000, 70]
@@ -219,11 +219,11 @@ console.log(withdrawalz); // [-400, -650, -130]
 
 console.log('-----REDUCE()-----'); // !! NO MUTATION - returns a single value
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648743#overview
-// * the reduce method allows us to loop through an array and perform a function on each element in the array
-// * the reduce method returns a SINGLE value after iterating through the elements of an array
+// 👉🏽 the reduce method allows us to loop through an array and perform a function on each element in the array
+// 👉🏽 the reduce method returns a SINGLE value after iterating through the elements of an array
 
 // ** examples **
-// - how to use the reduce() method
+// 🛠 how to use the reduce() method
 // ... sum of wall the movements
 const balance = movements.reduce((acc, value) => acc + value, 0);
 console.log(balance); // 3840
@@ -234,8 +234,8 @@ console.log(max); // 3000
 
 console.log('-----CHAINING METHODS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648747#overview
-// * the chaining methods allow us to chain together multiple methods
-// * the chaining methods return the original array
+// 👉🏽 the chaining methods allow us to chain together multiple methods
+// 👉🏽 the chaining methods return the original array
 
 // ** examples **
 // ... sum of the depositsSum to usd dollars
@@ -295,13 +295,13 @@ console.log(discount); // [ { name: 'dress', price: 540 }, { name: 'book', price
 
 console.log('-----FIND()-----'); // !! NO MUTATION - returns a single value
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648757#overview
-// * the find method allows us to loop through an array and perform a function on each element in the array
-// * the find method returns the FIRST element of an array that passes a certain condition
-// * the find method does not modify/mutate the original array
-// * the find method returns a single value
+// 👉🏽 the find method allows us to loop through an array and perform a function on each element in the array
+// 👉🏽 the find method returns the FIRST element of an array that passes a certain condition
+// 👉🏽 the find method does not modify/mutate the original array
+// 👉🏽 the find method returns a single value
 
 // ** examples **
-// - how to use the find() method
+// 🛠 how to use the find() method
 // ... find the first number thats greater than 10
 const nums = [-11, 8, 9, 10, 5, 32, 14, 6];
 const firstElement = nums.find((value) => value > 10);
@@ -320,8 +320,8 @@ const withdrawalGreater400 = movements2
 console.log(withdrawalGreater400); // 650
 
 // eslint-disable-next-line prettier/prettier
-console.log('----- 💡 how to use the find() method to find an object in an array based on some property of that object-----');
-// - 💡 how to use the find() method to find an object in an the array based on some property value of that object
+console.log('----- 💡🛠 how to use the find() method to find an object in an array based on some property of that object-----');
+// 💡🛠 how to use the find() method to find an object in an the array based on some property value of that object
 const user1 = {
         name: 'John',
         age: 30,
@@ -345,12 +345,12 @@ console.log(userJohn.favFood); // [ 'pizza', 'pasta', 'salad' ]
 
 console.log('-----FINDINDEX()-----'); // !! NO MUTATION - returns the index of the element that passes the test
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648769#questions/13698340
-// * the findIndex method allows us to loop through an array and perform a function on each element in the array
-// * the findIndex method returns the a single value which is the index of an element in an array that passes a certain condition
-// * the findIndex method does not modify/mutate the original array
+// 👉🏽 the findIndex method allows us to loop through an array and perform a function on each element in the array
+// 👉🏽 the findIndex method returns the a single value which is the index of an element in an array that passes a certain condition
+// 👉🏽 the findIndex method does not modify/mutate the original array
 
 // ** examples **
-// - how to use the findIndex() method
+// 🛠 how to use the findIndex() method
 // ... find the index of the first number thats greater than 10
 const nums2 = [-11, 8, 9, 10, 5, 32, 14, 6];
 const firstElementIndex = nums2.findIndex((value) => value > 10);
@@ -359,28 +359,28 @@ console.log(firstElementIndex); // 5
 console.log('-----SOME() EVERY()-----'); // !! NO MUTATION - returns a boolean
 console.log('-----some()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648771#questions/13698340
-// * the some method allows us to loop through an array and perform a function on each element in the array
-// * the some method checks if at least one element in an array passes a certain condition or not and returns a boolean value
-// * the some method does not modify/mutate the original array
+// 👉🏽 the some method allows us to loop through an array and perform a function on each element in the array
+// 👉🏽 the some method checks if at least one element in an array passes a certain condition or not and returns a boolean value
+// 👉🏽 the some method does not modify/mutate the original array
 
 // ** examples **
-// - how to use the some() method
+// 🛠 how to use the some() method
 // ... check if there is a number greater than 10
 const nums3 = [-11, 8, 9, 12, 5, 2, 1, 6];
 const comeNum = nums3.some((value) => value > 10);
 console.log(comeNum); // true
 
-// the incudes() method is similar to the some method tp the some method only checks for equalioty whereas the some() method checks for a condition
+// the incudes() method is similar to the some method tp the some method only checks for equality whereas the some() method checks for a condition
 console.log(movements);
 console.log(movements.includes(-40)); // false
 
 console.log('-----every()-----');
-// * the every method allows us to loop through an array and perform a function on each element in the array
-// * the every method checks if every element in an array passes a certain condition or not and returns a boolean value
-// * the every method does not modify/mutate the original array
+// 👉🏽 the every method allows us to loop through an array and perform a function on each element in the array
+// 👉🏽 the every method checks if every element in an array passes a certain condition or not and returns a boolean value
+// 👉🏽 the every method does not modify/mutate the original array
 
 // ** examples **
-// - how to use the every() method
+// 🛠 how to use the every() method
 // ... check if every number is greater than 10
 const nums4 = [11, 9, 600];
 const allNum = nums4.every((value) => value > 10);
@@ -389,18 +389,18 @@ console.log(allNum); // false
 console.log('-----FLAT() FLATMAP()-----'); // !! NO MUTATION 
 console.log('-----flat()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648775#questions
-// * the flat() method allows us to flatten an array of arrays into a single array
-// * the flat() method does not modify/mutate the original arAlfred Chiriacray
-// * the flat() method returns a new array
+// 👉🏽 the flat() method allows us to flatten an array of arrays into a single array
+// 👉🏽 the flat() method does not modify/mutate the original arAlfred Chiriacray
+// 👉🏽 the flat() method returns a new array
 
 // ** examples **
-// - how to use the flat() method
+// 🛠 how to use the flat() method
 const arr11 = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
 const flatArr = arr11.flat();
 console.log(flatArr); // [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
 
-// .. how to can pass a number to the flat() method to flatten an array of arrays into a single array if there are nested arrays inside nested arrays
-// ... flatten an array of arrays at a deeper nested level
+// 🛠 how to can pass a number to the flat() method to flatten an array of arrays into a single array if there are nested arrays inside nested arrays
+// ... flattens an array of arrays at a deeper nested level
 const arr12 = [[1, 2, [4, 5, [900, 800], 9], 6], [7, 8, 9], 10];
 const flatArr2 = arr12.flat(3); // <-- pass a number to the flat() method to go a to deeper level of the array to flatten it out
 console.log(flatArr2); // [ 1, 2, 3, 4, 5, 900, 800, 9, 6, 7, 8, 9, 10 ]
@@ -414,9 +414,9 @@ const account4 = { owner: 'Sarah Smith', movements: [430, 1000, 700, 50, 90] };
 
 const accounts = [account1, account2, account3, account4];
 
-// step 1: loop through the accounts array and get the movements from each account
-// step 2: flatten the movements of each account into a single array
-// step 3: calculate the overall bal ance of all the accounts
+// step 1️⃣: loop through the accounts array and get the movements from each account
+// step 2️⃣: flatten the movements of each account into a single array
+// step 3️⃣: calculate the overall bal ance of all the accounts
 const allAccMovements = accounts
         .map((acc) => acc.movements)
         .flat()
@@ -424,12 +424,12 @@ const allAccMovements = accounts
 console.log(allAccMovements); // 17840
 
 console.log('-----flatMap()-----'); // !! NO MUTATION - returns a boolean
-// * the flatMap() method map and flat an array at the same time and returns a new array
-// * the flatMap() method does not modify/mutate the original array
-// * keep in mind that flatMap() method only go one level deep unlike the flat() method method that can go as deep as you want inside nested arrays
+// 👉🏽 the flatMap() method map and flat an array at the same time and returns a new array
+// 👉🏽 the flatMap() method does not modify/mutate the original array
+// 👉🏽 keep in mind that flatMap() method only go one level deep unlike the flat() method method that can go as deep as you want inside nested arrays
 
 // ** examples **
-// - how to use the flatMap() method
+// 🛠 how to use the flatMap() method
 // ... rewrite the allAccMovements fm above using the flatMap() method
 // eslint-disable-next-line prettier/prettier
 const allAccMovements2 = accounts
@@ -439,12 +439,12 @@ console.log(allAccMovements2); // 17840
 
 console.log('-----SORT()-----'); // !! MUTATES THE ORIGINAL ARRAY !!
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648779#questions/14542862
-// * the sort() method allows us to sort an array in ascending or descending order
-// * the sort() method does not return a new array but it modifies the original array
-// * the sort() method is case sensitive
+// 👉🏽 the sort() method allows us to sort an array in ascending or descending order
+// 👉🏽 the sort() method does not return a new array but it modifies the original array
+// 👉🏽 the sort() method is case sensitive
 
 // ** examples: strings**
-// - how to use the sort() method to sort strings
+// 🛠  how to use the sort() method to sort strings
 // ... sort the names alphabetically in ascending order (from a to z)
 const names = ['Keron', 'Jessica', 'Apple', 'Zebra', 'Steven', 'Sarah'];
 console.log(names.sort()); // ['Apple', 'Jessica', 'Keron', 'Sarah', 'Steven', 'Zebra']
@@ -454,10 +454,10 @@ const names2 = ['Keron', 'Jessica', 'Apple', 'Zebra', 'Steven', 'Sarah'];
 console.log(names2.sort().reverse()); // ['Zebra', 'Steven', 'Sarah', 'Keron', 'Jessica', 'Apple']
 
 // ** examples: numbers**
-// - how to use the sort() method to sort numbers
-// ~~  pass a compare callback fn '.sort((a, b) => a - b)' to the sort() method to sort numbers in ascending or descending order ~~
-// ~~ ascending order: a - b (smallest to biggest)
-// ~~ descending order: b - a (biggest to smallest)
+// 🛠 how to use the sort() method to sort numbers
+// 📌 pass a compare callback fn '.sort((a, b) => a - b)' to the sort() method to sort numbers in ascending or descending order ~~
+// 🎯 ascending order: a - b (smallest to biggest)
+// 🎯 descending order: b - a (biggest to smallest)
 
 // ... sort the numbers in an array in ascending order (from smallest to biggest)
 const nums5 = [11, 9, 600, 7, -900, -12, 500];
@@ -474,43 +474,43 @@ console.log('---CREATING AND FILLING ARRAYS: ARRAY() FILL() ARRAY.FOM()---');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648783#questions/13468474
 
 console.log('-----Array()-----'); // !! CREATES AN ARRAY
-// * the Array() constructor allows us to create an array
-// * the Array() constructor does not return a new array but it modifies the original array
-// * the Array() constructor takes in a number as a parameter and creates an array of that length
-// * the Array() constructor takes in a string as a parameter and creates an array of that string
-// * the Array() constructor takes in an array as a parameter and creates an array of that array
-// * the Array() constructor takes in an object as a parameter and creates an array of that object
-// * the Array() constructor takes in a set of parameters and creates an array of those parameters
+// 👉🏽 the Array() constructor allows us to create an array
+// 👉🏽 the Array() constructor does not return a new array but it modifies the original array
+// 👉🏽 the Array() constructor takes in a number as a parameter and creates an array of that length
+// 👉🏽 the Array() constructor takes in a string as a parameter and creates an array of that string
+// 👉🏽 the Array() constructor takes in an array as a parameter and creates an array of that array
+// 👉🏽 the Array() constructor takes in an object as a parameter and creates an array of that object
+// 👉🏽 the Array() constructor takes in a set of parameters and creates an array of those parameters
 
 // *** examples ***
-// - how to use the Array() constructor to create an array of numbers
+// 🛠 how to use the Array() constructor to create an array of numbers
 console.log(new Array(10, 20, 30, 40, 50)); // [ 10, 20, 30, 40, 50 ]
 
 console.log('-----fill()-----'); // !! MUTATES THE ORIGINAL ARRAY !!
-// * the fill() method allows us to fill an array with a certain value
-// * the fill() method does not return a new array but it modifies the original array
-// * the fill() method takes in a: value and a start index and an end index like the splice method() method
+// 👉🏽 the fill() method allows us to fill an array with a certain value
+// 👉🏽 the fill() method does not return a new array but it modifies the original array
+// 👉🏽 the fill() method takes in a: value and a start index and an end index like the splice method() method
 
-// - how to use the fill() and Array() method together to create arrays programmatically without having hard code all the items manually
-// .. step 1: we use thd Array constructor and pass a single number in the array constructor, this will create an array of that length
+// 🛠 how to use the fill() and Array() method together to create arrays programmatically without having hard code all the items manually
+// .. step 1️⃣: we use thd Array constructor and pass a single number in the array constructor, this will create an array of that length
 const x = new Array(7); // [ <7 empty items> ]
-// ... step 2: we fill the array using the fill() method and pass in a value which fills the entire array with that value
+// ... step 2️⃣: we fill the array using the fill() method and pass in a value which fills the entire array with that value
 // x.fill(0); // [ 0, 0, 0, 0, 0, 0, 0 ]
-// ~~ we can also also specify which index we want it to start filling from and which index we want it to end at by passing in a start index and an end index ~~
+// 💡 we can also also specify which index we want it to start filling from and which index we want it to end at by passing in a start index and an end index ~~
 x.fill('egg', 2, 7); // [empty × 2, 'egg', 'egg', 'egg', 'egg', 'egg']
 console.log(x);
 
-// - how to use the fill() method on other arrays
+// 🛠 how to use the fill() method on other arrays
 // ... fill the array with the value 'rice' starting at index 1 and ending at index 3
 const x2 = ['butter', 'egg', 'egg', 'egg', 'egg'];
 x2.fill('rice', 1, 3); // ['butter', 'rice', 'rice', 'rice', 'egg']
 console.log(x2);
 
 console.log('-----Array.from()-----'); // !! CREATES AN ARRAY !!
-// * the Array.from() method allows us to create an array from scratch
-// * the Array.from() method also allows us to create an array from any iterable like a nodes list, a string, a object, a set, a map, a generator, a function, an array-like object, or an another array
-// * the Array.from() method takes in a set of parameters and creates an array of those parameters
-// * these parameters can be:
+// 👉🏽 the Array.from() method allows us to create an array from scratch
+// 👉🏽 the Array.from() method also allows us to create an array from any iterable like a nodes list, a string, a object, a set, a map, a generator, a function, an array-like object, or an another array
+// 👉🏽 the Array.from() method takes in a set of parameters and creates an array of those parameters
+// 👉🏽 these parameters can be:
 //   - a string
 //   - a set
 //   - a map
@@ -518,30 +518,30 @@ console.log('-----Array.from()-----'); // !! CREATES AN ARRAY !!
 //   - a function
 
 // *** examples ***
-// - how tp use the Array.from() method to create an array from scratch
-// ... step 1: we pass in an object with the length property as the first parameter/argument
-// ... step 2: we pass in a second parameter which is a map callback function
+// 🛠 how tp use the Array.from() method to create an array from scratch
+// ... step 1️⃣: we pass in an object with the length property as the first parameter/argument
+// ... step 2️⃣: we pass in a second parameter which is a map callback function
 const createNewArr = Array.from({ length: 5 }, (_, index) => index + 1); // the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
 console.log(createNewArr);
 
 // ** practice example **
 // create an array of 100 dice rolls using the Array.from() method
 console.log(Array.from({ length: 100 }, (_, index) => Math.floor(Math.random(index) * 6) + 1));
-// the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
+// 🌟 the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
 
 // eslint-disable-next-line prettier/prettier
 console.log('-----!! How to create an array from a NODELIST using the Array.from() method and pass a callback fn as second argument to get the values of each nodelist element-----'); // !! CREATES AN ARRAY !!
-// - create an array from the movements values from the Bankist UI using the Array.from() method then use the map call back functions to get the values from the array and display them
-// step 1: pass in the node list to the Array.from() method by selecting each el using document.querySelectorAll()
-// step 2: use the map() method to loop through the nobelist to get the values from the array and display them in the console or alert window
+// create an array from the movements values from the Bankist UI using the Array.from() method then use the map call back functions to get the values from the array and display them
+// step 1️⃣: pass in the node list to the Array.from() method by selecting each el using document.querySelectorAll()
+// step 2️⃣: use the map() method to loop through the nobelist to get the values from the array and display them in the console or alert window
 
 // selectorExample.addEventListener('click', e => {
-//         // 1: pass the node list to the Array.from() method as the first argument by selecting each el using document.querySelectorAll() then pass a callback function to the Array.from() method as a second argument to loop through the nodelist array and get the values from the array and display them in the console
+//         // 1️⃣: pass the node list to the Array.from() method as the first argument by selecting each el using document.querySelectorAll() then pass a callback function to the Array.from() method as a second argument to loop through the nodelist array and get the values from the array and display them in the console
 //         const movementsUI = Array.from(
 //                 document.querySelectorAll('.movements__value'),
 //                 el => +el.textContent.replace('€', '')
 //         ); // .reduce((acc, curr) => acc + curr // <-- can chain methods to the Array.from() method
-//         // 2: display the values for each of the elements in the nodelist (movementsUI)
+//         // 2️⃣: display the values for each of the elements in the nodelist (movementsUI)
 //         console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
 // });
 
@@ -569,14 +569,14 @@ const numDeposits1000 = accountz
 console.log(numDeposits1000); // 6
 
 // ... different version using the reduce method
-// ~~ can use reduce to count something in an array ~~
+// 💡 can use reduce to count something in an array ~~
 const numDeposits1000v2 = accountz
         .flatMap((acc) => acc.movements)
         // .reduce((count, curValue) => (curValue >= 1000 ? count + 1 : count), 0); // <-- the zero is the initial value of the count
         .reduce((count, currentValue) => (currentValue >= 1000 ? ++count : count), 0);
 console.log(numDeposits1000v2); // 5
 
-// ~~~ postfix increment operator & prefix increment operator differences~~~
+// 💡 postfix increment operator & prefix increment operator differences~~~
 let a = 10;
 console.log(a++); // 10 <-- the postfix operator ++ returns the value of the variable before it is incremented by 1
 console.log(++a); // 11 <-- the prefix ++ operator adds 1 to the value of the variable and then returns the new value... same as writing a + 1
@@ -632,7 +632,7 @@ console.log(convertTitleCase('and here is another title with an EXAMPLE')); // T
 // ** Practice Example 4 
 // how to get user's information using the reduce method
 
-// ~~ separate callbacks.. dry principle .. use when the call function condition is the same in each fn~
+// 💡 separate callbacks.. dry principle .. use when the call function condition is the same in each fn~
 // const deposit = (mov) => mov > 0;
 // console.log(movements.every(deposit)); // true
 // console.log(movements.some(deposit)); // true

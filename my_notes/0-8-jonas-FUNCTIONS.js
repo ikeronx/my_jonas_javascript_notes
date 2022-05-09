@@ -52,14 +52,14 @@ const checkIn = (flightNum, passenger) => {
 };
 checkIn(flight, leanna);
 // ... the flight variable is a primitive type (string)
-// ... when a primitive type is pass to an object it's a copy of the original value
+// ❗️❗️ when a primitive type is pass to an object it's a copy of the original value
 console.log(flight); // LH234
 // ... the leanna object/variable is a reference type (object)
-// ... when we pass a reference type (object) to a function
-// ... what is copied is just a reference to the object in the memory heap
-// ... so whatever changes are made to the the leanna variable inside the function
-// ... will also apply to the leanna object outside the function when it is pass to the 'checkIn' function as an argument (passenger)
-// ... hence the leanna object values will be updated/change also
+// ❗️❗️ when we pass a reference type (object) to a function
+// ❗️ what is copied is just a reference to the object in the memory heap
+// ❗️ so whatever changes are made to the the leanna variable inside the function
+// ❗️ will also apply to the leanna object outside the function when it is pass to the 'checkIn' function as an argument (passenger)
+// ❗️ hence the leanna object values will be updated/change also
 console.log(leanna); // {name: 'Mrs Le-Anna McGuire', passport: 2345578}
 // is the same as writing
 // flightNum = flight;
@@ -69,8 +69,8 @@ const newPassport = (person) => {
         person.passport = Math.trunc(Math.random() * 100000);
 };
 
-// ❗️❗️ please note that the interaction of different functions with the same object can create issues
-// ❗️❗️ be aware of this
+// ❗️ please note that the interaction of different functions with the same object can create issues
+// ❗️ be aware of this
 newPassport(leanna);
 checkIn(flight, leanna);
 // console.log(leanna);
@@ -203,7 +203,7 @@ book.call(swiss, ...flightData); // George Cooper booked a seat on Swiss Air Lin
 console.log('-----FUNCTION METHODS: BIND()-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648667#overview
 // 👉🏽 the bind() method creates a new function instance whose this value is bound to the object that you provide
-// ❗️❗️ using the bind() method will not call the function but will return a new function instance
+// ❗️ using the bind() method will not call the function but will return a new function instance
 
 // *** example ***
 const bookSwiss = book.bind(swiss);
