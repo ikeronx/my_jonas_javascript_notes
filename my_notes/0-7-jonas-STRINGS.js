@@ -35,7 +35,7 @@ console.log(airline.slice(1, -3)); // AP Air Portu
 // 🛠 how to extract all the letters except the last letter from a string
 console.log(airline.slice(0, -1)); // AP Air Portuga
 
-// **** REAL WORLD EXAMPLES ****
+// 🤔🌍 Real World Examples:
 // ... write a function that receives an airplane seat and logs to to the console whether it is middle seat or not
 const checkMiddleSeat = (seat) => {
         // B and E are the middle seats
@@ -63,7 +63,7 @@ console.log('---string methods: toLowerCase() toUpperCase() trim()---');
 console.log(airline.toLowerCase()); // tap air portugal
 console.log(airline.toUpperCase()); // TAP AIR PORTUGAL
 
-// **** REAL WORLD EXAMPLES ****
+// // 🤔🌍 Real World Examples:
 // 1. ... fix the capitalization of the name
 const passenger = 'jOnAs';
 const passengerLower = passenger.toLowerCase();
@@ -78,7 +78,7 @@ const fixName = (name) => {
 };
 fixName('kERONn '); // Keronn
 
-// **** REAL WORLD EXAMPLES ****
+// // 🤔🌍 Real World Example:
 // 2. ... compare / check user's email
 const email = 'hellomoney@io';
 const loginEmail = '   HelloMONEY@io \n';
@@ -124,7 +124,7 @@ const userName = 'Keron Williams';
 console.log(userName.startsWith('Keron')); // true
 console.log(userName.startsWith('Keron8')); // false
 
-// **** REAL WORLD EXAMPLES ****
+// 🤔🌍 Real World Examples:
 // 🛠 how check if a string ends with a word
 // 1. check if planeID begins with Airbus and ends with 'neo'
 if(planeID.includes('Airbus') && planeID.endsWith('neo')) {
@@ -151,7 +151,7 @@ console.log('---string methods: split() join()---');
 
 // *** SPLIT METHOD ***
 // 👉🏽 the split method allows us to split a string into multiple parts which creates an array of substrings base on a divider (delimiter) 
-// - how use the split method
+// 🛠 how to use the split method
 console.log('a+very+long+string'.split('+')); // <-- removes the '+' divider returns array of strings ['a', 'very', 'long', 'string']
 console.log('Keron Williams'.split(' ')); // <-- remove the space ' ' divider returns array of string['Keron', 'Williams']
 
@@ -167,7 +167,7 @@ console.log(newName); // Mr. Keron williams
 // const newName2 = ['Mr.', firstName, lastName.toLocaleLowerCase()].join('+') // Mr.+Keron+williams
 
 
-// **** REAL WORLD EXAMPLES ****
+// 🤔🌍 Real World Example:
 // 1. ... capitalize the first letter of each word in a string
 const capitalizeName = (name) => {
     // ... jonas way
@@ -211,7 +211,7 @@ console.log('hello'.padStart(23, '*')); // '*******hello'
 console.log('hello'.padStart(10, '$')); // 'hello-----'
 console.log('hello'.padStart(10, '%').padEnd(20, '+')); // -----hello**********
 
-// **** REAL WORLD EXAMPLES ****
+// 🤔🌍 Real World Example:
 // 1. ... write a function that mass credit card numbers except the last 4 digits
 const massCreditCard = (number) => {
         // step 1. convert the number into a string

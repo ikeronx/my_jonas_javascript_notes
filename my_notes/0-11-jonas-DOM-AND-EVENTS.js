@@ -17,7 +17,7 @@ console.log('-----HOW THE DOM REALLY WORKS-----');
 
 // 🌟 INHERITANCE IN THE DOM
 // 👉🏽 Inheritance means that all the child node types inherit from the parent node type. They will have access to all the properties and methods of the parent node type.
-// ❓ For example, and HTML element will have access to all the properties and methods of the element type. Like innerHTML, innerText, classList, append(), querySelector(), closest() etc.
+// 🤔 For example, and HTML element will have access to all the properties and methods of the element type. Like innerHTML, innerText, classList, append(), querySelector(), closest() etc.
 // 👉🏽 It will also get access to all the properties and methods form teh node type. For example html Button element is also an element and a node.
 
 // 🌟 EVENT TARGET
@@ -28,7 +28,7 @@ console.log('-----HOW THE DOM REALLY WORKS-----');
 console.log('-----SELECTING, CREATING, AND DELETING ELEMENTS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648947#questions/16505196
 
-console.log('-----SELECTING ELEMENTS-----');
+// 📌 SELECTING ELEMENTS
 console.log('----- document.-----');
 // 🛠 how to select the entire document of a webpage
 console.log(document.documentElement); // <html>...
@@ -50,9 +50,10 @@ console.log('----- getElementByClassName()-----');
 // 🛠 how to get element by class name
 console.log(document.getElementsByClassName('btn')); // HTMLCollection(2) [div.btn, div.btn]
 
-console.log('----- getElementsByTagName()-----');
+console.log('----- getElementsByTagName()-----'); // HTMLCollection
 const allButtons = document.getElementsByTagName('button');
 console.log(allButtons); // HTMLCollection(3) [button, button, button]
+
 // ❗️❗️ please note that the getElementsByTagName() method returns a collection of elements, not a node list. So we have to convert it to a node list.
 const allButtonsNodeList = Array.from(allButtons);
 console.log(allButtonsNodeList); // [button, button, button]
@@ -61,13 +62,7 @@ console.log('----- getElementByClassName()-----');
 // 🛠 how to get element by class name
 console.log(document.getElementsByClassName('btn')); // HTMLCollection(2) [div.btn, div.btn]
 
-console.log('-----CREATING AND INSERTING ELEMENTS-----');
-console.log('-----insertAdjacentHTML()-----');
-// 🛠 how to create and insert elements
-// 🎯 insertAdjacentHTML() inserts the HTML string at the specified position.
-// 🎯 insertAdjacentHTML() can be used to insert HTML elements, text, or raw HTML at the specified position.
-// .insertAdjacentHTML()
-
+// 📌 CREATING AND INSERTING ELEMENTS
 console.log('-----createElement()-----');
 // 🛠 how to create elements
 const message = document.createElement('div');
@@ -75,6 +70,12 @@ message.classList.add('cookie-message');
 // message.textContent = 'We use cookies fro improved functionality and analytics';
 message.innerHTML = `We use cookies for improved functionality and analytics
 <button class="btn btn--close-cookie">Got it!</button>`;
+
+console.log('-----insertAdjacentHTML()-----');
+// 🛠 how to insert elements
+// 🎯 insertAdjacentHTML() inserts the HTML string at the specified position.
+// 🎯 insertAdjacentHTML() can be used to insert HTML elements, text, or raw HTML at the specified position.
+// .insertAdjacentHTML()
 
 console.log('-----prepend() append()-----');
 // 🛠 how to add elements to the DOM
@@ -93,11 +94,10 @@ console.log('-----before() after()-----');
 // ... header.before(message); // before() inserts a new node before the header element. (sibling element)
 // ... header.after(message); // after() inserts a new node after the header element. (sibling element)
 
-console.log('-----DELETING ELEMENTS-----');
+// 📌 DELETING ELEMENTS
 document.querySelector('.btn--close-cookie').addEventListener('click', function () {
-        message.remove(); // removes the element from the DOM.
-        // 👎🏽 old way to remove the element from the DOM
-        // ... message.parentElement.removeChild(message); // removes the element from the DOM.
+        message.remove(); // <-- 👍🏽 new way to remove an element from the DOM
+        // message.parentElement.removeChild(message) <-- 👎🏽 old way to remove the element from the DOM
 });
 
 console.log('-----IMPLEMENTING SMOOTH SCROLLING-----');
@@ -107,7 +107,7 @@ console.log('-----IMPLEMENTING SMOOTH SCROLLING-----');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
-btnScrollTo.addEventListener('click', e => {
+btnScrollTo.addEventListener('click', (e) => {
         // 💡👍🏽 the new way of implementing smooth scrolling
         section1.scrollIntoView({
                 behavior: 'smooth',
@@ -115,7 +115,6 @@ btnScrollTo.addEventListener('click', e => {
                 // inline: 'nearest',
         });
 });
-
 
 console.log('----- 🛠 IMPLEMENTING A STICKY NAVIGATION: THE INTERSECTION OBSERVER API-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648993#notes
@@ -163,7 +162,7 @@ const headerObserver = new IntersectionObserver(stickyNav, {
         rootMargin: `-${navHeight}px`, // this adds margin to the header element
         threshold: 0, // when the header section is out of viewport (root) the nav will be sticky
 });
-headerObserver.observe(headerr); // observe the header element
+headerObserver.observe(headerr); // <-- observe the header element
 
 console.log('----- 🛠 REVEALING ELEMENTS ON SCROLL-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648995#notes
@@ -186,7 +185,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
         threshold: 0.15, // <- section will be revealed when the intersection ratio is 15%
 });
 
-allSectionss.forEach(section => {
+allSectionss.forEach((section) => {
         sectionObserver.observe(section);
         section.classList.add('section--hidden');
 });
@@ -199,7 +198,7 @@ const imgTargets = document.querySelectorAll('img[data-src]'); // select all the
 
 // step 2: create a fn that's selects and loads all the images
 const loadImg = (entries, observer) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
                 // ⛔️🎅🏽 Guard clause: if the image is already loaded, do not load it again
                 if (!entry.isIntersecting) return; // if the entry is not intersecting the viewport (root) return
                 // replace the pixilated img with lazy load image then remove the lazy img class that applies the blur effect the image
@@ -222,7 +221,7 @@ const imgObserver = new IntersectionObserver(loadImg, {
 });
 
 // step 4: loop through the images and observe them using the observer method on the imgObserver instanceof
-imgTargets.forEach(img => {
+imgTargets.forEach((img) => {
         imgObserver.observe(img);
 });
 
@@ -243,7 +242,6 @@ const goToSlide = () => {
                 slide.style.transform = `translateX(${-100 * currentSlide + 100 * index}%)`;
         });
 };
-
 
 // next slide fn
 const nextSlide = () => {
@@ -303,9 +301,9 @@ const createDots = () => {
 };
 
 // change the dot to active classlist function
-const activeDot = slide => {
+const activeDot = (slide) => {
         // remove the active class from all the dots
-        document.querySelectorAll('.dots__dot').forEach(dot => {
+        document.querySelectorAll('.dots__dot').forEach((dot) => {
                 dot.classList.remove('dots__dot--active');
         });
         // add the active class to the current dot that was clicked
@@ -313,7 +311,7 @@ const activeDot = slide => {
 };
 
 // 🛠  how to select the dots
-dotContainer.addEventListener('click', e => {
+dotContainer.addEventListener('click', (e) => {
         // e.preventDefault();
         if (e.target.classList.contains('dots__dot')) {
                 console.log(e.target.dataset.slide);

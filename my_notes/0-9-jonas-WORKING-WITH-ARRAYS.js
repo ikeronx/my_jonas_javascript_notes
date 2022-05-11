@@ -251,7 +251,7 @@ const totalDepositsUSD = movements
         .reduce((acc, value) => acc + value, 0);
 console.log(totalDepositsUSD); // 5522
 
-// *** practice ***
+// // 🤔🏋🏻‍♀️ Practice:
 // ... sum of the withdrawals
 const withdrawalsSum = movements.filter((value) => value < 0).reduce((acc, value) => acc + value, 0);
 console.log(withdrawalsSum); // -1180
@@ -405,7 +405,7 @@ const arr12 = [[1, 2, [4, 5, [900, 800], 9], 6], [7, 8, 9], 10];
 const flatArr2 = arr12.flat(3); // <-- pass a number to the flat() method to go a to deeper level of the array to flatten it out
 console.log(flatArr2); // [ 1, 2, 3, 4, 5, 900, 800, 9, 6, 7, 8, 9, 10 ]
 
-// *** PRACTICE ***
+// // 🤔🏋🏻‍♀️ Practice:
 // get all the movements of every single account inside the accounts array and flatten them into a single array and get the overall balance of all the accounts
 const account1 = { owner: 'Keron Williams', movements: [200, 450, -400, 3000, -650, -130, 70, 1300] };
 const account2 = { owner: 'Jessica Davis', movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30] };
@@ -524,7 +524,7 @@ console.log('-----Array.from()-----'); // !! CREATES AN ARRAY !!
 const createNewArr = Array.from({ length: 5 }, (_, index) => index + 1); // the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
 console.log(createNewArr);
 
-// ** practice example **
+// 🤔🏋🏻‍♀️ Practice Example:
 // create an array of 100 dice rolls using the Array.from() method
 console.log(Array.from({ length: 100 }, (_, index) => Math.floor(Math.random(index) * 6) + 1));
 // 🌟 the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
@@ -545,7 +545,7 @@ console.log('----- 💡 How to create an array from a NODELIST using the Array.f
 //         console.log(movementsUI); // [1300, 70, -130, -650, 3000, -400, 450, 200]
 // });
 
-// *** more array method practice ***
+console.log( `--- more practice examples --`);
 const account11 = { owner: 'Keron Williams', movements: [200, 450, -400, 3000, -650, -130, 70, 1300] };
 const account22 = { owner: 'Jessica Davis', movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30] };
 const account33 = { owner: 'Steven Thomas Williams', movements: [200, -200, 340, -300, -20, 50, 400, -460] };

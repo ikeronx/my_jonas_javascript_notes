@@ -33,6 +33,7 @@ createBooking('LH123', undefined, 1000); // {flightNum: 'LH123', numPassengers: 
 
 console.log('-----HOW PASSING ARGUMENTS WORKS: VALUE VS. REFERENCE-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648645#notes
+// https://www.youtube.com/watch?v=-hBJz2PPIVE
 // ❗️❗️ It's important to know how primitives and objects (reference) types works in the context of functions
 const flight = 'LH234';
 const leanna = {
