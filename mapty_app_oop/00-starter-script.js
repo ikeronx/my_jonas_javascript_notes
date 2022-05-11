@@ -224,7 +224,7 @@ class App {
 
                         // Check if data is valid
                         // ... use a Guard Clause to check if the distance, duration and cadence is a number if not return alert message
-                        // ... guard clauses are used to check if a condition is true or false and if it is false, then the code inside the if statement will not be executed
+                        // ... ⛔️🎅🏽 guard clauses are used to check if a condition is true or false and if it is false, then the code inside the if statement will not be executed
                         if (
                                 // !Number.isFinite(distance) ||
                                 // !Number.isFinite(duration) ||
@@ -387,7 +387,7 @@ class App {
                 if (!this.#map) return;
 
                 const workoutEl = e.target.closest('.workout');
-                // guard clause to check if the workoutEl is not null
+                // ⛔️🎅🏽 guard clause to check if the workoutEl is not null
                 if (!workoutEl) return;
 
                 // get the workout id from the workoutEl

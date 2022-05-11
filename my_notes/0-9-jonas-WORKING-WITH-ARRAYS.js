@@ -13,7 +13,7 @@ console.log('-----slice() method-----'); // !! NO MUTATION - returns a new array
 // 👉🏽 the slice method allows us to extract or take out elements from an array/ slice a portion of an array without modifying/mutating the original array
 // 👉🏽 the slice method returns a new array with the extracted items
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the slice() method
 const arr = ['a', 'b', 'c', 'd', 'e'];
 console.log(arr.slice(2)); // ['c', 'd', 'e'] <-- starts extraction at index 2
@@ -36,7 +36,7 @@ console.log('-----splice() method-----'); // !! MUTATION - modifies the original
 // 📌 the second argument is the number of items to remove
 // 📌 the third argument is the items to add to the array
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the splice() method to delete elements from an array
 const arr2 = ['a', 'b', 'c', 'd', 'e'];
 arr2.splice(2); // ['c', 'd', 'e'] <-- deletes elements starting at index 2
@@ -61,7 +61,7 @@ console.log('-----reverse() method-----'); // !! MUTATION
 // 👉🏽 the reverse method reverses the order of the elements in an array
 // 👉🏽 the reverse method modifies/mutates the original array by returning the original with the reversed order of the elements
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the reverse() method
 const arr5 = ['c', 'b', 'a'];
 arr5.reverse();
@@ -72,14 +72,14 @@ console.log('-----concat() method -----'); // !! NO MUTATION - returns a new arr
 // 👉🏽 the concat method does not modify/mutate the original array
 // 👉🏽 the concat method returns a new array with the joined arrays
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the concat() method
 const arr6 = ['a', 'b', 'c'];
 const arr7 = ['d', 'e', 'f'];
 const arr8 = arr6.concat(arr7);
 console.log(arr8.splice(arr8.length, 0, 'g')); // ['a', 'b', 'c', 'd', 'e', 'f'] <-- returns the joined array
 console.log(arr8); // ['a', 'b', 'c', 'd', 'e', 'f', 'g'] <-- returns the joined array with the added element 'g'
-// ... can also use the spread spread operator to join two or more arrays together
+// ...💡 can also use the spread spread operator to join two or more arrays together
 const arr9 = [...arr6, ...arr7];
 console.log(arr9); // ['a', 'b', 'c', 'd', 'e', 'f'] <-- returns the joined array
 
@@ -88,7 +88,7 @@ console.log('-----join() method-----'); // !! NO MUTATION
 // 👉🏽 the join method does not modify/mutate the original array
 // 👉🏽 the join method returns a string
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the join() method
 const arr10 = ['a', 'b', 'c'];
 console.log(arr10.join('+')); // 'a,b,c' <-- returns the joined array as a string
@@ -100,7 +100,7 @@ console.log('-----THE NEW AT METHOD: AT()-----'); // !! NO MUTATION - returns a 
 // 👉🏽 the at method does not modify/mutate the original array
 // 👉🏽 the at method returns the element at the specified index
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the at() method
 const users = ['John', 'Bob', 'Kate'];
 console.log(users.at(1)); // 'Bob' <-- returns the element at index 2
@@ -119,7 +119,7 @@ console.log('-----LOOPING ARRAYS: FOREACH()-----'); // !! NO MUTATION - returns 
 // 👉🏽 the forEach method does not modify/mutate the original array
 
 console.log('----- forEach() -----');
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the forEach() method
 // ... loop over the movements array a print a message for each movement in the array
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -147,7 +147,7 @@ console.log('-----FOREACH() WITH MAPS AND SETS DATA STRUCTURE-----');
 // 👉🏽 the forEach method allows us to loop through maps and sets and perform a function on each element
 
 console.log('-----map data structure-----');
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to loop through the a map and print the key and value of each element
 const currencies = new Map([
         ['USD', 'United States dollar'],
@@ -183,7 +183,7 @@ console.log('-----MAP()-----'); // !! NO MUTATION - returns a new array
 // 👉🏽 the map method does not modify/mutate the original array
 // 👉🏽 the map method returns a new array with the transformed elements
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the map() method
 const eurToUsd = 1.1;
 const movementsUSD = movements.map((value) => Math.round(value * eurToUsd) / 1);
@@ -207,7 +207,7 @@ console.log('-----FILTER()-----'); // !! NO MUTATION - returns a new array
 // 👉🏽 the filter method does not modify/mutate the original array
 // 👉🏽 the filter method returns a new array with the filtered elements
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the filter() method
 // ... filter out the negative movements and return the positive ones (deposit)
 const depositz = movements.filter((value) => value > 0);
@@ -222,7 +222,7 @@ console.log('-----REDUCE()-----'); // !! NO MUTATION - returns a single value
 // 👉🏽 the reduce method allows us to loop through an array and perform a function on each element in the array
 // 👉🏽 the reduce method returns a SINGLE value after iterating through the elements of an array
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the reduce() method
 // ... sum of wall the movements
 const balance = movements.reduce((acc, value) => acc + value, 0);
@@ -237,7 +237,7 @@ console.log('-----CHAINING METHODS-----');
 // 👉🏽 the chaining methods allow us to chain together multiple methods
 // 👉🏽 the chaining methods return the original array
 
-// ** examples **
+// 🤔 Examples:
 // ... sum of the depositsSum to usd dollars
 const eurToUSD = 1.1;
 const totalDepositsUSD = movements
@@ -266,7 +266,7 @@ const calcAverageHumanAge = (dogAges) => {
         const humanAge = dogAges
                 .map((dogAge) => (dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4))
                 .filter((dogAge) => dogAge >= 18)
-                // 💡 !! use the arr variable in reduce method to get the length of the new array to calculate the average
+                // 💡❗️ use the arr variable in reduce method to get the length of the new array to calculate the average
                 .reduce((acc, dogAge, i, arr) => acc + dogAge / arr.length, 0);
         return Math.round(humanAge);
 };
@@ -300,7 +300,7 @@ console.log('-----FIND()-----'); // !! NO MUTATION - returns a single value
 // 👉🏽 the find method does not modify/mutate the original array
 // 👉🏽 the find method returns a single value
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the find() method
 // ... find the first number thats greater than 10
 const nums = [-11, 8, 9, 10, 5, 32, 14, 6];
@@ -349,7 +349,7 @@ console.log('-----FINDINDEX()-----'); // !! NO MUTATION - returns the index of t
 // 👉🏽 the findIndex method returns the a single value which is the index of an element in an array that passes a certain condition
 // 👉🏽 the findIndex method does not modify/mutate the original array
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the findIndex() method
 // ... find the index of the first number thats greater than 10
 const nums2 = [-11, 8, 9, 10, 5, 32, 14, 6];
@@ -363,7 +363,7 @@ console.log('-----some()-----');
 // 👉🏽 the some method checks if at least one element in an array passes a certain condition or not and returns a boolean value
 // 👉🏽 the some method does not modify/mutate the original array
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the some() method
 // ... check if there is a number greater than 10
 const nums3 = [-11, 8, 9, 12, 5, 2, 1, 6];
@@ -379,7 +379,7 @@ console.log('-----every()-----');
 // 👉🏽 the every method checks if every element in an array passes a certain condition or not and returns a boolean value
 // 👉🏽 the every method does not modify/mutate the original array
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the every() method
 // ... check if every number is greater than 10
 const nums4 = [11, 9, 600];
@@ -393,7 +393,7 @@ console.log('-----flat()-----');
 // 👉🏽 the flat() method does not modify/mutate the original arAlfred Chiriacray
 // 👉🏽 the flat() method returns a new array
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the flat() method
 const arr11 = [1, 2, 3, [4, 5, 6], [7, 8, 9]];
 const flatArr = arr11.flat();
@@ -428,7 +428,7 @@ console.log('-----flatMap()-----'); // !! NO MUTATION - returns a boolean
 // 👉🏽 the flatMap() method does not modify/mutate the original array
 // 👉🏽 keep in mind that flatMap() method only go one level deep unlike the flat() method method that can go as deep as you want inside nested arrays
 
-// ** examples **
+// 🤔 Examples:
 // 🛠 how to use the flatMap() method
 // ... rewrite the allAccMovements fm above using the flatMap() method
 // eslint-disable-next-line prettier/prettier
@@ -443,8 +443,8 @@ console.log('-----SORT()-----'); // !! MUTATES THE ORIGINAL ARRAY !!
 // 👉🏽 the sort() method does not return a new array but it modifies the original array
 // 👉🏽 the sort() method is case sensitive
 
-// ** examples: strings**
-// 🛠  how to use the sort() method to sort strings
+// 🤔 Example (strings):
+// 🛠 how to use the sort() method to sort strings
 // ... sort the names alphabetically in ascending order (from a to z)
 const names = ['Keron', 'Jessica', 'Apple', 'Zebra', 'Steven', 'Sarah'];
 console.log(names.sort()); // ['Apple', 'Jessica', 'Keron', 'Sarah', 'Steven', 'Zebra']
@@ -453,7 +453,7 @@ console.log(names.sort()); // ['Apple', 'Jessica', 'Keron', 'Sarah', 'Steven', '
 const names2 = ['Keron', 'Jessica', 'Apple', 'Zebra', 'Steven', 'Sarah'];
 console.log(names2.sort().reverse()); // ['Zebra', 'Steven', 'Sarah', 'Keron', 'Jessica', 'Apple']
 
-// ** examples: numbers**
+// 🤔 Example (numbers):
 // 🛠 how to use the sort() method to sort numbers
 // 📌 pass a compare callback fn '.sort((a, b) => a - b)' to the sort() method to sort numbers in ascending or descending order ~~
 // 🎯 ascending order: a - b (smallest to biggest)
@@ -482,7 +482,7 @@ console.log('-----Array()-----'); // !! CREATES AN ARRAY
 // 👉🏽 the Array() constructor takes in an object as a parameter and creates an array of that object
 // 👉🏽 the Array() constructor takes in a set of parameters and creates an array of those parameters
 
-// *** examples ***
+// 🤔 Examples:
 // 🛠 how to use the Array() constructor to create an array of numbers
 console.log(new Array(10, 20, 30, 40, 50)); // [ 10, 20, 30, 40, 50 ]
 
@@ -517,7 +517,7 @@ console.log('-----Array.from()-----'); // !! CREATES AN ARRAY !!
 //   - a generator
 //   - a function
 
-// *** examples ***
+// 🤔 Examples:
 // 🛠 how tp use the Array.from() method to create an array from scratch
 // ... step 1️⃣: we pass in an object with the length property as the first parameter/argument
 // ... step 2️⃣: we pass in a second parameter which is a map callback function
@@ -530,7 +530,7 @@ console.log(Array.from({ length: 100 }, (_, index) => Math.floor(Math.random(ind
 // 🌟 the underscore is a placeholder for the value of the current item in the array and the index is the index of the current item in the array... we add 1 to the index because the index starts at 0 and we want the index to start at 1 so we add 1 to the index then get each subsequent item (index number) in the array
 
 // eslint-disable-next-line prettier/prettier
-console.log('-----!! How to create an array from a NODELIST using the Array.from() method and pass a callback fn as second argument to get the values of each nodelist element-----'); // !! CREATES AN ARRAY !!
+console.log('----- 💡 How to create an array from a NODELIST using the Array.from() method and pass a callback fn as second argument to get the values of each nodelist element-----'); // !! CREATES AN ARRAY !!
 // create an array from the movements values from the Bankist UI using the Array.from() method then use the map call back functions to get the values from the array and display them
 // step 1️⃣: pass in the node list to the Array.from() method by selecting each el using document.querySelectorAll()
 // step 2️⃣: use the map() method to loop through the nobelist to get the values from the array and display them in the console or alert window
@@ -553,7 +553,7 @@ const account44 = { owner: 'Sarah Smith', movements: [430, 1000, 700, 50, 90] };
 
 const accountz = [account11, account22, account33, account44];
 
-// ** Practice Example 1:
+// 🤔🏋🏻‍♀️ Practice Example 1:
 // - calculate the bank's deposits overall balance (sum of all the deposits)
 const bankDepositSum = accountz
         .flatMap((acc) => acc.movements)
@@ -561,7 +561,7 @@ const bankDepositSum = accountz
         .reduce((sum, curr) => sum + curr, 0);
 console.log(bankDepositSum); // 25180
 
-// ** Practice Example 2: 
+// 🤔🏋🏻‍♀️ Practice Example 2: 
 // - check how how many deposits the bank has that are at least 1000
 const numDeposits1000 = accountz
         .flatMap(acc => acc.movements)
@@ -581,7 +581,7 @@ let a = 10;
 console.log(a++); // 10 <-- the postfix operator ++ returns the value of the variable before it is incremented by 1
 console.log(++a); // 11 <-- the prefix ++ operator adds 1 to the value of the variable and then returns the new value... same as writing a + 1
 
-// ** Practice Example 2: 
+// 🤔🏋🏻‍♀️ Practice Example 2: 
 // - use the reduce method to create a brand new object which contains the sums of all the banks deposits and withdrawals
 const { deposits, withdrawals } = accountz.flatMap(acc => acc.movements)
         .reduce((sums, cur) => {
@@ -602,7 +602,7 @@ const [ depositzz, withdrawalzz ] = accountz.flatMap(acc => acc.movements)
         
 console.log(depositzz, withdrawalzz); // 25180, -7340
 
-// ** Practice Example 3:
+// 🤔🏋🏻‍♀️ Practice Example 3:
 // - create a fn that transforms str to title case: this is a nice title - This Is a Nice Tittle
 const convertTitleCase = (title) => {
         const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1)
@@ -617,7 +617,7 @@ console.log(convertTitleCase('this is a nice title')); // This Is a Nice Tittle
 console.log(convertTitleCase('this is a LONG title')); // This Is a Long Title
 console.log(convertTitleCase('and here is another title with an EXAMPLE')); // This Is a Long Title
 
-// ** Practice Example 4 
+// 🤔🏋🏻‍♀️ Practice Example 4:
 // how to get user's information using the reduce method
 // reference: https://www.youtube.com/watch?v=kC3AasLEuBA
 // const ownerObj = accountz.reduce((acc, user) => {
@@ -629,9 +629,6 @@ console.log(convertTitleCase('and here is another title with an EXAMPLE')); // T
 // console.log(ownerObj['Keron Williams']) // { owner: 'Keron Williams', movements: [ 200, 450, -400, 3000, -650, -130, 70, 1300 ] }
 // console.log(ownerObj['Jessica Davis']) // undefined
 
-// ** Practice Example 4 
-// how to get user's information using the reduce method
-
 // 💡 separate callbacks.. dry principle .. use when the call function condition is the same in each fn~
 // const deposit = (mov) => mov > 0;
 // console.log(movements.every(deposit)); // true
@@ -640,7 +637,8 @@ console.log(convertTitleCase('and here is another title with an EXAMPLE')); // T
 // console.log(movements.find(deposit)); // 200
 // console.log(movements.map(deposit)); // [ 200, 450, 1300 ]
 
-
+console.log('-----CODING CHALLENGE #8 167-----');
+console.log('-----working with arrays #4-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648793#questions/13468474
 
 const dogs = [
@@ -667,11 +665,7 @@ const dogs = [
 
 ];
 
-console.log('-----CODING CHALLENGE #8 167-----');
-console.log('-----working with arrays #4-----');
-// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648793#questions/13468474
-
-// Task 1: Your tasks: 1. Loop over the 'dogs' array containing dog objects, and foreach dog, calculate the recommended food portion and add it to the object as a new property. Do not create a new array, simply loop over the array. Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
+// Task 1: Loop over the 'dogs' array containing dog objects, and foreach dog, calculate the recommended food portion and add it to the object as a new property. Do not create a new array, simply loop over the array. Forumla: recommendedFood = weight ** 0.75 * 28. (The result is in grams of food, and the weight needs to be in kg)
 dogs.forEach(dog => dog.recFood = Math.trunc(dog.weight ** 0.75 * 28));
 console.log(dogs); // [ { weight: 22, curFood: 250, owners: [ 'Alice', 'Bob' ], recfood: 528 }, { weight: 8, curFood: 200, owners: [ 'Matilda' ], recfood: 280 }, { weight: 13, curFood: 275, owners: [ 'Sarah', 'John' ], recfood: 515 }, { weight: 32, curFood: 340, owners: [ 'Michael' ], recfood: 740 } ]
 

@@ -349,8 +349,8 @@ const tabsContent = document.querySelectorAll('.operations__content');
 tabsContainer.addEventListener('click', function (e) {
         e.preventDefault();
         const clicked = e.target.closest('.operations__tab'); // returns the element that was clicked on
-        // !! A Guard clause: if the clicked element is not a tab, do nothing
-        if (!clicked) return; // if the clicked element is not a tab, return
+        // ⛔️🎅🏽 A Guard clause: if the clicked element is not a tab, do nothing
+        if (!clicked) return; // if the clicked element is not a tab, return (don't do anything)
 
         // remove the 'active' class from all the tabs and add it to the clicked tab
         tabs.forEach(tab => tab.classList.remove('operations__tab--active')); // remove the active class from all the tabs

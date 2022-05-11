@@ -46,19 +46,18 @@ console.log('----OPTIONAL CHAINING (?.)----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648565#announcements
 // with optional chaining you check if a certain property is present in an object, if not, it will return undefined
 
-// 🛠 how to check if openingHours and fri properties are present in the restaurant2 object
 // 👎🏽 the old way
+// 🛠 how to check if openingHours and fri properties are present in the restaurant2 object
 if (restaurant.openingHours && restaurant.openingHours.fri) {
         console.log(restaurant.openingHours.fri.open); // 9:00am
 }
 
 // 👍🏽 the new way with optional chaining (?.)
-
 // 🛠 how use optional chaining on object properties
 // ... if the property (fri) before the question mark is not present in the object, it will return undefined
 console.log(restaurant.openingHours?.fri?.open); // undefined
 
-// // ******* REAL WORLD EXAMPLES*******
+// 🤔🌍 Real World Examples:
 // ... loop through the weekdays array and check if the property (open) is present in the restaurant.openingHours object
 for (const day of weekdays) {
         const open = restaurant.openingHours[day]?.open ?? 'closed';
@@ -72,7 +71,6 @@ console.log(restaurant.pizza?.() ?? 'pizza method is not present'); // undefine 
 
 // 🛠 how to use optional chaining on arrays
 // ... if the property (0) before the question mark is not present in the array, it will return undefined.. use nullish coalescing operator ?? to return a default value
-
 const users = [
         {
                 name: 'Willis',

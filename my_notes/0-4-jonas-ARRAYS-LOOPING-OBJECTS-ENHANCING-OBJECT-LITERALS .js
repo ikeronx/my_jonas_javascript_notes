@@ -42,8 +42,7 @@ const restaurant = {
         },
 };
 
-console.log('----LOOPING ARRAYS----');
-// ******* Looping arrays ********
+console.log('----LOOPING ARRAYS OLD WAY----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648563#announcements
 
 const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
@@ -56,17 +55,10 @@ for (const item of menu.entries()) {
         console.log(`Menu Item ${item[0] + 1}: ${item[1]}`);
 }
 
-// - how to destructure the array using for of loop
+// 🛠 how to destructure the array using for of loop
 for (const [index, item] of menu.entries()) console.table(`${index}: ${item}`);
 
-// // - how to loop through arrays using forEach
-// menu.forEach((item, index) => console.log(`${index}: ${item}`));
-// // - how to loop through arrays using map
-// const menuItems = menu.map((item, index) => `${index}: ${item}`);
-// console.log(menuItems); // [ '0: Focaccia 🥐', '1: Bruschetta 🥪', '2: Garlic Bread 🥖', '3: Caprese Salad 🥙', '4: Pizza 🍕', '5: Pasta 🍝', '6: Risotto 🍲 ' ]
-
 console.log('----LOOPING OBJECTS----');
-// ******* Looping objects ********
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648577#announcements
 
 // 🛠 how to loop through objects using for of loop
@@ -108,8 +100,8 @@ for (const [key, { open, close }] of openingHoursEntries) {
 
 console.log('----ENHANCING OBJECT LITERALS ----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648565#announcements
-// * 1. first es6 enhanced object literal
-// 🛠  how to add a object literal inside another object literal by using ES6 enhanced object literals
+// 📌 1. first es6 enhanced object literal
+// 🛠 how to add a object literal inside another object literal by using ES6 enhanced object literals
 const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const openingHours = {
         [weekdays[4]]: {
@@ -133,17 +125,13 @@ const restaurant2 = {
         categories: ['Italian 🇮🇹', 'Pizzeria 🇺🇸', 'Vegetarian 🥗', 'Organic 🍳'],
         starterMenu: ['Focaccia 🥐', 'Bruschetta 🥪', 'Garlic Bread 🥖', 'Caprese Salad 🥙'],
         mainMenu: ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 '],
-        // * 1. ES6 enhanced object literal
-        openingHours,
-        // 1. 🛠 how to make a function return an array and destruct the result into different variables.... receive values from the object's arrays (mainMenu, etc) using indexes
+        openingHours, // <-- 📌 1. ES6 enhanced object literal: add the entire openinghours object to the restaurant2 object
         order(categoryIndex, starterIndex, MainIndex) {
                 return [this.categories[categoryIndex], this.starterMenu[starterIndex], this.mainMenu[MainIndex]];
         },
-        // 2.🛠   how to make a function accept multiple arguments then use the spread operator to pass those arguments...
         orderPizza(...ingredients) {
                 console.log(`Here's your delicious Pizza with ${ingredients.join(', ')}`);
         },
-        // 3. 🛠  how to use rest operator as an argument which returns an array
         orderFood(mainMenuIndex, mainIngredient, ...otherIngredients) {
                 console.log(
                         `Here's your delicious ${
@@ -154,7 +142,7 @@ const restaurant2 = {
 };
 console.log(restaurant2);
 
-// 2. second es6 enhanced object literal
+// 📌 2. second es6 enhanced object literal
 // 🛠  how to compute properties names dynamically
 const weekdays2 = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const hours2 = {

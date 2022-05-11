@@ -34,7 +34,7 @@ for (const item of orderSet) {
         console.log(item); // Pasta 🍝, Risotto 🍲 , Tacos 🌮
 }
 
-// ***** Real World Examples *****
+// 🤔🌍 Real World Example:
 // ... the main use case of sets is remove duplicate values from an array by using the set constructor and spread operator to pass in an array / create a new array
 const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
 const staffSet = [...new Set(staff)];
@@ -55,7 +55,7 @@ restaurantMap.set('name', 'Classico Italiano'); // <-- then fill the map using t
 restaurantMap.set(1, 'Firenze, Italy');
 restaurantMap.set(2, 'Lisbon, Portugal');
 
-// ... you can chain the set method to add key/value pairs to the restaurant map
+// ... 💡 you can chain the set method to add key/value pairs to the restaurant map
 console.log(
         restaurantMap
                 .set('categories', ['Italian 🇮🇹', 'Pizzeria 🇺🇸', 'Vegetarian 🥗', 'Organic 🍳'])
@@ -82,7 +82,7 @@ console.log(restaurantMap.size); // 8 <-- get the size of the map
 // 🛠 how to remove all key/value pairs from a map
 // restaurantMap.clear(); // 0 <-- remove all key/value pairs from the map
 
-// **** REAL WORLD EXAMPLES ****
+// 🤔🌍 Real World Example:
 // 🛠 how to use the map booleans keys to get results from a map
 // ... if result is equal to true then the map key boolean will return true automatically otherwise false if the result is false automatically
 const currentTime = 25;
@@ -119,7 +119,7 @@ const question = new Map([
 ]);
 console.log(question);
 
-// **** REAL WORLD EXAMPLES ****
+// 🤔🌍 Real World Example:
 // 🛠 how loop through a map array
 // quiz app
 console.log(question.get('question')); // What is the best programming language in the world?
@@ -165,25 +165,27 @@ console.log(hoursMaps); // Map(3) {'thu' => Map(2) {'open' => 12, 'close' => 22}
 
 console.log('-----WHICH DATA STRUCTURE TO USE-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648597#announcements
-//* ** FOUR DATA STRUCTURES ****
-// 👷🏽‍♂️🧱 Arrays:
+
+// 📌 FOUR DATA STRUCTURES 👷🏽‍♂️🧱
+
+// 1️⃣ ARRAYS:
 // 👉🏽 Use when you need ordered list of values (might contain duplicates)
 // 👉🏽 Use when you need to manipulate data
 
-// 👷🏽‍♂️🧱 Objects:
+// 2️⃣ OBJECTS:
 // 👉🏽 More “traditional” key/value store (“abused” objects)
 // 👉🏽 Easier to write and access values with . and []
 // 👉🏽 Use when you need to include functions (methods)
 // 👉🏽 Use when working with JSON (can convert to map)
 
-// 👷🏽‍♂️🧱 Maps:
+// 3️⃣ MAPS:
 // 👉🏽 Better performance
 // 👉🏽 Keys can have any data type Easy to iterate
 // 👉🏽 Easy to compute size
 // 👉🏽 Use when you simply need to map key to values
 // 👉🏽 Use when you need keys that are not strings
 
-// 👷🏽‍♂️🧱 Sets:
+// 4️⃣ Sets:
 // 👉🏽 Use when you need to work with unique values
 // 👉🏽 Use when high-performance is really important
 // 👉🏽 Use to remove duplicates from arrays

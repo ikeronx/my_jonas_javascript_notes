@@ -49,7 +49,7 @@ const account2 = {
 
 const accounts = [account1, account2];
 
-// floating point numbers
+// 📌 floating point numbers
 console.log(23 === 23.0); // true <-- all numbers in JS are represented internally as floating point numbers. So basically always as decimals.
 
 // Base 10 - 0 to 9
@@ -58,26 +58,26 @@ console.log(0.1 + 0.2); // numbers are stored inn 64 base 2 format. So that mean
 console.log(0.1 + 0.2 === 0.3); // false <-- should be true but because they're stored in binary format
 
 console.log('-----how to convert a string to a number-----');
-// ❗ - how to convert string to number
+// 🌟 📌 Number()
 console.log(Number('23')); // 23
 console.log(+'23.5'); // 23.5 <-- + sign is used to convert to number
 
-// parseInt: is used to convert a string to an integer
+// 🌟 📌 parseInt: is used to convert a string to an integer
 console.log(Number.parseInt('30px', 10)); // 30 <-- parseInt() converts a string to an integer and removes letters and other characters from the string !! please the string needs to start with a number for it to work... second argument is the radix. Base 10 is the base of the number system.
 console.log(Number.parseInt('ee30px', 10)); // NaN <-- parseInt() wont work with a string that doesn't start with a number
 console.log(parseFloat('23.5')); // 23.5 <-- parseFloat() converts to floating point number
 
-// ❗ parseFloat: is used to convert a string to a floating point number
+// 🌟 parseFloat: is used to convert a string to a floating point number
 console.log(Number(parseFloat('23.5rem'))); // 23.5 <-- parseFloat() converts to floating point number and removes letters and other characters from the string
 
 console.log('-----how to check if a value is a number-----');
-// isNAN: is used to check if a value is a number (means is not a number)
+// 📌 isNAN: is used to check if a value is a number (means is not a number)
 console.log(Number.isNaN(23)); // false
 console.log(Number.isNaN('23')); // false
 console.log(Number.isNaN(+'23X')); // true
 console.log(Number.isNaN(23 / 0)); // false <-- any number deviled by 0 gives us infinity which is not a number.. infinity is not a number
 
-// ❗ isFinite: is the better way to check if a value is a number
+// 🌟📌 isFinite: is the better way to check if a value is a number
 console.log(Number.isFinite(23)); // true
 console.log(Number.isFinite('23')); // false
 console.log(Number.isFinite('23')); // false

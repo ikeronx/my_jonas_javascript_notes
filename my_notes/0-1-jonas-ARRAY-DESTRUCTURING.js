@@ -13,11 +13,11 @@ const restaurant = {
         starterMenu: ['Focaccia 🥐', 'Bruschetta 🥪', 'Garlic Bread 🥖', 'Caprese Salad 🥙'],
         mainMenu: ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 '],
 
-        // 1. 🛠 how to make a function return an array and destruct the result into different variables.... receive values from the object's arrays (mainMenu, etc) using indexes
+        // 🤔🌍 1. 🛠 how to make a function return an array and destruct the result into different variables.... receive values from the object's arrays (mainMenu, etc) using indexes
         order(categoryIndex, starterIndex, MainIndex) {
                 return [this.categories[categoryIndex], this.starterMenu[starterIndex], this.mainMenu[MainIndex]];
         },
-        // 2. 🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments...
+        // 🤔🌍 2. 🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments...
         orderPizza(...ingredients) {
                 console.log(`Here's your delicious Pizza with ${ingredients.join(', ')}`);
         },
@@ -25,7 +25,7 @@ const restaurant = {
         // orderPasta(ing1, ing2, ing3) {
         //         console.log(`Here's your delicious Pasta with ${ing1}, ${ing2}, and ${ing3}`);
         // },
-        // 3. 🛠 how to use rest operator as an argument which returns an array
+        // 🤔🌍 3. 🛠 how to use rest operator as an argument which returns an array
         orderFood(mainMenuIndex, mainIngredient, ...otherIngredients) {
                 console.log(
                         `Here's your delicious ${
@@ -37,20 +37,17 @@ const restaurant = {
         },
 };
 
-console.log('----REAL WORLD EXAMPLES----');
-// ******* real world example ********
+// 🤔🌍 Real World Examples:
 // 1. 🛠 how to make a function return an array and destruct the result into different variables....  - receive values from the object's from arrays (mainMenu, etc) using indexes and object method
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648521#announcements 10:55 timestamp
 const [foodCategory, starter, mainCourse] = restaurant.order(0, 2, 0);
 console.log(`Food Category: ${foodCategory} Starter Menu: ${starter} Main Menu: ${mainCourse}`); // Food Category: Italian 🇮🇹 Starter Menu: Garlic Bread 🥖 Main Menu: Pizza 🍕
 
-// ******* real world example ********
 // 2. 🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments.  receive values using spread operator
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648535#announcements 12:30 timestamp
 const pastaIngredients = ['Tomato 🍅', 'Cheese 🧀', 'Chilli 🌶'];
 restaurant.orderPizza(...pastaIngredients); // Here's your delicious Pasta with 🍅, 🍝,🍗
 
-// ******* real world example ********
 // 3. 🛠 how to use rest operator as an argument which returns an array
 restaurant.orderFood(0, ' 🍇', '🍆', '🍄'); // Here's your delicious Pizza with 🍇 and 🍆 and 🍄
 const keronOrder = { ...restaurant.orderFood(1, 'Tomato 🍅', 'Broccoli 🥦', 'Shrimp 🍤') }; // Here's your delicious Pasta with Tomato 🍅 and Broccoli 🥦
@@ -100,7 +97,7 @@ console.log(newMenu); // ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 ', 'Focaccia
 const menu2 = [...restaurant.mainMenu, ...restaurant.starterMenu];
 console.log(menu2); // ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 ', 'Bruschetta 🥪', 'Garlic Bread 🥖', 'Caprese Salad 🥙', 'Focaccia 🥐', 'Cake 🍰']
 
-// - Iterables: arrays, strings, maps, sets, not objects
+// 📌 Iterables: arrays, strings, maps, sets, not objects
 const str = 'Keron';
 const letters = [...str, ' ', 'S.'];
 console.log(letters); // ['K', 'e', 'r', 'o', 'n' ' ', 'S.']
@@ -108,17 +105,17 @@ console.log(...str); // 'K', 'e', 'r', 'o', 'n'
 // console.log(`${...str} Williams`); // cannot use the spread_operator in template literal cause it does expect multiple values separated by a comma
 
 console.log('----THE REST PATTERNS AND PARAMETERS (...) ARRAYS----');
-// ****** REST  OPERATOR (ARRAYS) *********
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648543#announcements
 // ❗REST OPERATOR, is on the LEFT hand side of the assignment operator, the rest operator is used to collect the remaining arguments into an array
 // ❗rest element should always be the last element and there can only be one rest element in an array
+
 const [z, y, ...others] = [1, 2, 3, 4, 5];
 console.log(z, y, others); // 1 2 [3, 4, 5]
 
 const [pizza, , risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
 console.log(pizza, risotto, otherFood); // Pizza 🍕 Risotto 🍲 [ 'Focaccia 🥐', 'Bruschetta 🥪', 'Garlic Bread 🥖', 'Caprese Salad 🥙' ]
 
-// ****** REST  OPERATOR (FUNCTIONS) *********
+console.log('---- Rest Operator (as a function parameter)----');
 // https://www.javascripttutorial.net/es6/javascript-rest-parameters/
 // 🛠 how to use rest operator as an argument which returns an array
 const add = function (...numbers) {
@@ -151,9 +148,9 @@ console.log(rest); // [ '🥑', '🍌' ]
 
 console.log('----DIFFERENCE BETWEEN SPREAD OPERATOR AND REST OPERATOR----');
 // ******* DIFFERENCE BETWEEN SPREAD OPERATOR AND REST OPERATOR********
-// 👉 Spread operator serves to copy all the elements into a new array
-// 👉 Spread is used on the Right hand side of the assignment operator
-// 👉 Rest operator is used to collect the remaining arguments into an array
-// 👉 Rest operator is on the LEFT hand side of the assignment operator
-// 👉 Rest element should always be the last element and there can only be one rest element in an array
+// 👉🏽 Spread operator serves to copy all the elements into a new array
+// 👉🏽 Spread is used on the Right hand side of the assignment operator
+// 👉🏽 Rest operator is used to collect the remaining arguments into an array
+// 👉🏽 Rest operator is on the LEFT hand side of the assignment operator
+// 👉🏽 Rest element should always be the last element and there can only be one rest element in an array
 
