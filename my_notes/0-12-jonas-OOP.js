@@ -27,7 +27,7 @@ console.log('-----CONSTRUCTOR FUNCTIONS AND THE NEW OPERATOR-----');
 // 👉🏽 the new operator returns the new object
 
 // *** example ***
-// 🛠 how to create a constructor function
+// 👷🏽‍♂️🛠 how to create a constructor function
 const Person = function (firstName, birthYear) {
         // instance properties
         this.firstName = firstName;
@@ -38,23 +38,23 @@ const keron = new Person('keron', 1991); // <-- new operator
 console.log(keron); // { firstName: 'keron', birthYear: 1991 }
 
 // behind the scenes four steps happen when we call the constructor function with the new keyword:
-// 1. a new empty object {} is created
-// 2. function is called, this keyword = {}
-// 3. {} linked to prototype
-// 4. function automatically returns the {}
+// 1️⃣ a new empty object {} is created
+// 2️⃣ function is called, this keyword = {}
+// 3️⃣ {} linked to prototype
+// 4️⃣ function automatically returns the {}
 
 // 💡 we can use the constructor function to create as many different objects as we want
 const leanna = new Person('Leanna', 1990);
 console.log(leanna); // { firstName: 'Leanna', birthYear: 1990 }
 
-// 🛠 how to test if an object is the instance of a constructor function/class
+// 👷🏽‍♂️🛠 how to test if an object is the instance of a constructor function/class
 console.log(leanna instanceof Person); // true
 
 console.log('-----PROTOTYPES-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649045#notes
 // 💡 all the objects crated from the constructor function will have access to all the prototype property and methods
 
-// 🛠 how to add methods to the prototype of a constructor function
+// 👷🏽‍♂️🛠 how to add methods to the prototype of a constructor function
 Person.prototype.calcAge = function () {
         return new Date().getFullYear() - this.birthYear;
 };
@@ -64,16 +64,16 @@ Person.prototype.greeter = function () {
 console.log(keron.calcAge()); // 29
 console.log(leanna.greeter()); // Hello Leanna
 
-// 🛠 how to check the prototype of an object (the object that is linked to the prototype property)
+// 👷🏽‍♂️🛠 how to check the prototype of an object (the object that is linked to the prototype property)
 console.log(keron.__proto__); // Person { calcAge: [Function: calcAge], greeter: [Function: greeter] }
 console.log(leanna.__proto__ === Person.prototype); // true
 console.log(Person.prototype.isPrototypeOf(keron)); // true
 
-// 🛠 how to add properties to the prototype of a constructor function
+// 👷🏽‍♂️🛠 how to add properties to the prototype of a constructor function
 Person.prototype.species = 'Homo Sapiens';
 console.log(keron.species, leanna.species); // Homo Sapiens Homo Sapiens
 
-// 🛠 how to check if object has its own property (constructor function)
+// 👷🏽‍♂️🛠 how to check if object has its own property (constructor function)
 console.log(keron.hasOwnProperty('firstName')); // true
 console.log(keron.hasOwnProperty('species')); // false
 
@@ -93,7 +93,7 @@ console.log(num.__proto__); // Array []
 console.log(num.__proto__ === Array.prototype); // true
 console.log(num.__proto__.__proto__); // Object {} <-- the Array.prototype object is linked to the Object.prototype object
 
-// 🛠 how to create our own methods on the array prototype object (not good practice)https://www.udemy.com/course/react-tutorial-and-projects-course/learn/lecture/23639058?start=15#overview
+// 👷🏽‍♂️🛠 how to create our own methods on the array prototype object (not good practice)https://www.udemy.com/course/react-tutorial-and-projects-course/learn/lecture/23639058?start=15#overview
 Array.prototype.double = function () {
         return this.map((num) => num * 2);
 };
@@ -158,9 +158,9 @@ const account = {
                 this.movements.push(mov);
         },
 };
-// 🛠 how to get the value of the latest movement
+// 👷🏽‍♂️🛠 how to get the value of the latest movement
 console.log(account.latest); // 300
-// 🛠 how to set the value of the latest movement
+// 👷🏽‍♂️🛠 how to set the value of the latest movement
 account.latest = 500;
 console.log(account.movements); // [200, 530, 120, 300, 500]
 
@@ -200,16 +200,16 @@ class UserCl {
         }
 
         // 📌 STATIC METHODS
-        // 🛠 how to create static methods on the class
+        // 👷🏽‍♂️🛠 how to create static methods on the class
         static hey() {
                 console.log('hey');
         }
 }
-// 🛠 how to get value using the getter method
+// 👷🏽‍♂️🛠 how to get value using the getter method
 const eric = new UserCl('Eric', 1990); // <-- instance of the class
 console.log(eric.age); // 32
 
-// 🛠 how to set value using setter method
+// 👷🏽‍♂️🛠 how to set value using setter method
 eric.fullName = 'Eric Smith';
 console.log(eric); // UserCl { _fullName: 'Eric Smith', birthYear: 1990 }
 
@@ -217,7 +217,7 @@ const kaydel = new UserCl('Kaydel Gordon', 1990);
 console.log(kaydel); // Kaydel Gordon
 console.log(kaydel.fullName); // Kaydel Gordon
 
-//  🛠 how to call static method
+//  👷🏽‍♂️🛠 how to call static method
 UserCl.hey(); // hey
 
 console.log('-----STATIC METHODS-----');
@@ -229,7 +229,7 @@ console.log('-----STATIC METHODS-----');
 Array.from(document.querySelectorAll('h1')); // .from() is a static method that converts a node list to an array
 Number.parseFloat('1.2'); // 1.2 // .parseFloat() is a static method that converts a string to a number
 
-// 🛠 how to create static methods (add it to a constructor)
+// 👷🏽‍♂️🛠 how to create static methods (add it to a constructor)
 Person.hey = function () {
         console.log('hey there ');
         console.log(this); // Person {}
@@ -242,7 +242,7 @@ console.log('-----OBJECT.CREATE-----');
 // 💡 we can use Object.create to manually set the prototype of an object to any other object we want
 
 // ** example of object.create **
-// 🛠 how to create an object that will  be the prototype of another object
+// 👷🏽‍♂️🛠 how to create an object that will  be the prototype of another object
 
 // step 1️⃣: create the object that will be the prototype
 const PersonProto = {
@@ -268,7 +268,7 @@ console.log('-----INHERITANCE BETWEEN "CLASSES": CONSTRUCTOR FUNCTIONS-----');
 // 💡 we can use the keyword "super" to call the constructor of the parent class
 
 // ** EXAMPLES **
-// 🛠 how to inherit properties and methods from one constructor function to another
+// 👷🏽‍♂️🛠 how to inherit properties and methods from one constructor function to another
 // step 1️⃣: create the parent constructor function
 const PersonParentConstructor = function (firstName, birthYear) {
         this.firstName = firstName;
@@ -305,7 +305,7 @@ yoyo.calcAge(); // 28
 console.log('-----INHERITANCE BETWEEN "CLASSES": ES6 CLASSES-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649089#questions
 
-// 🛠 how to inherit properties and methods from one class to another
+// 👷🏽‍♂️🛠 how to inherit properties and methods from one class to another
 // STEP 1️⃣: create the parent class
 class PersonParentClass {
         constructor(firstName, birthYear) {
@@ -401,7 +401,7 @@ class Account {
                 console.log(`Thank you for opening an account with us ${this.name}`);
         }
 
-        /// 🛠 how to access and return private properties
+        /// 👷🏽‍♂️🛠 how to access and return private properties
         // public interface (methods)
         getMovements() {
                 return this._movements;
@@ -416,7 +416,7 @@ class Account {
         }
 
         withdraws(val) {
-                // we can call other methods inside another method
+                // 💡 we can call other methods inside another method
                 this.deposits(-val);
         }
 
@@ -468,17 +468,17 @@ console.log('-----ENCAPSULATION: PROTECTED PROPERTIES AND METHODS-----');
 // 👉🏽 The rest of the methods and properties are public and can be accessed from outside the class // exposed as a public interface
 
 // 📌 TWO BIG REASONS WHY NEED ENCAPSULATION AND DATA PRIVACY:
-// 1. to prevent code from outside of a class to accidentally manipulate or data inside the class.
-// 2. when we expose only a small interface so a small API consisting only of a few public methods then we can change all the other internal methods with more confidence
+// 1️⃣ to prevent code from outside of a class to accidentally manipulate or data inside the class.
+// 2️⃣ when we expose only a small interface so a small API consisting only of a few public methods then we can change all the other internal methods with more confidence
 
-// ** EXAMPLE 1:
+// 🤔 Example:
 class Account2 {
         constructor(name, age, pin) {
                 this.name = name;
                 this.age = age;
 
                 // 🎯 protected properties (encapsulation)... properties that are not supposed to be touch outside the class
-                // 🛠  how to create private properties by using the convention _ + property name
+                // 👷🏽‍♂️🛠  how to create private properties by using the convention _ + property name
                 this._pin = pin;
                 this._movements = [];
                 this.locale = navigator.language;
@@ -487,14 +487,14 @@ class Account2 {
         }
 
         // 🎯 public interface (methods)
-        /// 🛠  how to access and return private properties
+        /// 👷🏽‍♂️🛠  how to access and return private properties
         getMovements() {
                 return this._movements;
         }
 
         requestLoan(val) {
-                // 🛠 how to access the private methods (_approveLoan) from the public interface (requestLoan)
-                // 🛠 how to call other methods inside a certain method
+                // 👷🏽‍♂️🛠 how to access the private methods (_approveLoan) from the public interface (requestLoan)
+                // 👷🏽‍♂️🛠 how to call other methods inside a certain method
                 if (this._approveLoan(val)) {
                         this.deposits(val);
                         console.log(`Your loan has been approved`);
@@ -506,7 +506,7 @@ class Account2 {
         }
 
         // 🎯 private interface (methods)
-        // 🛠 how to create private methods by using the convention _ + method name
+        // 👷🏽‍♂️🛠 how to create private methods by using the convention _ + method name
         // eslint-disable-next-line class-methods-use-this
         // eslint-disable-next-line class-methods-use-this
         _approveLoan(_val) {
@@ -552,7 +552,7 @@ class Account3 {
         // 🎯 Public methods ()
         // Public interface
         getMovements() {
-                return this.#movements; // 💡🛠 how to access the private field
+                return this.#movements; // 💡👷🏽‍♂️🛠 how to access the private field
         }
 
         deposit(val) {
@@ -561,7 +561,7 @@ class Account3 {
         }
 
         withdraw(val) {
-                this.deposit(-val); // 💡🛠  how to call other methods (deposit() method) inside a certain method
+                this.deposit(-val); // 💡👷🏽‍♂️🛠  how to call other methods (deposit() method) inside a certain method
                 return this; // return this to be able to chain methods
         }
 
@@ -575,7 +575,7 @@ class Account3 {
         }
 
         getAccPin() {
-                return this.#pin; // 💡🛠 how to access the private field
+                return this.#pin; // 💡👷🏽‍♂️🛠 how to access the private field
         }
 
         static helper() {

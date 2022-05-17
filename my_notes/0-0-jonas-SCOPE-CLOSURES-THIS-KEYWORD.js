@@ -1,11 +1,16 @@
 /* eslint-disable strict */
 // eslint-disable-next-line lines-around-directive
 'use strict';
-// EXECUTION CONTEXT - https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648479#notes
-// - https://ui.dev/ultimate-guide-to-execution-contexts-hoisting-scopes-and-closures-in-javascript/?ck_subscriber_id=1368032892
+console.log(`---- EXECUTION CONTEXT ----`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648479#notes
+// https://ui.dev/ultimate-guide-to-execution-contexts-hoisting-scopes-and-closures-in-javascript/?ck_subscriber_id=1368032892
 
-// /////////////////////////////////////
-// CLOSURES - https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648487#notes
+
+console.log(`---- CLOSURES ----`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648487#notes
+// https://javascript.plainenglish.io/what-is-closures-how-it-works-in-javascript-step-by-step-real-life-example-eb4a97c7120d
+// https://www.youtube.com/watch?v=aHrvi2zTlaU&list=PL1PqvM2UQiMoGNTaxFMSK2cih633lpFKP&index=10
+
 // function year(birthYear) {
 //         function calcAge() {
 //                 const age = 2037 - birthYear
@@ -46,11 +51,10 @@ function calcAge(birthYear) {
 const firstName = 'Jonas'
 calcAge(1991)
 */
+console.log(`---- HOISTING ----`);
+// HOISTING Practice is to declare a variable before using it
 
-/// ////////////////////////////////////
-// hOISTING Practice is to declare a variable before using it
-
-// Hoisting with variables
+// 📌 Hoisting with variables
 /* console.log(city) // undefined
 console.log(age) // uncaught reference error because city is not defined
 console.log(lastName) // uncaught reference error because
@@ -59,7 +63,7 @@ var city = 'New York'
 const age = 20
 const lastName = 'james'
 
-// hoisting with functions
+// 📌 Hoisting with functions
 console.log(textMessage()) // uncaught reference error because textmessage /is not defined
 console.log(location()) // uncaught reference error because location is not defined
 console.log(greeting()) // hello
@@ -75,26 +79,26 @@ function greeting() {
 }
 */
 
-// /////////////////////////////////////
-// THIS KEYWORD - https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648505#notes
+console.log(`---- THIS KEYWORD ----`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648505#notes
 /*
 console.log(this) // window
 
-// - this keyword inside a function
+// 📌 this keyword inside a function
 const calcAge2 = function (birthYear) {
         console.log(2037 - birthYear) // 46
         console.log(this) // undefined <- regular  point to undefined in strict mode
 }
 calcAge2(1991)
 
-// - this keyword inside an arrow function
+// 📌 this keyword inside an arrow function
 const calcArrowAge2 = birthYear => {
         console.log(2037 - birthYear) // 46
         console.log(this) // window <- arrow function point to the lexical scope it in which is the window
 }
 calcArrowAge2(1991)
 
-// - this keyword inside a method
+// 📌 this keyword inside a method
 const person = {
         name: 'steven',
         city: 'New York',
@@ -107,7 +111,7 @@ const person = {
 }
 person.calcAge()
 
-// - prototypal inheritance using this keyword inside objects
+// 📌 prototypal inheritance using this keyword inside objects
 const keron = {
         year: 1991,
 }
@@ -139,11 +143,11 @@ let myArrowFunction2 = () => {
 myArrowFunction2() // window
 
 
-// NEVER USE THE 'this' keyword INSIDE ARROW FUCNTION USE IT IN REGULAR FUNCTION;
+// ❗️ NEVER USE THE 'this' keyword INSIDE AN ARROW FUNCTION USE IT IN REGULAR FUNCTION;
 */
 
-// /////////////////////////////////////
-// ARROW FUNCTION  Vs. REGULAR FUNCTION - https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648507#notes
+console.log(`---- ARROW FUNCTION  Vs. REGULAR FUNCTION ----`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648507#notes
 
 const jonas = {
         firstName: 'Jonas',
@@ -186,16 +190,17 @@ addExpr(1, 2); // 3
 
 const addArrow = (a, b) => a + b;
 
-/// ////////////////////////////////////
-// Primitives vs. Objects in Practice - https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648513#notes
 
-// Primitive types
+console.log(`---- PRIMITIVES VS. OBJECTS IN PRACTICE  ----`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648513#notes
+
+// 📌 Primitive types
 let lastName = 'Williams';
 const oldLastName = lastName;
 lastName = 'Davis';
 console.log(lastName, oldLastName); // Davis Williams
 
-// Reference types
+// 📌 Reference types
 const jessica = {
         firstName: 'Jessica',
         lastName: 'Williams',

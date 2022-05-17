@@ -24,16 +24,19 @@ const createBooking = (
         bookings.push(booking);
 };
 createBooking('LH123'); // {flightNum: 'LH123', numPassengers: 1, price: 199}
-// 🛠 how to overwrite default parameters by passing argument when you invoke the function
+
+// 👷🏽‍♂️🛠 how to overwrite default parameters by passing argument when you invoke the function
 createBooking('LH123', 2, 800); // {flightNum: 'LH123', numPassengers: 7, price: 0}
 createBooking('LH123', 2); // {flightNum: 'LH123', numPassengers: 2, price: 398}
 createBooking('LH123', 5); // {flightNum: 'LH123', numPassengers: 5, price: 995}
-// 🛠 how to skip an argument - you add undefined in its place when you invoke the function.
+
+// 👷🏽‍♂️🛠 how to skip an argument - you add undefined in its place when you invoke the function.
 createBooking('LH123', undefined, 1000); // {flightNum: 'LH123', numPassengers: 1, price: 1000}
 
 console.log('-----HOW PASSING ARGUMENTS WORKS: VALUE VS. REFERENCE-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648645#notes
 // https://www.youtube.com/watch?v=-hBJz2PPIVE
+
 // ❗️❗️ It's important to know how primitives and objects (reference) types works in the context of functions
 const flight = 'LH234';
 const leanna = {
@@ -92,7 +95,7 @@ const upperFirstWord = (str) => {
         return [firstWord.toUpperCase(), ...others].join(' ');
 };
 
-// 🛠 how to pass a function to another function
+// 👷🏽‍♂️🛠 how to pass a function to another function
 // ... step 1️⃣: set the str and the upperFirstWord fn to the higher oder transformer function as parameters
 const transformer = (str, fn) => {
         console.log(`The original string: ${str}`); // The original string: JAVASCRIPT is the best!
@@ -133,7 +136,7 @@ greeterHey('Leanna'); // Hey Leanna
 greeterWadUp('Willis'); // Wad Up! Willis
 greet('Hello sexy')('Terry'); // Hello sexy Terry
 
-// 🛠  how to write is an arrow function...
+// 👷🏽‍♂️🛠  how to write is an arrow function...
 const greetArr = (greeting) => (name) => console.log(`${greeting} ${name}`);
 
 const greeterBye = greetArr('Byeeeee!!');
@@ -151,7 +154,7 @@ console.log('-----FUNCTION METHODS: CALL() APPLY()-----');
 // 🎯 2. you pass the arguments to the apply() method as an array-like object - say.apply(cat, ['What does a cat say?']);
 
 // 🤔 Examples:
-// 🛠 how to use the call() method
+// 👷🏽‍♂️🛠 how to use the call() method
 const lufthansa = {
         airline: 'Lufthansa',
         iataCode: 'LH',
@@ -214,7 +217,7 @@ bookSwiss(45, 'Robyn Fenty'); // Robyn Fenty booked a seat on Swiss Air Lines fl
 bookLufthansa(456, 'Kaydel Gordon'); // Kaydel Gordon booked a seat on Lufthansa flight LH456
 bookEurowings(245, 'Kayum Stapleton'); // Kayum Stapleton booked a seat on Eurowings flight EW245
 
-// 🛠 how to preset the arguments when you use the bind() method:
+// 👷🏽‍♂️🛠 how to preset the arguments when you use the bind() method:
 // ... preset the book 'flightNum' value/argument
 const bookSwiss249 = book.bind(swiss, 249);
 bookSwiss249('Robyn Fenty'); // Robyn Fenty booked a seat on Swiss Air Lines flight LX249
@@ -222,7 +225,7 @@ bookSwiss249('Jerry'); // Jerry booked a seat on Swiss Air Lines flight LX249
 
 console.log('-----other situations when we can use the function methods-----');
 // 📌🤔 Binding with Event listeners example:
-// 🛠 how to use the bind() method with event listeners:
+// 👷🏽‍♂️🛠 how to use the bind() method with event listeners:
 // ... step 1️⃣. add a new properties to the lufthansa object
 lufthansa.planes = 300;
 lufthansa.buyPlane = function () {
@@ -241,7 +244,7 @@ buyPlaneBtn.addEventListener('click', lufthansa.buyPlane.bind(lufthansa)); // Lu
 // 👉🏽 partial application is a function that takes a function as an argument and returns a function
 
 // 🤔 Examples:
-// 🛠  how to use the partial application method:
+// 👷🏽‍♂️🛠  how to use the partial application method:
 // ... step 1️⃣. create a fn general fn that we'll bind to
 const addTax = (rate, value) => value + value * rate;
 console.log(addTax(0.1, 200)); // 123.23
@@ -302,7 +305,7 @@ console.log('-----IIFE-----');
 // 📌 IIFE is only executed once when the page loads
 // 📌 best use-case is with async await functions and it's a way to avoid the 'this' keyword confusion when using the 'this' keyword inside the IIFE
 
-// 🛠 how  to use the IIFE:
+// 👷🏽‍♂️🛠 how  to use the IIFE:
 // 🤔 Examples:
 (function () {
         console.log('This will never run again');
@@ -322,10 +325,12 @@ console.log('-----IIFE-----');
 
 console.log('-----CLOSURES-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648683#overview
+// https://javascript.plainenglish.io/what-is-closures-how-it-works-in-javascript-step-by-step-real-life-example-eb4a97c7120d
+// https://www.youtube.com/watch?v=aHrvi2zTlaU&list=PL1PqvM2UQiMoGNTaxFMSK2cih633lpFKP&index=10
 // 👉🏽 closures make the function remember and access the variables from the scope in which it was created even if that execution context is gone
 // 📌 closures are useful when you want to access a variable from a function that has already returned
 
-// 🛠  how to use closures:
+// 👷🏽‍♂️🛠  how to use closures:
 // 🤔 Example:
 const secureBooking = function () {
         let passenger = 0;

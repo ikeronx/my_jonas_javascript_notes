@@ -30,24 +30,24 @@ console.log('-----SELECTING, CREATING, AND DELETING ELEMENTS-----');
 
 // 📌 SELECTING ELEMENTS
 console.log('----- document.-----');
-// 🛠 how to select the entire document of a webpage
+// 👷🏽‍♂️🛠 how to select the entire document of a webpage
 console.log(document.documentElement); // <html>...
-// 🛠 how to select the head and body of a webpage
+// 👷🏽‍♂️🛠 how to select the head and body of a webpage
 console.log(document.body); // <body>
 console.log(document.head); // <head>
 
 console.log('----- querySelector() querySelectorAll()-----');
-// 🛠 how to select a specific element in the DOM
+// 👷🏽‍♂️🛠 how to select a specific element in the DOM
 const header = document.querySelector('.header');
 const allSections = document.querySelectorAll('.section');
 console.log(allSections); // NodeList(3) [div.section, div.section, div.section]
 
 console.log('----- getElementById()-----');
-// 🛠 how to get element by id
+// 👷🏽‍♂️🛠 how to get element by id
 console.log(document.getElementById('section--1')); // <div class="section" id="section--1">
 
 console.log('----- getElementByClassName()-----');
-// 🛠 how to get element by class name
+// 👷🏽‍♂️🛠 how to get element by class name
 console.log(document.getElementsByClassName('btn')); // HTMLCollection(2) [div.btn, div.btn]
 
 console.log('----- getElementsByTagName()-----'); // HTMLCollection
@@ -59,12 +59,12 @@ const allButtonsNodeList = Array.from(allButtons);
 console.log(allButtonsNodeList); // [button, button, button]
 
 console.log('----- getElementByClassName()-----');
-// 🛠 how to get element by class name
+// 👷🏽‍♂️🛠 how to get element by class name
 console.log(document.getElementsByClassName('btn')); // HTMLCollection(2) [div.btn, div.btn]
 
 // 📌 CREATING AND INSERTING ELEMENTS
 console.log('-----createElement()-----');
-// 🛠 how to create elements
+// 👷🏽‍♂️🛠 how to create elements
 const message = document.createElement('div');
 message.classList.add('cookie-message');
 // message.textContent = 'We use cookies fro improved functionality and analytics';
@@ -72,25 +72,25 @@ message.innerHTML = `We use cookies for improved functionality and analytics
 <button class="btn btn--close-cookie">Got it!</button>`;
 
 console.log('-----insertAdjacentHTML()-----');
-// 🛠 how to insert elements
+// 👷🏽‍♂️🛠 how to insert elements
 // 🎯 insertAdjacentHTML() inserts the HTML string at the specified position.
 // 🎯 insertAdjacentHTML() can be used to insert HTML elements, text, or raw HTML at the specified position.
 // .insertAdjacentHTML()
 
 console.log('-----prepend() append()-----');
-// 🛠 how to add elements to the DOM
+// 👷🏽‍♂️🛠 how to add elements to the DOM
 // 💡 we can use prepend or append to insert or move elements in the DOM unless we clone them first.
 // ❗️❗️ please note that elements can only be at one place at a time in the DOM
 // ... header.prepend(message); // prepend() inserts a new node before the first child of this element.
 header.append(message); // append() inserts a new node after the last child of this element.
 
 console.log('-----cloneNode()-----');
-// 🛠 how to insert multiple copies of the same element.. we clone the element first and then append it to the DOM
+// 👷🏽‍♂️🛠 how to insert multiple copies of the same element.. we clone the element first and then append it to the DOM
 // ... const clone = message.cloneNode(true);
 // ... header.append(clone);
 
 console.log('-----before() after()-----');
-// 🛠 how to use before() and after() to insert elements before or after another element in the DOM.
+// 👷🏽‍♂️🛠 how to use before() and after() to insert elements before or after another element in the DOM.
 // ... header.before(message); // before() inserts a new node before the header element. (sibling element)
 // ... header.after(message); // after() inserts a new node after the header element. (sibling element)
 
@@ -103,7 +103,7 @@ document.querySelector('.btn--close-cookie').addEventListener('click', function 
 console.log('-----IMPLEMENTING SMOOTH SCROLLING-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648955#questions/16505196
 
-// 🛠  how implement smooth scrolling
+// 👷🏽‍♂️🛠  how implement smooth scrolling
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
@@ -116,7 +116,7 @@ btnScrollTo.addEventListener('click', (e) => {
         });
 });
 
-console.log('----- 🛠 IMPLEMENTING A STICKY NAVIGATION: THE INTERSECTION OBSERVER API-----');
+console.log('----- 👷🏽‍♂️🛠 IMPLEMENTING A STICKY NAVIGATION: THE INTERSECTION OBSERVER API-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648993#notes
 
 /*
@@ -136,14 +136,14 @@ const obsOptions = {
         threshold: [0, 0.20], // when the intersection ratio is a 0, the nav will be visible/sticky in the viewport until it reaches the threshold of 0.2
 };
 
-// - how to use the intersection observer API
+// 👷🏽‍♂️🛠 how to use the intersection observer API
 // Step 1: create an observer
 const observer = new IntersectionObserver(obsCallback, obsOptions); // !! whenever the section1 intersect is intersecting the viewport (root) at 10% the callback fn will execute hence the nav will be sticky
 // Step 2: use the 'observer' observe method to observe a certain target element
 observer.observe(section1);
 */
 
-// 🛠 how to implement a sticky navigation using the intersection observer API
+// 👷🏽‍♂️🛠 how to implement a sticky navigation using the intersection observer API
 const headerr = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
 
@@ -164,10 +164,10 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 headerObserver.observe(headerr); // <-- observe the header element
 
-console.log('----- 🛠 REVEALING ELEMENTS ON SCROLL-----');
+console.log('----- 👷🏽‍♂️🛠 REVEALING ELEMENTS ON SCROLL-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648995#notes
 
-// 🛠 how to reveal sections on scroll
+// 👷🏽‍♂️🛠 how to reveal sections on scroll
 const allSectionss = document.querySelectorAll('.section'); // get all the sections
 
 const revealSection = (entries, observer) => {
@@ -190,13 +190,13 @@ allSectionss.forEach((section) => {
         section.classList.add('section--hidden');
 });
 
-console.log('----- 🛠 LAZY LOADING IMAGES-----');
+console.log('----- 👷🏽‍♂️🛠 LAZY LOADING IMAGES-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648999#notes
 
-// step 1: select all the images
+// step 1️⃣: select all the images
 const imgTargets = document.querySelectorAll('img[data-src]'); // select all the images with data-src attribute
 
-// step 2: create a fn that's selects and loads all the images
+// step 2️⃣: create a fn that's selects and loads all the images
 const loadImg = (entries, observer) => {
         entries.forEach((entry) => {
                 // ⛔️🎅🏽 Guard clause: if the image is already loaded, do not load it again
@@ -213,22 +213,22 @@ const loadImg = (entries, observer) => {
         });
 };
 
-///  step 3: create a new instance of the observer api and pass the loadImg fn to the intersection observer API to the load images and set when the viewport potions (root, null, threshold, rootmargin)
+///  step 4️3️⃣: create a new instance of the 'IntersectionObserver()' built in api class and pass the loadImg fn as the first argument to the intersection observer API to the load images and set second argument - the viewport options (root, null, threshold, rootmargin) so the images display when they intersecting the viewport (root)
 const imgObserver = new IntersectionObserver(loadImg, {
         root: null,
         threshold: 0,
         rootMargin: '200px', // will load the image earlier so the user doesn't see the blurry image
 });
 
-// step 4: loop through the images and observe them using the observer method on the imgObserver instanceof
+// step 4️⃣: loop through the images array and observe them using the 'observer()' method on the imgObserver instance variable
 imgTargets.forEach((img) => {
         imgObserver.observe(img);
 });
 
-console.log('----- 🛠  BUILDING A SLIDER COMPONENT: PART 1 -----');
+console.log('----- 👷🏽‍♂️🛠  BUILDING A SLIDER COMPONENT: PART 1 -----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649001#notes
 
-//  🛠 how to implement a slider component
+//  👷🏽‍♂️🛠 how to implement a slider component
 // global variables
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
@@ -267,10 +267,10 @@ btnRight.addEventListener('click', nextSlide);
 // goes to previous slide in the slider when the left arrow is clicked
 btnLeft.addEventListener('click', prevSlide);
 
-console.log('----- 🛠  BUILDING A SLIDER COMPONENT: PART 2 -----');
+console.log('----- 👷🏽‍♂️🛠  BUILDING A SLIDER COMPONENT: PART 2 -----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649003#notes
 
-// 🛠 how to switch slides with the keyboard arrows keys (left and right)
+// 👷🏽‍♂️🛠 how to switch slides with the keyboard arrows keys (left and right)
 document.addEventListener('keydown', function (e) {
         e.preventDefault();
         console.log(e.key); // shows the key that was pressed
@@ -292,7 +292,7 @@ document.addEventListener('keydown', function (e) {
 // dots navigation for the slider
 const dotContainer = document.querySelector('.dots');
 
-// 🛠 how to create the dots for each slide
+// 👷🏽‍♂️🛠 how to create the dots for each slide
 const createDots = () => {
         // create a dot for each slide
         slides.forEach((_, i) => {
@@ -310,7 +310,7 @@ const activeDot = (slide) => {
         document.querySelector(`.dots__dot[data-slide="${slide}"]`).classList.add('dots__dot--active');
 };
 
-// 🛠  how to select the dots
+// 👷🏽‍♂️🛠  how to select the dots
 dotContainer.addEventListener('click', (e) => {
         // e.preventDefault();
         if (e.target.classList.contains('dots__dot')) {

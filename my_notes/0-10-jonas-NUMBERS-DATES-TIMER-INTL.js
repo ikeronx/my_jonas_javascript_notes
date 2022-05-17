@@ -84,7 +84,7 @@ console.log(Number.isFinite('23')); // false
 console.log(Number.isFinite(+'23X')); // false
 console.log(Number.isFinite(23 / 0)); // false <-- infinity is not a number
 
-// isInteger: is used to check if a value is an integer
+// 📌 isInteger: is used to check if a value is an integer
 console.log(Number.isInteger(23)); // true
 console.log(Number.isInteger(23.6)); // false
 
@@ -92,27 +92,27 @@ console.log('-----MATH AND ROUNDING-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648879#announcements
 
 console.log('-----how to get square root or cubic root of a number-----');
-// - how to find the square root of a number
+// 👷🏽‍♂️🛠 how to find the square root of a number
 console.log(Math.sqrt(25)); // 5
 console.log(25 ** (1 / 2)); // 5 <-- ** is the power operator
 console.log(25 ** 0.5); // 5
 
-// - how to calculate the cubic root of a number
+// 👷🏽‍♂️🛠 how to calculate the cubic root of a number
 console.log(Math.cbrt(27)); // 3
 console.log(27 ** (1 / 3)); // 3
 
 console.log('-----how to get the max or min value of a set of numbers-----');
-// - how to get the max value
+// 👷🏽‍♂️🛠 how to get the max value
 console.log(Math.max(1, 2, 3, 4, 5)); // 5
 const nums = [1, 2, 3, 4, 5];
 console.log(Math.max(...nums)); // 5
 
-// - how to get the min value
+// 👷🏽‍♂️🛠 how to get the min value
 console.log(Math.min(1, 2, 3, 4, 5)); // 1
 const nums2 = [-16, 0, 1, 2, 3, 4, 5];
 console.log(Math.min(...nums2)); // -16
 
-// *** practice ***
+// 🏋🏻‍♀️ Practice:
 // find the max and min number in the array **
 const nums3 = [-80, 0, -6, '100px', 2, 3, 4, 5]; // min and max can convert strings with just integers and floats but not with letters like in this case
 const numberz = nums3.map((num) => Number.parseFloat(num));
@@ -120,12 +120,12 @@ console.log(Math.max(...numberz)); // 100
 console.log(Math.min(...numberz)); // -80
 
 console.log('-----how to get random numbers-----');
-// - how to get a random number
+// 👷🏽‍♂️🛠 how to get a random number
 // step 1: use Math.random() to get a random number between 0 and 1 'Math.random()'
 // step 2: multiply the random number by the max number 'Math.random() * any number' and then use Math.floor() to remove decimals and round down the integer
 console.log(Math.floor(Math.random() * 6) + 1); // 3 <- get the number between 0 and 5 (inclusive)...add + 1 to get the number between 1 and 6 (inclusive) because the mathFloor() method removes decimals part and the + 1 is to get the number between 1 and 6 (inclusive)
 
-// ** practice example 1: create 10 random dice roles
+// 🤔🏋🏻‍♀️ Practice example 1: create 10 random dice roles
 console.log(
         // create a empty array with the length of 10
         Array(10)
@@ -134,7 +134,7 @@ console.log(
                 .map(() => Math.floor(Math.random() * 6) + 1)
 ); // [1, 2, 3, 4, 5, 6, 1, 2, 3, 4]
 
-// !! practice example 2:
+// 🤔🏋🏻‍♀️ Practice example 2:
 // use the 'Math.trunc(Math.random() * any number)'...
 // to always generate random integers between two values.
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min;
@@ -158,7 +158,7 @@ Now, let's follow the execution for min=5 and max=10, so for randomInt(5, 10);:
 */
 
 console.log('-----how to round integers-----');
-// - how to round integers
+// 👷🏽‍♂️🛠 how to round integers
 console.log(Math.trunc(23.6)); // 23 <-- removes decimal part
 
 console.log(Math.round(15.3)); // 15 <-- rounds to the nearest integer
@@ -170,12 +170,12 @@ console.log(Math.ceil(23.4)); // 24 <-- always rounds up
 console.log(Math.floor(23.8)); // 24 <-- always rounds down
 console.log(Math.floor(23.4)); // 24 <-- always rounds down
 
-// ~~ difference between Math.trunc() and Math.floor() ~~
+// ~~ 💡 difference between Math.trunc() and Math.floor() ~~
 console.log(Math.trunc(-23.4)); // -23 <-- removes decimal part
 console.log(Math.floor(-23.4)); // -24 <-- removes the decimal part and rounds it down
 
 console.log('-----how to round decimals-----');
-// - how to round decimals
+// 👷🏽‍♂️🛠  how to round decimals
 console.log((2.7).toFixed(0)); // 3 !! <-- toFixed() converts a number to a string when it rounds to
 console.log((2.7).toFixed(3)); // 2.700 <-- rounds to the nearest integer and adds zeros to the end base how many decimal places you add to the  toFixed() method for example toFixed(3) will round to 3 decimal places
 console.log((2.435).toFixed(2)); // 2.44
@@ -199,7 +199,7 @@ console.log(8 / 3); // 2 = 3 * 2 + 2
 console.log(10 % 2); // 0
 console.log(10 / 2); // 5 = 2 * 2 * 2 + 2 * 2 + 1
 
-// ** practice examples  ***
+// 🤔🏋🏻‍♀️ Practice example:
 // how to use the reminder operator to change the color of the rows by the index that divisible 2 and 3 in the movements table
 /*
 labelBalance.addEventListener('click', function () {
@@ -220,12 +220,12 @@ console.log(isEven(133)); // false
 console.log('-----NUMERIC SEPARATORS-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/29433416#questions/16145200
 
-// underscores can use as numeric separator in js to separate numbers
+// 💡 underscores can use as numeric separator in js to separate numbers
 console.log(1000000); // 1000000
 console.log(1_000_000); // 1000000
 console.log(15_00); // 1500
 
-// ~~ please note that you can only use underscores between numbers..not at beginning, end, next to decimal points etc~~
+// ~~ ❗️ please note that you can only use underscores between numbers..not at beginning, end, next to decimal points etc~~
 // examples.. not valid.. throws an error:
 // const PI = _3._1415_
 
@@ -241,7 +241,7 @@ console.log(2 ** 53 - 1); // 9007199254740991
 // console.log(Number(MAX_SAFE_INTEGER)); // 9007199254740991
 
 // ~~~ BIGINT is a new predictive type that was added tp js to store number as large as possible ~~~
-// - how to use BIGINT in js... add 'n' to the end of the number
+// 👷🏽‍♂️🛠 how to use BIGINT in js... add 'n' to the end of the number
 console.log(900719925474099187897987979797n); // 9007199254740991n
 console.log(BigInt(90071992));
 
@@ -249,7 +249,7 @@ console.log(BigInt(90071992));
 console.log(100000n + 100000n); // 200000n;
 console.log(87871327371291327n * 29312830918903890109182n); // BigInt(87871327371291327n) * BigInt(29312830918903890109182n);
 
-// can't mixed bigInt numbers with regular numbers..wont compute
+// 👎🏽 can't mixed bigInt numbers with regular numbers..wont compute
 // console.log(100 + 100n); // TypeError: Cannot convert a BigInt to a number
 // console.log(Math.sqrt(16n));
 // .. use bigInt() to convert to the number to a  bigInt number then compute
@@ -257,7 +257,7 @@ const huge = 20289830237283728378237n;
 const num = 23;
 console.log(huge * BigInt(num));
 
-// Exceptions
+// 👍🏽 Exceptions
 console.log(20n > 15); // true
 console.log(20n === 20); // false
 console.log(typeof 20n); // 'bigint'
@@ -270,13 +270,13 @@ console.log(10 / 3); // 3.3333333333333335
 console.log(`------ CREATING DATES ------`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648895#questions/16145200
 
-console.log(`------ 4 different ways we can create a date ------`);
+console.log(`------ 📌 4 different ways we can create a date ------`);
 
-// 1: can create a new date by using the new Date() method
+// 1️⃣: can create a new date by using the new Date() method
 const now = new Date(); // current date
 console.log(now); // hu Feb 17 2022 13:19:23 GMT-0500 (Eastern Standard Time) <- shows current date and time
 
-// 2: can pass a string into the date constructor fn a date string to create a new date
+// 2️⃣: can pass a string into the date constructor fn a date string to create a new date
 console.log(new Date('Thu Feb 17 2022 13:22:53')); // Thu Feb 17 2020 00:00:00 GMT-0500 (Eastern Standard Time)
 console.log(new Date('Dec  25, 2015')); // Thu Feb 17 2020 00:00:00 GMT-0500 (Eastern Standard Time)
 
@@ -284,17 +284,17 @@ console.log(new Date('Dec  25, 2015')); // Thu Feb 17 2020 00:00:00 GMT-0500 (Ea
 console.log(new Date(account1.movementsDates[0])); // Mon Nov 18 2019 16:31:17 GMT-0500 (Eastern Standard Time)
 console.log(account1.movementsDates.map((date) => new Date(date))); // Mon Nov 18 2019 16:31:17 GMT-0500 (Eastern Standard Time)
 
-// 3: can pass into the date constructor fn the year, month, day, hour, minute, second, millisecond to create a new date
+// 3️⃣: can pass into the date constructor fn the year, month, day, hour, minute, second, millisecond to create a new date
 console.log(new Date(2037, 0, 1, 5, 30, 12)); // Wed Jan 01 2037 05:30:12
 console.log(new Date(2020, 10, 31)); // ue Dec 01 2020 00:00:00 <-- js auto corrects the date to the next day
 
-// 4: can pass into the date constructor fn the amount of milliseconds since the epoch (1/1/1970) - epoch is the first day of the year 1970 since the beginning of the UNIX time system (1/1/1970) to create a new date
+// 4️⃣: can pass into the date constructor fn the amount of milliseconds since the epoch (1/1/1970) - epoch is the first day of the year 1970 since the beginning of the UNIX time system (1/1/1970) to create a new date
 console.log(new Date(0)); // Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)
 // ... create a date that's three days after epoch (unix) time
 console.log(new Date(3 * 24 * 60 * 60 * 1000)); // Thu Jan 03 1970 00:00:00 GMT-0500 (Eastern Standard Time)
 // Timestamp of day number 3: 259200000
 
-console.log(`------ how we can use methods to set or get components of a date ------`);
+console.log(`------ 👷🏽‍♂️🛠 how we can use methods to set or get components of a date ------`);
 const future = new Date(2037, 10, 19, 15, 23);
 console.log(future.getFullYear()); // 2037
 console.log(future.getMonth()); // 10
@@ -316,11 +316,11 @@ console.log(future.getTime()); // 1578180800000 <-- getTime is used to get the a
 // console.log(future.getTimezoneOffset()); // -300 <-- getTimezoneOffset is used to get the timezone offset in minutes
 
 // eslint-disable-next-line prettier/prettier
-console.log(`------ how you can use the timestamp to create a new date either by passing in the timestamp or by using the valueOf method ------`);
+console.log(`------ 👷🏽‍♂️🛠 how you can use the timestamp to create a new date either by passing in the timestamp or by using the valueOf method ------`);
 console.log(new Date(future.valueOf())); // Wed Nov 19 2037 15:23:00 GMT-0500 (Eastern Standard Time)
 console.log(new Date(2142274980000)); // Wed Nov 19 2037 15:23:00 GMT-0500 (Eastern Standard Time)
 
-console.log(`------ how to get current timestamp for the date right now ------`);
+console.log(`------ 👷🏽‍♂️🛠 how to get current timestamp for the date right now ------`);
 console.log(Date.now()); // 1574690981796 <-- the number of milliseconds since the epoch
 
 console.log(`------ set version of the methods: to change year, month, date, hour etc------`);
@@ -334,8 +334,8 @@ console.log(currDate.toLocaleDateString()); // 2020
 console.log(`------ OPERATIONS WITH DATES ------`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648905#questions/16497420
 
-console.log(`------ how to calculate dates ------`);
-// - how to create a fn that takes in two dates and returns the days passed between these two dates
+console.log(`------ 👷🏽‍♂️🛠 how to calculate dates ------`);
+// 👷🏽‍♂️🛠 how to create a fn that takes in two dates and returns the days passed between these two dates
 const calcDaysPassed = (date1, date2) => Math.round(Math.abs(date2 - date1)) / (1000 * 60 * 60 * 24); // <- convert the days to numbers
 
 // eslint-disable-next-line prettier/prettier
@@ -347,9 +347,9 @@ console.log(Days1); // 3
 
 console.log(`------ INTERNATIONALIZING DATES (INTL) ------`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648909#questions/16505196
-// * Internationalization API allows us to format strings in different languages and countries (e.g. French, Spanish, etc)
-// * Intl is a global object that provides access to the internationalization API and the formatting API for dates and numbers (e.g. currency, percent, etc) using the Intl.DateTimeFormat and Intl.NumberFormat objects respectively
-// * Intl.DateTimeFormat is used to format dates and Intl.NumberFormat is used to format numbers
+// 👉🏼 Internationalization API allows us to format strings in different languages and countries (e.g. French, Spanish, etc)
+// 👉🏼 Intl is a global object that provides access to the internationalization API and the formatting API for dates and numbers (e.g. currency, percent, etc) using the Intl.DateTimeFormat and Intl.NumberFormat objects respectively
+// 👉🏼 Intl.DateTimeFormat is used to format dates and Intl.NumberFormat is used to format numbers
 
 console.log(`------ how to use the Intl() method to format dates  ------`);
 const todayDate = new Date();
@@ -366,7 +366,7 @@ console.log(new Intl.DateTimeFormat(locale, options).format(todayDate)); // 2/18
 // console.log(new Intl.DateTimeFormat('ar-SA').format(todayDate)); // ٢٠/١٨/٢٢٢٢
 // console.log(new Intl.DateTimeFormat('ko-KR').format(todayDate)); // 2022년 2월 18일
 
-console.log(`------ how to use the Intl() method to format numbers  ------`);
+console.log(`------ 👷🏽‍♂️🛠 how to use the Intl() method to format numbers  ------`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648915#questions/16505196
 const numm = 38884762.23;
 const options2 = {
@@ -384,19 +384,19 @@ console.log(navigator.language, new Intl.NumberFormat(navigator.language, option
 console.log(`------ TIMERS: SETTIMEOUT() AND SETINTERVAL() ------`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648919#questions/16505196
 // https://www.youtube.com/watch?v=RXWAZ0C_mds&t=93s
-// * setTimeout() and setInterval() are used to set a timer that will run a function after a certain amount of time
-// * setTimeout() is used to set a timer that will run a function after a certain amount of time - the set timeout timer runs just once, and then stops
-// * setInterval() is used to set a timer that will run a function every certain amount of time - the set interval timer runs repeatedly until the timer is stopped
+// 👉🏼 setTimeout() and setInterval() are used to set a timer that will run a function after a certain amount of time
+// 👉🏼 setTimeout() is used to set a timer that will run a function after a certain amount of time - the set timeout timer runs just once, and then stops
+// 👉🏼 setInterval() is used to set a timer that will run a function every certain amount of time - the set interval timer runs repeatedly until the timer is stopped
 
 console.log(`------ setTimeOut ------`);
-// *** examples ***
-// - how to use setTimeout() to run a function after a certain amount of time
+// 🤔 Example:
+// 👷🏽‍♂️🛠 how to use setTimeout() to run a function after a certain amount of time
 setTimeout(() => {
         console.log('Here is your pizza 🍕'); // <-- this code will run 5 seconds later
 }, 5000);
 console.log('waiting...');
 
-// - how to pass in a argument to the setTimeout() function
+// 👷🏽‍♂️🛠 how to pass in a argument to the setTimeout() function
 const ingredients = ['Olives 🫒', 'chilli 🌶'];
 const pizzaTimer = setTimeout(
         (ing1, ing2) => {
@@ -405,10 +405,10 @@ const pizzaTimer = setTimeout(
         5000,
         ...ingredients // <- her we pass the ingredients array as arguments to the setTimeout() function here
 );
-// .....can use clearTimeout() to delete the timer
+// ... 💡 can use clearTimeout() to delete the timer
 if (ingredients.includes('chilli 🌶')) clearTimeout(pizzaTimer); // <-- the setTimeout pizzaTimer fn won't run if the 'chilli 🌶' ingredient is included in the ingredients array
 
-// - how to use setInterval() to run a function every certain amount of time
+// 👷🏽‍♂️🛠 how to use setInterval() to run a function every certain amount of time
 // setInterval
 setInterval(() => {
         const noww = new Date();

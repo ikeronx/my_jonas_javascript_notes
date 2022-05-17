@@ -54,7 +54,7 @@ console.log(null || undefined || 0 || '' || false || "what's up" || 23); // what
 const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
 console.log(guest1); // 10
 // 💡 shorter way to write this example using the OR operator
-// 🛠 how to use the OR operator to set a default value for a variable if it is not defined in the object
+// 👷🏽‍♂️🛠 how to use the OR operator to set a default value for a variable if it is not defined in the object
 const guest2 = restaurant.numGuests || 15;
 console.log(guest2); // 15
 
@@ -96,7 +96,7 @@ const rest2 = {
 // 🤔 Examples:
 console.log('--- ||= ---');
 // OR assignment operator
-// 🛠  how to add a new property to an object using the logical assignment operator
+// 👷🏽‍♂️🛠  how to add a new property to an object using the logical assignment operator
 rest1.owner ||= 'Will Smith';
 rest2.owner ||= 'James Gordon';
 console.log(rest1.owner); // Keron Williams
@@ -111,7 +111,7 @@ console.log(rest2.numGuests); // 0
 
 console.log('--- &&= ---');
 // AND assignment operator
-// 🛠 how to replace a property value in an object using the logical assignment operator &&=
+// 👷🏽‍♂️🛠 how to replace a property value in an object using the logical assignment operator &&=
 // rest1.owner = rest1.owner && 'Anonymous1';
 rest1.owner &&= 'Anonymous1';
 console.log(rest1.owner); // Anonymous1

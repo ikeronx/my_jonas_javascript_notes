@@ -13,19 +13,19 @@ const restaurant = {
         starterMenu: ['Focaccia 🥐', 'Bruschetta 🥪', 'Garlic Bread 🥖', 'Caprese Salad 🥙'],
         mainMenu: ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 '],
 
-        // 🤔🌍 1. 🛠 how to make a function return an array and destruct the result into different variables.... receive values from the object's arrays (mainMenu, etc) using indexes
+        // 🤔🌍 1. 👷🏽‍♂️🛠 how to make a function return an array and destruct the result into different variables.... receive values from the object's arrays (mainMenu, etc) using indexes
         order(categoryIndex, starterIndex, MainIndex) {
                 return [this.categories[categoryIndex], this.starterMenu[starterIndex], this.mainMenu[MainIndex]];
         },
-        // 🤔🌍 2. 🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments...
+        // 🤔🌍 2. 👷🏽‍♂️🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments...
         orderPizza(...ingredients) {
                 console.log(`Here's your delicious Pizza with ${ingredients.join(', ')}`);
         },
-        // 2. 🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments...  receive values using spread operator
+        // 2. 👷🏽‍♂️🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments...  receive values using spread operator
         // orderPasta(ing1, ing2, ing3) {
         //         console.log(`Here's your delicious Pasta with ${ing1}, ${ing2}, and ${ing3}`);
         // },
-        // 🤔🌍 3. 🛠 how to use rest operator as an argument which returns an array
+        // 🤔🌍 3. 👷🏽‍♂️🛠 how to use rest operator as an argument which returns an array
         orderFood(mainMenuIndex, mainIngredient, ...otherIngredients) {
                 console.log(
                         `Here's your delicious ${
@@ -38,38 +38,38 @@ const restaurant = {
 };
 
 // 🤔🌍 Real World Examples:
-// 1. 🛠 how to make a function return an array and destruct the result into different variables....  - receive values from the object's from arrays (mainMenu, etc) using indexes and object method
+// 1. 👷🏽‍♂️🛠 how to make a function return an array and destruct the result into different variables....  - receive values from the object's from arrays (mainMenu, etc) using indexes and object method
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648521#announcements 10:55 timestamp
 const [foodCategory, starter, mainCourse] = restaurant.order(0, 2, 0);
 console.log(`Food Category: ${foodCategory} Starter Menu: ${starter} Main Menu: ${mainCourse}`); // Food Category: Italian 🇮🇹 Starter Menu: Garlic Bread 🥖 Main Menu: Pizza 🍕
 
-// 2. 🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments.  receive values using spread operator
+// 2. 👷🏽‍♂️🛠 how to make a function accept multiple arguments then use the spread operator to pass those arguments.  receive values using spread operator
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648535#announcements 12:30 timestamp
 const pastaIngredients = ['Tomato 🍅', 'Cheese 🧀', 'Chilli 🌶'];
 restaurant.orderPizza(...pastaIngredients); // Here's your delicious Pasta with 🍅, 🍝,🍗
 
-// 3. 🛠 how to use rest operator as an argument which returns an array
+// 3. 👷🏽‍♂️🛠 how to use rest operator as an argument which returns an array
 restaurant.orderFood(0, ' 🍇', '🍆', '🍄'); // Here's your delicious Pizza with 🍇 and 🍆 and 🍄
 const keronOrder = { ...restaurant.orderFood(1, 'Tomato 🍅', 'Broccoli 🥦', 'Shrimp 🍤') }; // Here's your delicious Pasta with Tomato 🍅 and Broccoli 🥦
 
 console.log('----DESTRUCTING ARRAYS----');
 
-// 🛠 how to destructure arrays inside an object
+// 👷🏽‍♂️🛠 how to destructure arrays inside an object
 const [restaurantCategories] = [restaurant.categories];
 console.log(restaurantCategories); // ['Italian 🍝', 'Pizzeria 🍕', 'Vegetarian 🥗', 'Organic 🍳']
 const [first, second] = restaurant.categories;
 console.log(first, second); // 'Italian 🍝' 'Pizzeria 🍕'
 
-// 🛠 how to skip one or more elements
+// 👷🏽‍♂️🛠 how to skip one or more elements
 const [first0, , third] = restaurant.categories;
 console.log(first0, third); // 'Italian 🍝' 'Vegetarian 🥗'
 
-// 🛠 how to switch the order of elements in an array
+// 👷🏽‍♂️🛠 how to switch the order of elements in an array
 let [main, , secondary] = restaurant.categories;
 [main, secondary] = [secondary, main]; // 'Italian 🍝' 'Vegetarian 🥗'
 console.log(secondary); // 'Italian 🍝'
 
-// 🛠 how to destructure nested arrays
+// 👷🏽‍♂️🛠 how to destructure nested arrays
 const nested = [2, 4, ['hello', 6]];
 const [num1, , [greeting, num3]] = nested;
 console.log(num1, greeting, num3); // 2 hello 6
@@ -81,10 +81,10 @@ console.log(p, q, r); // 8 9 1
 console.log('----THE SPREAD OPERATOR (...) ARRAYS----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648535#notes
 
-// 🛠 how to copy an array using the spread operator
+// 👷🏽‍♂️🛠 how to copy an array using the spread operator
 const mainMenuCopy = [...restaurant.mainMenu];
 
-// 🛠 how to build a new array using the spread operator
+// 👷🏽‍♂️🛠 how to build a new array using the spread operator
 const array = [1, 2, 3];
 const newArr = [0, ...array, 4, 5];
 console.log(newArr); // [0, 1, 2, 3, 4, 5]
@@ -93,7 +93,7 @@ console.log(newArr); // [0, 1, 2, 3, 4, 5]
 const newMenu = ['Sushi 🍣', ...restaurant.mainMenu, 'Cake 🍰'];
 console.log(newMenu); // ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 ', 'Focaccia 🥐', 'Bruschetta 🥪', 'Garlic Bread 🥖', 'Caprese Salad 🥙']
 
-// 🛠 how to join two arrays using the spread operator
+// 👷🏽‍♂️🛠 how to join two arrays using the spread operator
 const menu2 = [...restaurant.mainMenu, ...restaurant.starterMenu];
 console.log(menu2); // ['Pizza 🍕', 'Pasta 🍝', 'Risotto 🍲 ', 'Bruschetta 🥪', 'Garlic Bread 🥖', 'Caprese Salad 🥙', 'Focaccia 🥐', 'Cake 🍰']
 
@@ -117,7 +117,7 @@ console.log(pizza, risotto, otherFood); // Pizza 🍕 Risotto 🍲 [ 'Focaccia �
 
 console.log('---- Rest Operator (as a function parameter)----');
 // https://www.javascripttutorial.net/es6/javascript-rest-parameters/
-// 🛠 how to use rest operator as an argument which returns an array
+// 👷🏽‍♂️🛠 how to use rest operator as an argument which returns an array
 const add = function (...numbers) {
         // rest operator is used to collect the remaining arguments into an array
         console.log(numbers.reduce((a, b) => a + b));
