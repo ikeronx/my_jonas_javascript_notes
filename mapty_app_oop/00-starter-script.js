@@ -82,6 +82,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+// const drop_btn = document.querySelector('.drop_btn')
 
 console.log(`---- #6 MANAGING EVENT HANDLING ARCHITECTURE----`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649229#questions/15630120
@@ -115,6 +116,7 @@ class App {
 
                 // to move the marker to the location of the click event on the map
                 containerWorkouts.addEventListener('click', this._moveToPopup.bind(this)); // <-- the _moveMarker() method is called when the containerWorkouts is clicked
+                // containerWorkouts.addEventListener('click', this._editWorkout.bind(this)); // <-- the _editWorkout() method is called when the
         }
 
         // ALL THE EVENT HANDLERS
@@ -167,7 +169,7 @@ class App {
                 this.#map.on('click', this._showForm.bind(this)); // <-- the _showForm() method is called when the map is clicked
 
                 // loop through the workout array and render the workout on the map
-                this.#workouts.forEach(workout => {
+                this.#workouts.forEach((workout) => {
                         // this._renderWorkout(workout);
                         this._renderWorkoutMarker(workout);
                 });
@@ -201,10 +203,10 @@ class App {
 
         _newWorkout(e) {
                 // A helper function that checks if every inputs is a numbers
-                const validInputs = (...inputs) => inputs.every(input => Number.isFinite(input));
+                const validInputs = (...inputs) => inputs.every((input) => Number.isFinite(input));
 
                 // A helper function that checks if the input is a positive number
-                const validPositiveInputs = (...inputs) => inputs.every(input => input > 0);
+                const validPositiveInputs = (...inputs) => inputs.every((input) => input > 0);
 
                 e.preventDefault(); // <-- prevent the form from submitting
 
@@ -224,7 +226,7 @@ class App {
 
                         // Check if data is valid
                         // ... use a Guard Clause to check if the distance, duration and cadence is a number if not return alert message
-                        // ... ⛔️🎅🏽 guard clauses are used to check if a condition is true or false and if it is false, then the code inside the if statement will not be executed
+                        // ... guard clauses are used to check if a condition is true or false and if it is false, then the code inside the if statement will not be executed
                         if (
                                 // !Number.isFinite(distance) ||
                                 // !Number.isFinite(duration) ||
@@ -295,40 +297,50 @@ class App {
                 console.log(`---- #8 RENDERING WORKOUTS (ON THE LIST)----`);
                 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649249#questions/13455316
 
-             
                 let html = `
                 <li class="workout workout--${workout.type}" data-id="${workout.id}">
-                <h2 class="workout__title">${workout.description}</h2>
-                <i class="ph-dots-three workout_dot_icon drop_menu_btn"></i>
-                <div class="workout__details">
+                  <h2 class="workout__title">${workout.description}</h2>
+                  <i class="ph-dots-three workout_dot_icon drop_menu"></i>
+                  
+                <div class="dropdown">
+                  
+                  <ul id="myDropdown" class="dropdown-content menu">
+                    <li href="#" class='edit'>✏️ Edit workout</li>
+                    <li href="#" class='delete'>🗑 Delete this workout</li>
+                    <li href="#">🗑 Delete all workouts</li>
+                    <li href="#">👀 Sort by</li>
+                  </ul>
+                </div>
+                  
+                  <div class="workout__details">
                     <span class="workout__icon">${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'}</span>
                     <span class="workout__value">${workout.distance}</span>
                     <span class="workout__unit">km</span>
-                </div>
-                <div class="workout__details">
+                  </div>
+                  <div class="workout__details">
                     <span class="workout__icon">⏱</span>
                     <span class="workout__value">${workout.duration}</span>
                     <span class="workout__unit">min</span>
-                </div>
+                  </div>
               `;
-          
-                          if (workout.type === 'running')
-                                  html += `
-                <div class="workout__details">
+
+                if (workout.type === 'running')
+                        html += `
+                  <div class="workout__details">
                     <span class="workout__icon">⚡️</span>
                     <span class="workout__value">${workout.pace.toFixed(1)}</span>
                     <span class="workout__unit">min/km</span>
-                </div>
-                <div class="workout__details">
+                  </div>
+                  <div class="workout__details">
                     <span class="workout__icon">🦶🏼</span>
                     <span class="workout__value">${workout.cadence}</span>
                     <span class="workout__unit">spm</span>
-                </div>
+                  </div>
                 </li>
                 `;
-          
-                          if (workout.type === 'cycling')
-                                  html += `
+
+                if (workout.type === 'cycling')
+                        html += `
                   <div class="workout__details">
                     <span class="workout__icon">⚡️</span>
                     <span class="workout__value">${workout.speed.toFixed(1)}</span>
@@ -341,7 +353,8 @@ class App {
                   </div>
                 </li>
                 `;
-             /*
+
+                /*
                 // conditional statements expressions (values) to add to the html template
                 const workoutEmoji = workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️';
                 const workoutCadenceOrElevationGainEmoji = workout.type === 'running' ? '🦶🏼' : '⛰';
@@ -378,7 +391,43 @@ class App {
                         </div>
                         `;
                         */
+
                 form.insertAdjacentHTML('afterend', html);
+
+                //  🎯  ADD CLICK EVENT THE DOT ICON TO SHOW DROP DOWN MENU
+                // add event delegation to the element with the (parent element) workout class then target the element that has a class of drop_menu to show the drop menu each time we click the doted icon
+                const workoutContainer = document.querySelector('.workout');
+
+                workoutContainer.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        // if (e.target.tagName !== 'I') return;
+                        const menu = e.target.closest('.workout').querySelector('.menu');
+                        menu.classList.toggle('show-dropdown');
+
+                        if (e.target.tagName !== 'I' || e.target.tagName === 'li') {
+                                menu.classList.remove('show-dropdown');
+                        }
+
+                        const edit = e.target.closest('.workout').querySelector('.edit');
+                        edit.addEventListener('click', () => {
+                                menu.classList.remove('show-dropdown');
+
+                                this._showForm(workout);
+
+                                inputDistance.value = workout.distance;
+                                inputDuration.value = workout.duration;
+
+                                if (inputType.value === 'running') inputCadence.value = workout.cadence;
+                                if (inputType.value === 'cycling') inputElevation.value = workout.elevation;
+                        });
+                });
+                const hideMenu = () => {
+                        const menus = workoutContainer.querySelectorAll('.menu');
+                        menus.forEach((menu) => {
+                                if (!menu.classList.contains('show-dropdown')) return;
+                                menu.style.display = 'none';
+                        });
+                };
         }
 
         // move marker to the clicked location on the map
@@ -387,14 +436,14 @@ class App {
                 if (!this.#map) return;
 
                 const workoutEl = e.target.closest('.workout');
-                // ⛔️🎅🏽 guard clause to check if the workoutEl is not null
+                // guard clause to check if the workoutEl is not null
                 if (!workoutEl) return;
 
                 // get the workout id from the workoutEl
                 const workoutId = workoutEl.dataset.id;
-               
+
                 // loop through the workout array and find the workout id that matches the workoutEl id
-                const workout = this.#workouts.find(work => work.id === workoutId);
+                const workout = this.#workouts.find((work) => work.id === workoutId);
 
                 // move the marker to the clicked location
                 this.#map.flyTo(workout.coords);
@@ -407,7 +456,7 @@ class App {
         _setLocalStorage() {
                 localStorage.setItem('workouts', JSON.stringify(this.#workouts));
 
-                this.#workouts.forEach(workout => {
+                this.#workouts.forEach((workout) => {
                         this._renderWorkout(workout);
                 });
         }
@@ -419,7 +468,7 @@ class App {
 
                 // (restoring the data)  if we already have ata in workouts array we will simply set the data to the workouts thats already  the data thats already in local storage to the workout array
                 // this.#workouts = data;
-                this.#workouts = data.map(work => {
+                this.#workouts = data.map((work) => {
                         if (work.type === 'running') {
                                 return new Running(work.coords, work.distance, work.duration, work.cadence);
                         }
@@ -428,7 +477,7 @@ class App {
                         }
                 });
 
-                this.#workouts.forEach(workout => {
+                this.#workouts.forEach((workout) => {
                         this._renderWorkout(workout);
                 });
                 console.log(this.#workouts);
@@ -438,6 +487,45 @@ class App {
         //         localStorage.removeItem('workouts'); // remove the data from local storage
         //         location.reload(); // reload the page
         // }
+        _editWorkout(e) {
+                this._showForm();
+
+                // BUGFIX: When we click on a workout before the map has loaded, we get an error. But there is an easy fix:
+                if (!this.#map) return;
+
+                const workoutEl = e.target.closest('.workout');
+                // guard clause to check if the workoutEl is not null
+                if (!workoutEl) return;
+
+                // get the workout id from the workoutEl
+                const workoutId = workoutEl.dataset.id;
+
+                // loop through the workout array and find the workout id that matches the workoutEl id
+                const workout = this.#workouts.find((work) => work.id === workoutId);
+
+                console.log(workout);
+
+                // get the current value from the div element
+        }
+
+        _try() {
+                alert('bitchhhhh i did it');
+        }
+
+        _renderDropdown(e) {
+                const workoutEl = e.target.closest('.workout');
+                // guard clause to check if the workoutEl is not null
+                if (!workoutEl) return;
+
+                // get the workout id from the workoutEl
+                const workoutId = workoutEl.dataset.id;
+
+                // loop through the workout array and find the workout id that matches the workoutEl id
+                const workout = this.#workouts.find((work) => work.id === workoutId);
+                if (workout.type === 'running') {
+                        inputDistance.value = workout.distance;
+                }
+        }
 }
 
 console.log(`---- create an instance of 'App' class to use the event handlers----`);

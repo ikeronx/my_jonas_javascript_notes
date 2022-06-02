@@ -2,6 +2,37 @@
 /* eslint-disable strict */
 // eslint-disable-next-line lines-around-directive
 'use strict';
+// GLOBAL VARIABLES
+const btn = document.querySelector('.btn-country');
+const countriesContainer = document.querySelector('.countries');
+
+// FUNCTIONS
+const renderCountry = (data, className = '') => {
+        const name = Object.values(data.name)[0];
+        const flag = Object.values(data.flags)[0];
+        const language = Object.values(data.languages);
+        const currency = Object.values(data.currencies).map((cur) => cur.name);
+        const html = `
+        <article class="country ${className}">
+        <img class="country__img" src="${flag}" />
+                <div class="country__data">
+                <h3 class="country__name">${name}</h3> 
+                <h4 class="country__region">${data.region}</h4> 
+                <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)}</p>
+                <p class="country__row"><span>🗣️</span>${language}</p>
+                <p class="country__row"><span>💰</span>${currency}</p>
+                </div>
+        </article>
+        `;
+        countriesContainer.insertAdjacentHTML('beforeend', html);
+        // countriesContainer.style.opacity = 1;
+        console.log(html);
+};
+
+const renderError = (msg) => {
+        countriesContainer.insertAdjacentText('beforeend', msg);
+        // countriesContainer.opacity = 1;
+};
 
 console.log(`----  ASYNCHRONOUS JAVASCRIPT, AJAX AND APIS ---`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649283#questions/13295838
@@ -100,24 +131,6 @@ console.log(`--- WELCOME TO CALLBACK HELL ---`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649301#questions/15963214
 
 // 📌👷🏽‍♂️🛠 How to create a sequence of AJAX calls so the second request only runs after the first request is finish executing and so forth
-const renderCountry = (data, className = '') => {
-        const html = `
-        <article class="country ${className}">
-        <img class="country__img" src="${data.flags.svg}" />
-                <div class="country__data">
-                <h3 class="country__name">${Object.values(data.name)[0]}</h3> 
-                <h4 class="country__region">${data.region}</h4> 
-                <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)}</p>
-                <p class="country__row"><span>🗣️</span>${Object.values(data.languages)[0]}</p>
-                <p class="country__row"><span>💰</span>${Object.values(data.currencies)[0].name}</p>
-                </div>
-        </article>
-        `;
-        // countriesContainer.insertAdjacentHTML('beforeend', html);
-        // countriesContainer.style.opacity = 1;
-        console.log(html);
-};
-
 const getCountryAndNeighbor = (country) => {
         // old way
         // STEP 1: CREATE A FUNCTION (OBJECT) THAT WILL FETCH THE DATA
@@ -213,7 +226,7 @@ const getCountryData2 = (country) => {
                 response.json().then(([data]) => renderCountry(data))
         );
 };
-getCountryData2('south korea')
+getCountryData2('south korea');
 
 console.log(`---  CHAINING PROMISES ---`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649327#questions/16579266
@@ -226,22 +239,84 @@ const getCountryData3 = (country) => {
                 .then(([data]) => {
                         renderCountry(data);
 
-                        // ...🎯 changing promise
-                        const neighbor = data.borders; // <-- // get the neighboring country
+                        // 🎯 changing promise
+                        const neighbor = data.borders; // <-- get the neighboring country
                         console.log(neighbor);
 
-                        if (!neighbor) return; // <-- return if there's np neighboring country
+                        // ⛔️🎅🏽 Guard clause: if there's np neighboring country
+                        if (!neighbor) return;
 
-                        // ❗️💡 return the second ajax call so you can chain the promise using the then method
-                        return neighbor.forEach((code) => {
-                                // Country 2
-                                // ❗️❗️ the second AJAX call
-                                fetch(`https://restcountries.com/v3.1/alpha/${code}`)
-                                        .then((response) => response.json())
-                                        .then((data) => renderCountry(data[0], 'neighbour'));
-                        });
+                        // Country 2
+                        // 👉🏼 the return value from the fetch() is the fulfilled promise of this then method because each the then method return a promise
+                        // 👇🏽💡❗️ return the second ajax call inside this then() method so you can chain the promise using the then method
+                        return fetch(`https://restcountries.com/v3.1/alpha?codes=${neighbor}`);
                 })
-                .catch((error) => alert(error.message));
+                // 👇🏽 chain the promise by using the then() method to parse the return promise value from the fetch data above, then() render the country and neighbor data
+                .then((response) => response.json())
+                .then((data) => renderCountry(data[0], 'neighbour'));
 };
-getCountryData3('united states');
 
+console.log(`---  HANDLING REJECTED PROMISE ---`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649327#questions/16579266
+
+// 👷🏽‍♂️🛠 How to handle rejected promise (no internet connection)
+const getCountryData4 = (country) => {
+        fetch(`https://restcountries.com/v3.1/name/${country}`)
+                .then((response) => response.json())
+                .then(([data]) => {
+                        renderCountry(data);
+
+                        const neighbor = data.borders;
+                        console.log(neighbor);
+
+                        if (!neighbor) return;
+                        return fetch(`https://restcountries.com/v3.1/alpha?codes=${neighbor}`);
+                })
+                .then((response) => response.json())
+                .then((data) => renderCountry(data[0], 'neighbour'))
+
+                // 🎯 Handling Rejected Promise
+                // 👇🏽 the catch() method is used to catch rejected promise (no net connection) and display error message
+                .catch((error) => {
+                        console.error(`${error} 💥💥💥`);
+                        renderError(`Something went wrong 💥💥💥 ${error.message} 💥💥💥 Try again!`);
+                })
+                // 👇🏽 the finally() method is use when we want something to always happen no matter the result of the promise .. full-filled / rejected etc
+                .finally(() => (countriesContainer.style.opacity = 1));
+};
+
+console.log(`---  THROWING ERRORS MANUALLY ---`);
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649335#questions/16111984
+
+// 👷🏽‍♂️🛠 How to throw errors manually
+const getCountryData5 = (country) => {
+        fetch(`https://restcountries.com/v3.1/name/${country}`)
+                .then((response) => {
+                        // 🎯 THROWING ERRORS MANUALLY
+                        // if theres no country / if response.ok: is false then throw new error
+                        if (!response.ok) throw new Error(`Something went wrong (${response.status})`); //
+                        return response.json();
+                })
+                .then(([data]) => {
+                        renderCountry(data);
+
+                        const neighbor = data.borders;
+                        console.log(neighbor);
+
+                        // 🎯 THROWING ERRORS MANUALLY
+                        // If there's no neighboring country then 👇🏽 'throw new Error()' 👇🏽 method
+                        if (!neighbor)
+                                throw new Error(`Something went wrong ${data.name.common} has no neighboring country`);
+                        return fetch(`https://restcountries.com/v3.1/alpha?codes=${neighbor}`);
+                })
+                .then((response) => response.json())
+                .then((data) => renderCountry(data[0], 'neighbour'))
+                .catch((error) => {
+                        renderError(`Something went wrong 💥💥💥 ${error.message} 💥💥💥 Try again!`);
+                })
+                .finally(() => (countriesContainer.style.opacity = 1));
+};
+// EVENTS
+btn.addEventListener('click', () => {
+        getCountryData5('united states');
+});
