@@ -160,7 +160,7 @@ class App {
                 const type = inputType.value;
                 const distance = +inputDistance.value;
                 const duration = +inputDuration.value;
-                const { lat, lng } = this.#mapEvent.latlng;
+                const { lat, lng } = this.#mapEvent.latlng; 
                 let workout;
 
                 // If workout running, create running object

@@ -137,7 +137,7 @@ class App {
                                 // 2nd argument: error callback
                                 // if geolocation fails, then we can get the error message
                                 function (error) {
-                                        console.log(error);
+                                        console.error(error);
                                 }
                         );
         }
@@ -148,8 +148,7 @@ class App {
 
                 // - how to get coordinates from the position object returned by the getCurrentPosition() method
                 // ... use object destructuring to get the latitude and longitude from the position object
-                const { latitude } = position.coords;
-                const { longitude } = position.coords;
+                const { latitude, longitude } = position.coords;
                 // console.log(`https://www.google.com/maps/@${latitude},${longitude}`); // 42.4727153 -70.948592 <-- this is the coordinates for the user's location
 
                 console.log(`---- #2 DISPLAYING A MAP USING THE LEAFLET LIBRARY----`);

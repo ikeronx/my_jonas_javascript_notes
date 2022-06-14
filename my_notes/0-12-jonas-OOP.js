@@ -151,7 +151,7 @@ const account = {
         movements: [200, 530, 120, 300],
         // 📌 GETTER - get value
         get latest() {
-                return this.movements[this.movements.length - 1];
+                return this.movements.at(-1);
         },
         // 📌 SETTER - set value (can be used to validate the value)
         set latest(mov) {

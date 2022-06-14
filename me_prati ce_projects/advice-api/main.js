@@ -22,9 +22,7 @@ const showRandomAdvice = (id) => {
                 })
                 .then((data) => {
                         // if (data.slip.id === undefined) throw new Error("Id doesn't exist");
-
                         // console.log(data.slip.advice);
-
                         renderRandomAdvice(data);
                 })
                 .catch((err) => {
