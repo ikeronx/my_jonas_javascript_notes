@@ -62,7 +62,7 @@ header2.style.color = 'red';
 header2.style.color = 'green';
 
 // 🤔 Example 2: Asynchronous image loading with event and callback
-const img = document.querySelector('.dog');
+const img~ = document.querySelector('.dog');
 img.src = 'dog.img'; // <-- asynchronous - setting the src attribute of an image is a an asynchronous operation due to fact that image is loading in background while rest of the code is running
 img.addEventListener('load', function () {
         // 👆🏼❗️💡 addEventListeners alone do not make the code asynchronous! The 'load' event as asynchronous behavior does and since the callback fn is attached to an element with an asynchronous attribute 'img.src' the load event will happened asynchronously
@@ -753,12 +753,56 @@ Promise.any([
         Promise.resolve('second fulfilled promise'),
 ]).then((res) => console.log(res));
 // first fulfilled promise
+console.log('--- CODING CHALLENGE #11 261---');
+console.log('-----ASYNCHRONOUS JAVASCRIPT #4-----');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649367#questions
+
+const imageContainer = document.querySelector('.images');
+const img = document.createElement('img');
+
+const wait = (seconds) => new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+
+const createImage = (imgPath) =>
+        new Promise((resolve, reject) => {
+                img.src = imgPath;
+                // we need to wait for the image to load before resolving it
+                img.onload = () => {
+                        imageContainer.append(img);
+                        resolve(img);
+                };
+                img.onerror = () => reject(new Error(`Could not load ${imgPath}`));
+        });
+
+createImage('img/img-1.jpg')
+        .then(() => wait(2))
+        .then(() => {
+                img.style.display = 'none';
+                return createImage('img/img-2.jpg');
+        })
+        .then(() => wait(2))
+        .then(() => {
+                img.style.display = 'block';
+        })
+        .then(() => wait(2))
+        .then(() => {
+                img.style.display = 'none';
+                return createImage('img/img-3.jpg');
+        })
+        .then(() => wait(2))
+        .then(() => {
+                img.style.display = 'block';
+        })
+        .then(() => wait(2))
+        .then(() => {
+                img.style.display = 'none';
+        })
+        .catch((err) => console.error(err));
 
 /*
 console.log('--- CODING CHALLENGE #11 261---');
 console.log('-----ASYNCHRONOUS JAVASCRIPT #4-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649367#questions
-
+        
 // TEST DATA
 const imgArr = ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg'];
 
@@ -788,9 +832,34 @@ const loadAndPause = async (...imgPath) => {
 
                 return createImage(imgs[0])
                         .then(() => wait(2))
-                        .then(() => createImage(imgs[1]))
+                        .then(() => {
+                                imgDiv.style.display = 'none';
+                                return createImage(imgs[1]);
+                        })
                         .then(() => wait(2))
-                        .then(() => createImage(imgs[2]));
+                        .then(() => {
+                                imgDiv.style.display = 'block';
+                        })
+                        .then(() => wait(2))
+                        .then(() => {
+                                imgDiv.style.display = 'none';
+                                return createImage(imgs[2]);
+                        })
+                        .then(() => wait(2))
+                        .then(() => {
+                                imgDiv.style.display = 'block';
+                        })
+                        .then(() => wait(2))
+                        .then(() => {
+                                imgDiv.style.display = 'none';
+                        });
+                
+                        // return createImage(imgs[0])
+                        // .then(() => wait(2))
+                        // .then(() => createImage(imgs[1]))
+                        // .then(() => wait(2))
+                        // .then(() => createImage(imgs[2]));
+                
         } catch (err) {
                 return Promise.reject(new Error(`💥 ${err.message}`));
         }
@@ -825,7 +894,7 @@ const loadAlI = async (...imgPath) => {
                 await loadAndPause(imgArr)
                         .then(() => wait(2))
                         .then(() => (imgDiv.style.display = 'none'))
-                        .then(() => loadAlI(...imgArr))
+                        .then(() => loadAlI(...imgArr));
         } catch (err) {
                 console.error(` 💥 ${err.message}`);
         }

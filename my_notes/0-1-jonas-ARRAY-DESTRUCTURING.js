@@ -153,4 +153,3 @@ console.log('----DIFFERENCE BETWEEN SPREAD OPERATOR AND REST OPERATOR----');
 // 👉🏽 Rest operator is used to collect the remaining arguments into an array
 // 👉🏽 Rest operator is on the LEFT hand side of the assignment operator
 // 👉🏽 Rest element should always be the last element and there can only be one rest element in an array
-

@@ -46,7 +46,7 @@ console.log('----- getElementById()-----');
 // 👷🏽‍♂️🛠 how to get element by id
 console.log(document.getElementById('section--1')); // <div class="section" id="section--1">
 
-console.log('----- getElementByClassName()-----');
+console.log ('----- getElementByClassName()-----');
 // 👷🏽‍♂️🛠 how to get element by class name
 console.log(document.getElementsByClassName('btn')); // HTMLCollection(2) [div.btn, div.btn]
 

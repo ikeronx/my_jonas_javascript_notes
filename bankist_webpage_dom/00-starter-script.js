@@ -286,7 +286,7 @@ navLinks.addEventListener('click', function (e) {
         if (e.target.tagName === 'A' || e.target.classList.contains('nav__link')) {
                 // <- if the target element is an anchor tag (a)
                 e.preventDefault();
-                const id = e.target.getAttribute('href');
+                const id = e.target.getAttribute('href'); 
                 const section = document.querySelector(id);
                 section.scrollIntoView({
                         behavior: 'smooth',

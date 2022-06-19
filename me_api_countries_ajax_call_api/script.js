@@ -770,7 +770,7 @@ Promise.any([
 console.log('--- CODING CHALLENGE #11 261---');
 console.log('-----ASYNCHRONOUS JAVASCRIPT #4-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649367#questions
-
+        
 // TEST DATA
 const imgArr = ['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg'];
 
@@ -800,9 +800,34 @@ const loadAndPause = async (...imgPath) => {
 
                 return createImage(imgs[0])
                         .then(() => wait(2))
-                        .then(() => createImage(imgs[1]))
+                        .then(() => {
+                                imgDiv.style.display = 'none';
+                                return createImage(imgs[1]);
+                        })
                         .then(() => wait(2))
-                        .then(() => createImage(imgs[2]));
+                        .then(() => {
+                                imgDiv.style.display = 'block';
+                        })
+                        .then(() => wait(2))
+                        .then(() => {
+                                imgDiv.style.display = 'none';
+                                return createImage(imgs[2]);
+                        })
+                        .then(() => wait(2))
+                        .then(() => {
+                                imgDiv.style.display = 'block';
+                        })
+                        .then(() => wait(2))
+                        .then(() => {
+                                imgDiv.style.display = 'none';
+                        });
+                
+                        // return createImage(imgs[0])
+                        // .then(() => wait(2))
+                        // .then(() => createImage(imgs[1]))
+                        // .then(() => wait(2))
+                        // .then(() => createImage(imgs[2]));
+                
         } catch (err) {
                 return Promise.reject(new Error(`💥 ${err.message}`));
         }
@@ -837,9 +862,11 @@ const loadAlI = async (...imgPath) => {
                 await loadAndPause(imgArr)
                         .then(() => wait(2))
                         .then(() => (imgDiv.style.display = 'none'))
-                        .then(() => loadAlI(...imgArr))
+                        .then(() => loadAlI(...imgArr));
         } catch (err) {
                 console.error(` 💥 ${err.message}`);
         }
 })();
 */
+
+

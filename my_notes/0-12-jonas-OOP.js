@@ -113,7 +113,7 @@ console.log('-----ES6 CLASSES-----');
 // 👉🏽 classes are a blueprint for creating objects
 // 👉🏽 all objects created through the class constructor are instances of the class
 // 👎🏽 classes are not hoisted (has to be declared before it is used)
-// 👉🏽 lasses are first class citizens (can be passed as arguments to functions)
+// 👉🏽 classes are first class citizens (can be passed as arguments to functions)
 // 👉🏽 classes are executed in strict mode (no variable declarations)
 
 // example: - how to create a class

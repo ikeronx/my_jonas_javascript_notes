@@ -78,7 +78,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
-const drop_menu_btn = document.querySelector('i')
+const drop_menu_btn = document.querySelector('i');
 class App {
         #map;
 
@@ -125,7 +125,7 @@ class App {
                 // Handling clicks on map
                 this.#map.on('click', this._showForm.bind(this));
 
-                this.#workouts.forEach(work => {
+                this.#workouts.forEach((work) => {
                         this._renderWorkoutMarker(work);
                 });
         }
@@ -151,8 +151,8 @@ class App {
         }
 
         _newWorkout(e) {
-                const validInputs = (...inputs) => inputs.every(inp => Number.isFinite(inp));
-                const allPositive = (...inputs) => inputs.every(inp => inp > 0);
+                const validInputs = (...inputs) => inputs.every((inp) => Number.isFinite(inp));
+                const allPositive = (...inputs) => inputs.every((inp) => inp > 0);
 
                 e.preventDefault();
 
@@ -160,7 +160,7 @@ class App {
                 const type = inputType.value;
                 const distance = +inputDistance.value;
                 const duration = +inputDuration.value;
-                const { lat, lng } = this.#mapEvent.latlng; 
+                const { lat, lng } = this.#mapEvent.latlng;
                 let workout;
 
                 // If workout running, create running object
@@ -275,11 +275,12 @@ class App {
                 // BUGFIX: When we click on a workout before the map has loaded, we get an error. But there is an easy fix:
                 if (!this.#map) return;
 
+                // DOM TRAVERSING
                 const workoutEl = e.target.closest('.workout');
 
                 if (!workoutEl) return;
 
-                const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
+                const workout = this.#workouts.find((work) => work.id === workoutEl.dataset.id);
                 console.log(this.#workouts);
 
                 this.#map.setView(workout.coords, this.#mapZoomLevel, {
@@ -304,7 +305,7 @@ class App {
 
                 this.#workouts = data;
 
-                this.#workouts.forEach(work => {
+                this.#workouts.forEach((work) => {
                         this._renderWorkout(work);
                 });
         }

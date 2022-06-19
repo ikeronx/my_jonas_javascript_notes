@@ -532,3 +532,10 @@ console.log(`---- create an instance of 'App' class to use the event handlers---
 const app = new App(); // <-- the App class is instantiated and the event handlers are called
 // app.init(); // <-- the map is loaded when the page is loaded
 // window.addEventListener('load', app.init());
+
+
+const datee = new Date();
+
+const id = `${Date.now()}`.slice(-10);
+console.log(`${id} first id`);
+console.log(`${id} sec id`);
