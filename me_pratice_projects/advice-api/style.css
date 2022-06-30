@@ -37,7 +37,7 @@ place-items: center;
     gap: 35px;
     border-radius: 10px;
 }
-
+ 
 .card__content{
     display: flex;
     flex-direction: column;
