@@ -167,37 +167,34 @@ console.log('-----IMPLEMENTING SMOOTH SCROLLING-----');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 
-btnScrollTo.addEventListener('click', e => {
-        e.preventDefault();
-        // the new way to implement smooth scrolling
-        section1.scrollIntoView({
-                behavior: ,
-                // block: 'start',
-                // inline: 'nearest',
-        });
+btnScrollTo.addEventListener('click', function (e) {
+        // 👍🏽 new way
+        section1.scrollIntoView({ behavior: 'smooth' });
+        
+        // 👎🏽 old way
+        // const s1coords = section1.getBoundingClientRect();
+        // console.log(s1coords);
 
-        // the old way of implementing smooth scrolling
-        // step 1: get the position (coordinates) of the element
-        /* 
-        const s1Coords = section1.getBoundingClientRect();
-        console.log(s1Coords);
-        console.log(e.target.getBoundingClientRect());
-        console.log('current scroll position (X/Y)', window.pageXOffset, window.pageYOffset); // gets the current scoill position of the page horizontally and vertically
-        console.log(
-                'height/width viewport ',
-                document.documentElement.clientHeight,
-                document.documentElement.clientWidth
-        ); // gets the height and width of the viewport
-        */
+        // console.log(e.target.getBoundingClientRect());
 
-        // step 2: scrolling to the element
-        // window.scrollTo(s1Coords.left + window.pageXOffset, s1Coords.top + window.pageYOffset); // scroll to the element
+        // console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-        // scrolling
+        // console.log(
+        //         'height/width viewport',
+        //         document.documentElement.clientHeight,
+        //         document.documentElement.clientWidth
+        // );
+
+        // Scrolling
+        // window.scrollTo(
+        //   s1coords.left + window.pageXOffset,
+        //   s1coords.top + window.pageYOffset
+        // );
+
         // window.scrollTo({
-        //         top: s1Coords.top + window.pageYOffset,
-        //         left: s1Coords.left + window.pageXOffset,
-        //         behavior: 'smooth',
+        //   left: s1coords.left + window.pageXOffset,
+        //   top: s1coords.top + window.pageYOffset,
+        //   behavior: 'smooth',
         // });
 });
 
@@ -280,6 +277,16 @@ console.log('----- implementing page navigation by event delegation-----');
 // Step 1: Add an event listener to the common parent element (nav_links) of all the elements we want to listen to.
 // Step 2: Add an event listener to the elements we want to listen to. (Determine what element originated the event)
 const navLinks = document.querySelector('.nav__links');
+// Page navigation
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
 navLinks.addEventListener('click', function (e) {
         // eslint-disable-next-line prettier/prettier
         // matching strategy:

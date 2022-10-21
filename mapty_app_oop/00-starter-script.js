@@ -157,10 +157,8 @@ class App {
                 const coords = [latitude, longitude]; // [42.4727153, -70.948592]
                 this.#map = L.map('map').setView(coords, this.#mapZoomLevel); // <-- the map is created and set to the coordinates and zoom level of the user's location
 
-                L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-                        attribution:
-                                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', // <-- the map title style is set to the OpenStreetMap style
-                }).addTo(this.#map); // <-- the map is added to the map container
+                L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {}, // <-- the map title style is set to the OpenStreetMap style
+                ).addTo(this.#map); // <-- the map is added to the map container
 
                 console.log(`---- #5 RENDERING FORM ----`);
                 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649193#notes
@@ -247,7 +245,7 @@ class App {
                         // Check if data is valid
                         if (
                                 // if any of the inputs is not a number or if any of the inputs is less than 0, then the alert message will be shown
-                                !validInputs(distance, duration) ||
+                                !validInputs(distance, duration, elevation) ||
                                 !validPositiveInputs(distance, duration)
                         )
                                 return alert('Inputs have to positive numbers');
@@ -268,6 +266,8 @@ class App {
 
                 // store workouts in local storage
                 this._setLocalStorage();
+
+                console.log(workout);
         }
 
         // display the workout on the map as a marker
@@ -413,6 +413,9 @@ class App {
 
                                 this._showForm(workout);
 
+                                // _toggleElevationField()
+
+                                workout.type === 'running' ? inputType.value = 'running' : inputType.value = 'cycling'
                                 inputDistance.value = workout.distance;
                                 inputDuration.value = workout.duration;
 

@@ -44,7 +44,7 @@ const restaurant = {
 
 console.log('----OPTIONAL CHAINING (?.)----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648565#announcements
-// 👉🏼 You can use optional chaining you check if a certain property is present in an object, if not, it will return undefined
+// 👉🏼 You can use optional chaining to check if a certain property is present in an object, if not, it will return undefined
 
 // 👎🏽 the old way
 // 👷🏽‍♂️🛠 how to check if openingHours and fri properties are present in the restaurant object

@@ -31,7 +31,7 @@ console.log(`---- OVERVIEW OF MODULES IN JAVASCRIPT ---`);
 // const dice = rand(1, 6, 2) // index.js
 // showdice(dice) // index.js
 
-/*
+
 console.log(`---- EXPORTING AND IMPORTING IN ES6 MODULES ---`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649463#questions
 
@@ -77,7 +77,7 @@ console.log(ShoppingCart.totalPrice, ShoppingCart.tq); // 237 23
 // eslint-disable-next-line import/first
 import add from './shoppingCart.js';
 add('pizza', 12); // 12 pizza added to cart
-*/
+
 
 console.log(`---- TOP-LEVEL AWAIT (ES2022) ---`);
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/29433458#questions/16445282
@@ -156,3 +156,21 @@ exports.addTocart = function (product, quantity) {
    // Import
     const { addTocart } = require('./shoppingCart.js');
 */
+
+console.log('--- A BRIEF INTRODUCTION TO THE COMMAND LINE ---');
+// https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649485#questions
+
+// 📌 Basic Command Line commands:
+// 🎯 cd - move in to a directory
+// 🎯 cd .. - move up a directory
+// 🎯 cd ../.. - move up two directory
+// 🎯 ls - list all the folders and files in a directory
+// 🎯 touch filename - create a file(s) 
+// 🎯 rm filename - remove a file(s)
+// 🎯 mkdir - create a directory
+// 🎯 rmdir - remove an empty directory
+// 🎯 rm -R diretoryname - remove entire that's not empty
+// 🎯 mv diretoryname ../ - move a directory up 
+// 🎯 clear - clears command line
+// 🎯 arrow keys - to move up and down to see past commands
+

@@ -99,13 +99,13 @@ const upperFirstWord = (str) => {
 // ... step 1️⃣: set the str and the upperFirstWord fn to the higher oder transformer function as parameters
 const transformer = (str, fn) => {
         console.log(`The original string: ${str}`); // The original string: JAVASCRIPT is the best!
-        // ... step 3️⃣: invoke the upperFirstWord/oneWord fn inside the transformer (higher order fn) like this:
+        // ... step 3️⃣: invoke the upperFirstWord/oneWord fn inside the transformer (higher order fn) like this: fn(str)
         console.log(`Transformed string: ${fn(str)}`); // Transformed string: javascriptisthebestest!!!!
-
+        return fn(str);
         // 💡 functions also have properties cause they are objects
         // 'mname' property:
         console.log(`Transformed by: ${fn.name === 'oneWord' ? `${fn.name} 1️⃣` : `${fn.name} 🆙`}`);
-        // Transformed ny: upperFirstWord 🆙
+        // Transformed by: upperFirstWord 🆙
         // Transformed by: oneWord  1️⃣
 };
 // ... step 2️⃣: invoke the transformer higher order function then

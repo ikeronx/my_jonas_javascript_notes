@@ -160,7 +160,7 @@ class App {
                 const type = inputType.value;
                 const distance = +inputDistance.value;
                 const duration = +inputDuration.value;
-                const { lat, lng } = this.#mapEvent.latlng;
+                const { lat, lng } = this.#mapEvent.latlng; // ❗️❗️ this is how you get the cordinates whereever you click on the map and pass it to the _showform(mapE) function as a '#mapEvent' that already built into the leaflet package which is then pass to the _#map.on('click', '') function to show map marker at that coordinates on the map
                 let workout;
 
                 // If workout running, create running object
@@ -268,7 +268,7 @@ class App {
       </li>
       `;
 
-                form.insertAdjacentHTML('afterend', html);
+        form.insertAdjacentHTML('afterend', html);
         }
 
         _moveToPopup(e) {
@@ -317,3 +317,66 @@ class App {
 }
 
 const app = new App();
+
+
+const getCityHisWeatherData = async (lat, lng, date) => {
+        try {
+            /// get country's capital current weather icon
+            const  utcDate = new Date(`${date}`.trim())
+            const myKey = '1db6ec5257aa7458bd25e359a7102c19'
+    
+            const resWeather = await fetch(`https://api.openweathermap.org/data/3.0/onecall/timemachine?lat=${lat}&lon=${lng}&dt=${utcDate}&appid={API key} https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lng}&appid=${myKey}`);
+            if (!resWeather.ok) throw new Error(`Problem getting location data`);
+            
+            const dataWeather = await resWeather.json();
+            if(!dataWeather) return
+            const { icon } = dataWeather.current.weather[0]
+            
+            return `https://openweathermap.org/img/wn/${icon}@2x.png`
+    
+        } catch (err) {
+            console.error(`${err} 💥 💥 💥`);
+            return ''
+        }
+    }
+
+const weatherIcon = async (lat, lng, date) => {
+        try {
+            /// get country's capital current weather icon
+                const utcDate = new Date(`${date}`.trim())
+                console.log(utcDate);
+            const myKey = '1db6ec5257aa7458bd25e359a7102c19'
+    
+            const resWeather = await fetch(`https://api.openweathermap.org/data/3.0/onecall/timemachine?lat=${lat}&lon=${lng}&dt=${utcDate}&appid=${myKey}`);
+            if (!resWeather.ok) throw new Error(`Problem getting location data`);
+            
+            const dataWeather = await resWeather.json();
+            if(!dataWeather) return
+            const { icon } = dataWeather.current.weather[0]
+            
+            return `https://openweathermap.org/img/wn/${icon}@2x.png`
+    
+        } catch (err) {
+            console.error(`${err} 💥 💥 💥`);
+            return ''
+        }
+}
+
+const icon = await weatherIcon(42.46221988646499, -70.95537185668947, `2022-03-12`);
+
+console.log(icon);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

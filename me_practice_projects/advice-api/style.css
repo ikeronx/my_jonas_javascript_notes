@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+:root{
+--clr-primary-light-cyan: #cee3e9;
+--clr-primary-neon-green: hsl(150, 100%, 66%);
+--clr-netrual-grayish-blue: hsl(217, 19%, 38%);
+--clr-netrual-dark-grayish-blue:  hsl(217, 19%, 24%);
+--clr-netrual-dark-blue: #1f2632;
+}
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+body{
+display: grid;
+min-height: 100vh;
+place-items: center;
+/* line-height: 1.6; */
+ background: var(--clr-netrual-dark-blue);
+ font-family: 'Manrope', sans-serif;
+ font-weight: 800;
+}
+
+.card{
+    background: var(--clr-netrual-dark-grayish-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 50ch; 
+    padding: 55px 45px 0px 45px; 
+    gap: 35px;
+    border-radius: 10px;
+}
+ 
+.card__content{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    align-items: center;
+    text-align: center;
+}
+
+.card__title{
+    color: var(--clr-primary-neon-green);
+    font-size: .6rem;
+    letter-spacing: .2rem;
+}
+
+.card__quote{
+color: var(--clr-primary-light-cyan);
+font-size: 28px;
+line-height: 1.5;
+}
+
+.card__quote-appostraphe{
+    font-size:100px;
+}
+
+/* .card__divider{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width:100%; 
+    height:auto;
+}   */
+
+.card__icon{
+    background-color: var(--clr-primary-neon-green);
+    border: 20px solid var(--clr-primary-neon-green);
+    border-radius: 50%;
+    margin-bottom: -35px;
+    cursor: pointer;
+}

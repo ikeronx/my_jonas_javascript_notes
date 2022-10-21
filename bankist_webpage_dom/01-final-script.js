@@ -13,14 +13,14 @@ const tabsContent = document.querySelectorAll('.operations__content');
 
 /// ////////////////////////////////////
 // Modal window
-
-const openModal = function (e) {
+console.log(section1);
+const openModal = (e) => {
         e.preventDefault();
         modal.classList.remove('hidden');
         overlay.classList.remove('hidden');
 };
 
-const closeModal = function () {
+const closeModal = () => {
         modal.classList.add('hidden');
         overlay.classList.add('hidden');
 };
@@ -38,54 +38,19 @@ document.addEventListener('keydown', function (e) {
 
 console.log('-----IMPLEMENTING SMOOTH SCROLLING-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648955#questions/16505196
-/// ////////////////////////////////////
+/// ////////////////////////section1////////////
 // Button scrolling
-btnScrollTo.addEventListener('click', function (e) {
-        const s1coords = section1.getBoundingClientRect();
-        console.log(s1coords);
-
-        console.log(e.target.getBoundingClientRect());
-
-        console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
-
-        console.log(
-                'height/width viewport',
-                document.documentElement.clientHeight,
-                document.documentElement.clientWidth
-        );
-
-        // Scrolling
-        // window.scrollTo(
-        //   s1coords.left + window.pageXOffset,
-        //   s1coords.top + window.pageYOffset
-        // );
-
-        // window.scrollTo({
-        //   left: s1coords.left + window.pageXOffset,
-        //   top: s1coords.top + window.pageYOffset,
-        //   behavior: 'smooth',
-        // });
-
+btnScrollTo.addEventListener('click', (e) => {
+        e.preventDefault();
         section1.scrollIntoView({ behavior: 'smooth' });
-});
+})
 
 console.log('-----IMPLEMENTING PAGE NAVIGATION-----');
 // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22648971#notes
 /// ////////////////////////////////////
 // Page navigation
-
-// document.querySelectorAll('.nav__link').forEach(function (el) {
-//   el.addEventListener('click', function (e) {
-//     e.preventDefault();
-//     const id = this.getAttribute('href');
-//     console.log(id);
-//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-//   });
-// });
-
 // 1. Add event listener to common parent element
 // 2. Determine what element originated the event
-
 document.querySelector('.nav__links').addEventListener('click', function (e) {
         e.preventDefault();
 
@@ -285,7 +250,7 @@ const slider = function () {
         btnLeft.addEventListener('click', prevSlide);
 
         console.log('----- BUILDING A SLIDER COMPONENT: PART 2 -----');
-        // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649003#notes
+        // https://www.udemy.com/course/the-complete-javascript-course/learn/lecture/22649001#notes
         document.addEventListener('keydown', function (e) {
                 if (e.key === 'ArrowLeft') prevSlide();
                 e.key === 'ArrowRight' && nextSlide();

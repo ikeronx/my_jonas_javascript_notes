@@ -62,7 +62,7 @@ header2.style.color = 'red';
 header2.style.color = 'green';
 
 // 🤔 Example 2: Asynchronous image loading with event and callback
-const img~ = document.querySelector('.dog');
+const img = document.querySelector('.dog');
 img.src = 'dog.img'; // <-- asynchronous - setting the src attribute of an image is a an asynchronous operation due to fact that image is loading in background while rest of the code is running
 img.addEventListener('load', function () {
         // 👆🏼❗️💡 addEventListeners alone do not make the code asynchronous! The 'load' event as asynchronous behavior does and since the callback fn is attached to an element with an asynchronous attribute 'img.src' the load event will happened asynchronously
@@ -437,50 +437,45 @@ const getPosition = () =>
 // getPosition().then((pos) => console.log(pos))
 
 const whereAmIRewrite = () => {
-        getPosition().then((pos) => {
+        getPosition().then(async (pos) => {
                 const { latitude: lat, longitude: lng } = pos.coords;
 
-                return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-                        .then((response) => {
-                                if (!response.ok)
-                                        throw new Error(
-                                                `This API allows you to make only 3 requests per second. ${response.status}. Please wait and try again(${response.status})`
-                                        );
-                                return response.json();
-                        })
-                        .then((data) => {
-                                if (data.success === false) throw new Error(`No city`);
-                                console.log(data);
-                                console.log(`Your are in ${data.city}, ${data.country}.`);
+                try {
+                        const response = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+                        if (!response.ok)
+                                throw new Error(
+                                        `This API allows you to make only 3 requests per second. ${response.status}. Please wait and try again(${response.status})`
+                                );
+                        const data = await response.json();
+                        if (data.success === false)
+                                throw new Error(`No city`);
+                        console.log(data);
+                        console.log(`Your are in ${data.city}, ${data.country}.`);
+                        const response_1 = await fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+                        if (!response_1.ok)
+                                throw new Error(`(${response_1.status})`); //
+                        const [data_2] = await response_1.json();
+                        renderCountry(data_2);
 
-                                // PART 2
-                                // getCountryData5(data.country);
-                                return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
-                        })
-                        .then((response) => {
-                                if (!response.ok) throw new Error(`(${response.status})`); //
-                                return response.json();
-                        })
-                        .then(([data]) => {
-                                renderCountry(data);
+                        const neighbor = data_2.borders;
+                        console.log(neighbor);
 
-                                const neighbor = data.borders;
-                                console.log(neighbor);
-
-                                if (!neighbor) throw new Error(`${data.name.common} has no neighboring country`);
-
-                                return neighbor.forEach((code) => {
-                                        fetch(`https://restcountries.com/v3.1/alpha?codes=${code}`)
-                                                .then((response) => {
-                                                        // 🎯 THROWING ERRORS MANUALLY
-                                                        // if theres no country / if response.ok: is false then throw new error
-                                                        if (!response.ok) throw new Error(`(${response.status})`); //
-                                                        return response.json();
-                                                })
-                                                .then((data) => renderCountry(data[0], 'neighbour'));
-                                });
-                        })
-                        .catch((err) => console.log(`📛📛 ${err.message}. Try again!`));
+                        if (!neighbor)
+                                throw new Error(`${data_2.name.common} has no neighboring country`);
+                        return neighbor.forEach((code) => {
+                                fetch(`https://restcountries.com/v3.1/alpha?codes=${code}`)
+                                        .then((response_2) => {
+                                                // 🎯 THROWING ERRORS MANUALLY
+                                                // if theres no country / if response.ok: is false then throw new error
+                                                if (!response_2.ok)
+                                                        throw new Error(`(${response_2.status})`); //
+                                                return response_2.json();
+                                        })
+                                        .then((data_4) => renderCountry(data_4[0], 'neighbour'));
+                        });
+                } catch (err) {
+                        return console.log(`📛📛 ${err.message}. Try again!`);
+                }
         });
 };
 btn.addEventListener('click', whereAmIRewrite);

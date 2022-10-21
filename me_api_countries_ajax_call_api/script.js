@@ -630,12 +630,16 @@ const whereAmIRewrite5 = async () => {
                 const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
                 if (!resGeo.ok) throw new Error(`Problem getting location data`);
                 const dataGeo = await resGeo.json();
+                console.log(dataGeo);
 
                 // Country data
                 const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`);
                 if (!res.ok) throw new Error(`Problem getting country data`);
                 const data = await res.json();
                 renderCountry(data[0]);
+                console.log(data);
+
+                console.log(`${data[0].flag} ${data[0].altSpellings[0]}`);
 
                 // Neighboring countries
                 const neighbor = data[0].borders;
@@ -869,4 +873,43 @@ const loadAlI = async (...imgPath) => {
 })();
 */
 
+const getCountryName = async (lat, lng) => {
+        try {
+            // reverse geocoding
+            const resGeo = await fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=528c5dcffdab43848fa6c11bfb7a2545`);
+            if (!resGeo.ok) throw new Error(`Problem getting location data`);
+            const dataGeo = await resGeo.json();
+            console.log(dataGeo);
+            // Country data
+            const res = await fetch(`https://restcountries.com/v3.1/alpha/${dataGeo.features[0].properties.country_code}`);
+            if (!res.ok) throw new Error(`Problem getting country data`);
+                const data = await res.json();
+                console.log(data);
+    
+            return `${data[0].name.common}`;
+    
+        }
+        catch (err) {
+            return Promise.reject(`${err} 💥 💥 💥`);
+        }
+};
+    
+console.log(getCountryName(35.9078, 127.7669));
 
+
+// UNSPLASH 
+const getTripImageByCountry = async (country) => {
+        try {
+                const myKey = '92MhZXBYZ32qrYaz6K9ZS_7x6HjAo7TrqHWgSvFNc4U'
+        
+                const res = await fetch(`https://api.unsplash.com/photos/random/?query=${country}&client_id=${myKey}`);
+                if (!res.ok) throw new Error(`Problem getting image data`);
+                const data = await res.json();
+    
+                return `${data.urls.small}`
+        }
+        catch (err) {
+                return Promise.reject(`${err} 💥 💥 💥`);
+        }
+    };
+getTripImageByCountry('india');

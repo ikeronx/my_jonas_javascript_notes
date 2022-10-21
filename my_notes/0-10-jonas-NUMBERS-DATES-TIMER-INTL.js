@@ -121,7 +121,7 @@ console.log(Math.min(...numberz)); // -80
 
 console.log('-----how to get random numbers-----');
 // 👷🏽‍♂️🛠 how to get a random number
-// step 1: use Math.random() to get a random number between 0 and 1 'Math.random()'
+// step 1: use Math.random() to get a random number between 0 and 5 'Math.random()'
 // step 2: multiply the random number by the max number 'Math.random() * any number' and then use Math.floor() to remove decimals and round down the integer
 console.log(Math.floor(Math.random() * 6) + 1); // 3 <- get the number between 0 and 5 (inclusive)...add + 1 to get the number between 1 and 6 (inclusive) because the mathFloor() method removes decimals part and the + 1 is to get the number between 1 and 6 (inclusive)
 
@@ -167,6 +167,7 @@ console.log(Math.round(15.6)); // 16 <-- rounds to the nearest integer
 console.log(Math.ceil(23.8)); // 24 <-- always rounds up
 console.log(Math.ceil(23.4)); // 24 <-- always rounds up
 
+// 🌟 
 console.log(Math.floor(23.8)); // 24 <-- always rounds down
 console.log(Math.floor(23.4)); // 24 <-- always rounds down
 
